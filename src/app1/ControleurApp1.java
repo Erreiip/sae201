@@ -1,6 +1,7 @@
 package src.app1;
 
 import iut.algo.Clavier;
+
 import src.app2.ihm.FrameReseau;
 
 public class ControleurApp1

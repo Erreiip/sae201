@@ -1,4 +1,4 @@
-package app2;
+package src.app2;
 
 
 import java.io.FileReader;
@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.ArrayList;
 
 
-import app2.ihm.*;
-import app1.Tuyau;
+import src.app2.ihm.*;
+import src.app1.Tuyau;
 
 
 
@@ -65,25 +65,33 @@ public class ControleurApp2
             System.out.println(e);
             return false;
         }
+
+        return true;
     }
 
     private int[][] initScan() 
     {
+        
         int     lig, col;
         int[][] matrice;
 
-        Scanner sc = new Scanner( new FileReader( this.pathMatrice ) );
-
-        for ( lig = 0; sc.hasNextLine(); lig++ )
+        try 
         {
-            for ( col = 0; sc.hasNextInt(); col++ ) {}
-        }
+            Scanner sc = new Scanner( new FileReader( this.pathMatrice ) );
 
-        matrice = new int[lig][col];
+            for ( lig = 0; sc.hasNextLine(); lig++ )
+            {
+                for ( col = 0; sc.hasNextInt(); col++ ) {}
+            }
+    
+            matrice = new int[lig][col];
+    
+            sc.close();
+            
+        } catch (Exception e) { System.out.println(e); return null;}
 
-        sc.close();
-        
         return matrice;
+        
     }
 
     public static void main ( String args[] )
