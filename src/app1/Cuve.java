@@ -97,7 +97,7 @@ public class Cuve
 
     public String toString()
     {
-        return "src.Cuve " + this.id + " : " +
+        return "Cuve " + this.id + " : " +
                 "[" + x +
                 ":" + y +
                 "] " +
