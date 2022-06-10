@@ -86,16 +86,6 @@ public class Controleur {
 
     }
 
-    public SQLTransientConnectionException void applicationDebug(String[] args){
-
-        if (args[0].equals("true")){
-
-            debugActiver = true;
-
-        }
-
-    }
-
     public static void main(String[] args) {
 
         
