@@ -2,7 +2,9 @@ package src.app1;
 
 import iut.algo.Clavier;
 import java.util.HashMap;
-
+import java.util.Scanner;
+import java.io.PrintWriter;
+import java.io.FileOutputStream;
 public class ControleurApp1
 {
 
@@ -15,13 +17,13 @@ public class ControleurApp1
         this.res = new Reseau();
     }
 
-    public boolean ajouterTuyau( int section, Cuve cuve1, Cuve cuve2 )
+    public boolean ajouterTuyau (int section, Cuve cuve1, Cuve cuve2)
     {
         return res.ajouterTuyau(Tuyau.creer(section, cuve1, cuve2));
     }
 
 
-    public boolean ajouterCuve( int capacite )
+    public boolean ajouterCuve ( int capacite )
     {
         return res.ajouterCuve(Cuve.creer(capacite));
     }
@@ -33,15 +35,47 @@ public class ControleurApp1
     }
 
 
-    public void sortieFichierTexte ()
+    public void sortieFichierTexteMatriceCout ()
     {
+		String sRet = "";
+        String [][] matrice;
+        int nbCuves = this.res.getCuves().size();
+        matrice = new String[nbCuves][nbCuves];
+        for (Tuyau tuyau : this.res.getTuyaux())
+        {
+            int lig,col;
+            lig = tuyau.getCuve1().getIdentifiant() - 'A';
+            col = tuyau.getCuve2().getIdentifiant() - 'A';
+            matrice[lig][col] = tuyau.getSection() + "" ;
+            matrice[col][lig] = tuyau.getSection() + "";
+        }
+        for (int lig =0;lig < nbCuves; lig ++)
+        {
+            for (int col = 0; col < nbCuves; col ++)
+            {
+                sRet += matrice[lig][col] != null ? String.format("%3s",matrice[lig][col]):"  0";
+            }
+            
+            sRet += "\n";
+        }    
+        try
+		{
+			PrintWriter pw = new PrintWriter( new FileOutputStream("sortie.txt") );
 
+            pw.println (sRet);
+
+			pw.close();
+		}
+		catch (Exception e){ e.printStackTrace(); }
+        /*Test sur le console*/
+        
+        System.out.println(sRet);
     }
 
     
 
     public static void main(String[] args) {
-        if (args.length > 0 && args[0].equals("debug")){
+        if(args.length > 0 && args[0].equals("debug")){
             lancerModeDebug();
             return;
         }
@@ -55,7 +89,6 @@ public class ControleurApp1
         /*----------------------------*/
         /**Demander le nombre de cuves*/
         /*----------------------------*/
-
         System.out.println("Veuillez entrez le nombre de cuves :");
         do
         {
@@ -69,7 +102,7 @@ public class ControleurApp1
         {
             /**Renseigner capacite de cuve en creation */
             do {
-            System.out.print("Entrez la capacité maximale de la cuve "+ (char)('A'+cpt)+ " (entre 200 et 2000) : ");
+            System.out.print("Entrez la capacité maximale de la cuve "+ (char)('A'+cpt)+ " (entre 200 et 2000) :");
             capaciteMaximal = Clavier.lire_int();
 
             cuveEnCreation = Cuve.creer(capaciteMaximal);
@@ -118,7 +151,8 @@ public class ControleurApp1
             System.out.println ("Voulez-vous continuer de creer un tuyau (O/N) ?");    
             
         } while (resCreerTuyau == 'O');
-        System.out.println ("Reseau fini");
+        System.out.println ("Finir de Creer le Reseau ");
+        controleur.sortieFichierTexteMatriceCout();
     }
 
 }
