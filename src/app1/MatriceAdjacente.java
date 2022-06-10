@@ -1,5 +1,7 @@
 package src.app1;
 
+import iut.algo.Clavier;
+
 public class MatriceAdjacente 
 {
     public MatriceAdjacente()

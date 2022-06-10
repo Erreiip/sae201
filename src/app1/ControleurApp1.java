@@ -14,7 +14,7 @@ public class ControleurApp1
 
     public ControleurApp1(Reseau res)
     {
-        this.frame = new FrameReseau ( this );
+        
     }
 
     public static void matriceAdjacence(){
