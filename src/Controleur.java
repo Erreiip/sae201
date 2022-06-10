@@ -54,6 +54,7 @@ public class Controleur {
 
             System.out.print("Capacité maximal (entre 0 et "+ capaciteMaximal  +") : ");
             capaciteInitial = Clavier.lire_int();
+<<<<<<< HEAD
 
             while (true){
 
@@ -74,6 +75,8 @@ public class Controleur {
                 }
 
             }
+=======
+>>>>>>> 9fc5ff833853d204cf3fbfb84d0ed4d8039fb340
 
         }
 
