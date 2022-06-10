@@ -1,24 +1,85 @@
 package src;
 
+import src.ihm.*;
+
+import java.sql.SQLTransientConnectionException;
+
 import iut.algo.Clavier;
 
 public class Controleur {
 
     private static boolean debugActiver = false;
 
-    private static void matriceAdjacence(){
+    private FrameReseau frame;
+
+    private Reseau       res;
+
+    public Controleur ( Reseau res)
+    {
+        this.frame = new FrameReseau ( this );
+    }
+
+    public void matriceAdjacence(){
 
         //Boucle pour avoir toute les cuves
         
-        while (Cuve.getNbCuves()<26){
+        while (Cuve.getNbCuves()<26)
+        {
 
-            System.out.println("Cuve "+ (String (('A' + Cuve.getNbCuves()))) );
+            int  capaciteMaximal;
+            int  capaciteInitial;
+            Cuve cuveEnCreation;
+
+            System.out.println("Cuve "+ (char) ('A' + Cuve.getNbCuves()) + ", rentrez sa capacité initial et sa capacité maximum :" );
+
+            while (true){
+
+                System.out.print("Capacité maximal (entre 200 et 2000) : ");
+                capaciteMaximal = Clavier.lire_int(); 
+
+                cuveEnCreation = Cuve.creer(capaciteMaximal);
+
+                if (cuveEnCreation == null){
+
+                    System.out.println("Erreur, la capacité maximal doit être entre (200 et 2000), veuillez re-rentrer une valeur");
+
+                }
+                else {
+
+                    break;
+
+                }
+
+            }
+
+            System.out.print("Capacité maximal (entre 0 et "+ capaciteMaximal  +") : ");
+            capaciteInitial = Clavier.lire_int();
+
+            while (true){
+
+                System.out.print("Capacité maximal (entre 200 et 2000) : ");
+                capaciteMaximal = Clavier.lire_int(); 
+
+                cuveEnCreation = Cuve.creer(capaciteMaximal);
+
+                if (cuveEnCreation == null){
+
+                    System.out.println("Erreur, la capacité maximal doit être entre (200 et 2000), veuillez re-rentrer une valeur");
+
+                }
+                else {
+
+                    break;
+
+                }
+
+            }
 
         }
 
     }
 
-    private static void applicationDebug(String[] args){
+    public SQLTransientConnectionException void applicationDebug(String[] args){
 
         if (args[0].equals("true")){
 
@@ -29,6 +90,8 @@ public class Controleur {
     }
 
     public static void main(String[] args) {
+
+        
 
         if (args.length == 0){
             System.out.println("Vide");
@@ -59,7 +122,6 @@ public class Controleur {
 
             }
             else {
-
                 break;
 
             }
