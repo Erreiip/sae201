@@ -23,9 +23,10 @@ public class Reseau
 
     
     // matrice de cout (même constructeur pour matrice opti)
-    public Reseau( int[][] matriceCout )
+    public Reseau( int[][] matriceCout, int[] capaCuves )
     {
         this.tabCuve = new Cuve[matriceCout.length];
+        this.nbCuves = this.tabCuve.length+1;
 
         for ( int lig=0 ; lig < matriceCout.length ; lig++ )
         {
@@ -33,14 +34,8 @@ public class Reseau
             {
                 if ( matriceCout[lig][col] != 0 )
                 {
-                    if ( this.tabCuve[lig] == null )
-                        this.tabCuve[lig] = Cuve.creer(200); 
-                    
-                    if ( this.tabCuve[col] == null )
-                        this.tabCuve[col] = Cuve.creer(200);
-
                     if ( !tuyauExiste( matriceCout[lig][col], this.tabCuve[lig], this.tabCuve[col] ) )
-                        tabTuyau[nbTuyaux] = new Tuyau ( matriceCout[lig][col], this.tabCuve[lig], this.tabCuve[col] );
+                        tabTuyau[nbTuyaux++] = new Tuyau ( matriceCout[lig][col], this.tabCuve[lig], this.tabCuve[col] );
                 }
             }
         }
