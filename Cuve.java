@@ -12,7 +12,7 @@ public class Cuve
     private Position position;
 
 
-    public Cuve creerCuve( int[] capaCuve )
+    public Cuve creerCuve( int capaCuve )
     {
         return null;
     }
