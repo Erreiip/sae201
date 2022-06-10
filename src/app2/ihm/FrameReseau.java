@@ -7,7 +7,6 @@ import src.app2.ControleurApp2;
 import java.awt.Dimension;
 import java.awt.BorderLayout;
 
-
 public class FrameReseau extends JFrame 
 {
 

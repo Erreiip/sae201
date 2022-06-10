@@ -3,13 +3,12 @@ package src.app2.ihm;
 import javax.swing.*;
 
 import src.app1.Cuve;
+import src.app1.Tuyau;
 import src.app2.ControleurApp2;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Color;
-
-
 
 public class PanelPaint extends JPanel
 {

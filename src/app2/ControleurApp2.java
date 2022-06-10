@@ -1,17 +1,15 @@
 package src.app2;
 
+import src.app2.ihm.FrameReseau;
+
 import java.io.FileReader;
 import java.util.Scanner;
 
-import src.app2.ihm;
-
-
 public class ControleurApp2
 {
-    private FrameReseau   frame;
+    private FrameReseau frame;
 
 	private String        pathMatrice;
-
 
     public ControleurApp2()
     {
