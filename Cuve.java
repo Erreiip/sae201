@@ -2,8 +2,9 @@ public class Cuve
 {
     private static int nbCuves = 0;
 
-    private char      id;
-    private int       capacite;
+    private final char      id;
+    private final int       capacite;
+
     private double    contenu;
     private int       x;
     private int       y;
@@ -90,8 +91,8 @@ public class Cuve
         }
     }
 
-    @Override
-    public String toString() {
+    public String toString()
+    {
         return "Cuve " + this.id + " : " +
                 "[" + x +
                 ":" + y +
