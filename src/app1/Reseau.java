@@ -20,9 +20,9 @@ public class Reseau
 
     public Cuve getCuve(char identifiant)
     {
-        for(Cuve c : this.cuves)
+        for (Cuve c : this.cuves)
         {
-            if( c.getIdentifiant() == identifiant )
+            if ( c.getIdentifiant() == identifiant )
             {
                 return c;
             }
@@ -44,24 +44,22 @@ public class Reseau
 
     public boolean ajouterCuve(Cuve cuve)
     {
-        if(cuve == null) return false;
+        if (cuve == null) return false;
         return this.cuves.add( cuve );
     }
 
     public boolean ajouterTuyau(Tuyau tuyau)
     {
-        if(tuyau == null) return false;
-        if(getTuyau(tuyau.getCuve1(), tuyau.getCuve2()) != null)
-        {
-            return false;
-        }
+        if (tuyau == null)                                        return false;
+        if (getTuyau(tuyau.getCuve1(), tuyau.getCuve2()) != null) return false;
         return this.tuyaux.add(tuyau);
     }
 
-    public Tuyau getTuyau(Cuve cuve1, Cuve cuve2) {
-        for(Tuyau t : this.tuyaux)
+    public Tuyau getTuyau(Cuve cuve1, Cuve cuve2)
+    {
+        for (Tuyau t : this.tuyaux)
         {
-            if(t.estRelie(cuve1) && t.estRelie(cuve2))
+            if (t.estRelie(cuve1) && t.estRelie(cuve2))
             {
                 return t;
             }
