@@ -7,23 +7,29 @@ import java.util.ArrayList;
 public class Reseau 
 {
     
-    private ArrayList<Tuyau> lstTuyau;
-    private ArrayList<Cuve>  lstCuve;
+    private final ArrayList<Tuyau> lstTuyau;
+    private final ArrayList<Cuve>  lstCuve;
 
     private int nbCuve;
 
     // Constructeur
-    public Reseau( int nbCuve )
+    public Reseau(int nbCuve)
     {
-        this.lstTuyau = new ArrayList<Tuyau>();
-        this.lstCuve  = new ArrayList<Cuve>();
-
+        this.lstTuyau = new ArrayList<>();
+        this.lstCuve  = new ArrayList<>();
     }
 
     // Accesseurs
-    public Cuve getCuve( char indice ) 
+    public Cuve getCuve( char identifiant )
     {
-        return this.lstCuve.get( (int) (indice - 'A') );
+        for( Cuve c : this.lstCuve )
+        {
+            if( c.getIdentifiant() == identifiant )
+            {
+                return c;
+            }
+        }
+        return null;
     }
 
     public Tuyau getTuyau( int indice )
@@ -31,31 +37,33 @@ public class Reseau
         return this.lstTuyau.get( indice );
     }
 
-    public boolean ajouterTuyau( int section, Cuve cuve1, Cuve cuve2 )
+    public boolean ajouterCuve(Cuve cuve)
     {
-        if ( tuyauExiste(section, cuve1, cuve2) )
-            return false;
-        this.lstTuyau.add( new Tuyau(section, cuve1, cuve2) );
-        return true;
+        if(cuve == null) return false;
+        return this.lstCuve.add( cuve );
     }
 
-    public boolean ajouterCuve( int capacite )
+    public boolean ajouterTuyau(Tuyau tuyau)
     {
-        this.lstCuve.add( Cuve.creer(capacite) );
-    }
-
-
-    public boolean tuyauExiste( int section, Cuve cuve1, Cuve cuve2 )
-    {
-        boolean tuyauExiste = false;
-        for ( Tuyau t:this.lstTuyau )
+        if(tuyau == null) return false;
+        if(sontRelies(tuyau.getCuve1(), tuyau.getCuve2()))
         {
-            if ( t.getSection() == section &&
-                 t.estRelie  (cuve1)       &&
-                 t.estRelie  (cuve2)          ) { tuyauExiste = true; }
+            return false;
         }
-
-        return tuyauExiste;
+        return this.lstTuyau.add(tuyau);
     }
+
+    public boolean sontRelies(Cuve cuve1, Cuve cuve2 )
+    {
+        for(Tuyau t : this.lstTuyau)
+        {
+            if(t.estRelie(cuve1) && t.estRelie(cuve2))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 }
