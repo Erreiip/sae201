@@ -9,19 +9,24 @@ import java.util.ArrayList;
 
 
 import src.app2.ihm.*;
+import src.app1.Reseau;
 import src.app1.Tuyau;
-
+import src.app1.Cuve;
 
 
 public class ControleurApp2
 {
     private FrameReseau frame;
+    private Reseau      metier;
 
-	private String        pathMatrice;
+	private String      pathMatrice;
+
 
     public ControleurApp2()
     {
-        this.frame = new FrameReseau( this );
+        this.frame       = new FrameReseau( this );
+        this.metier      = null;
+        this.pathMatrice = null; 
     }
 
     public void setPath ( String path ) 
@@ -30,30 +35,67 @@ public class ControleurApp2
         this.creerReseau(); 
     }
 
-    public ArrayList<Tuyau> getTuyaux ()
+    public ArrayList<Tuyau> getTuyaux()
     {
+        int cpt = 0;
+        Tuyau c;
 
+        ArrayList<Tuyau> lstTuyaus = new ArrayList<Tuyau>();
+
+        do {
+            c = this.metier.getTuyau(cpt);
+            
+            if ( c != null )
+                lstTuyaus.add(c);
+
+            cpt++;
+
+        } while ( c != null );
+        
+        return lstTuyaus;
+    }
+
+    public ArrayList<Cuve> getCuves()
+    {
+        int cpt = 0;
+        Cuve c;
+
+        ArrayList<Cuve> lstCuve = new ArrayList<Cuve>();
+
+        do {
+            c = this.metier.getCuve((char) (cpt + 'A'));
+            
+            if ( c != null )
+                lstCuve.add(c);
+
+            cpt++;
+
+        } while ( c != null );
+        
+        return lstCuve;
     }
 
     public boolean creerReseau()
     {
         try
         {
-            int[][]  matrice = initScan();
+            int[][]  matrice   = initScan();
 
             Scanner sc = new Scanner( new FileReader( this.pathMatrice ) );
             
             String type = sc.nextLine();
             
 
-            for ( int lig = 0; sc.hasNextLine(); lig++ )
+            for ( int lig = 0; sc.hasNextLine() && !sc.nextLine().equals("---"); lig++ )
             {
                 for ( int col = 0; sc.hasNextInt(); col++ )
                 {
                     matrice[lig][col] = sc.nextInt();
                 }
+                
             }
 
+            //a completer
             if ( type.equals("Matrice Adjacente"))
             {
         
@@ -70,8 +112,7 @@ public class ControleurApp2
     }
 
     private int[][] initScan() 
-    {
-        
+    {  
         int     lig, col;
         int[][] matrice;
 
@@ -79,9 +120,12 @@ public class ControleurApp2
         {
             Scanner sc = new Scanner( new FileReader( this.pathMatrice ) );
 
-            for ( lig = 0; sc.hasNextLine(); lig++ )
+            sc.nextLine();
+
+            for ( lig = 0; sc.hasNextLine() && !sc.nextLine().equals("---"); lig++ )
             {
-                for ( col = 0; sc.hasNextInt(); col++ ) {}
+                for ( col = 0; sc.hasNextInt(); col++ ) 
+                    sc.nextInt();
             }
     
             matrice = new int[lig][col];

@@ -3,6 +3,7 @@ package src.app2.ihm;
 import javax.swing.*;
 
 import src.app1.Cuve;
+import src.app1.Tuyau;
 import src.app2.ControleurApp2;
 
 import java.awt.Graphics;
@@ -20,9 +21,7 @@ public class PanelPaint extends JPanel
 
     public void paintComponent (Graphics g)
     {
-        super.paintComponent(g);
-
-        Graphics2D g = (Graphics2D) g; 
+        super.paintComponent(g); 
 
         for ( Cuve c : this.ctrl.getCuves() )
         {
@@ -31,7 +30,7 @@ public class PanelPaint extends JPanel
             int x = c.getX() + taille;
             int y = c.getY() - taille;
             
-            g.setColor( this.degrade(c.getContenu(), c.getCapacite()) );
+            g.setColor( this.degrade((int) c.getContenu(), c.getCapacite()) );
             g.fillArc (x, y, taille, taille);
         }
 
