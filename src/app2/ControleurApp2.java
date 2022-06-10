@@ -1,9 +1,15 @@
-package src.app2;
+package app2;
 
 import java.io.FileReader;
 import java.util.Scanner;
 
-import src.app2.ihm;
+import java.util.List;
+import java.util.ArrayList;
+
+
+import app2.ihm.*;
+import app1.Tuyau;
+
 
 
 public class ControleurApp2
@@ -22,6 +28,11 @@ public class ControleurApp2
     { 
         this.pathMatrice = path;
         this.creerReseau(); 
+    }
+
+    public ArrayList<Tuyau> getTuyaux ()
+    {
+
     }
 
     public boolean creerReseau()
@@ -56,7 +67,7 @@ public class ControleurApp2
         }
     }
 
-    private int[][] initScan()
+    private int[][] initScan() 
     {
         int     lig, col;
         int[][] matrice;

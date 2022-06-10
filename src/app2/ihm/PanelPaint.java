@@ -1,9 +1,9 @@
-package src.app2.ihm;
+package app2.ihm;
 
 import javax.swing.*;
 
-import src.app1.Cuve;
-import src.app2.ControleurApp2;
+import app1.Cuve;
+import app2.ControleurApp2;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;

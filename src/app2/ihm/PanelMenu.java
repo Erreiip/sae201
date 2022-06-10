@@ -1,4 +1,4 @@
-package src.app2.ihm;
+package app2.ihm;
 
 import javax.swing.*;
 
@@ -6,7 +6,7 @@ import java.awt.BorderLayout;
 import java.awt.event.*;
 import java.io.File;
 
-import src.app2.ControleurApp2;
+import app2.ControleurApp2;
 
 public class PanelMenu extends JFrame implements ActionListener
 {
