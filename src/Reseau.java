@@ -1,18 +1,14 @@
 package src;
 
-import java.util.List;
 
 public class Reseau 
 {
     
-    int      nbCuves;
-    Cuve[]   tabCuve;
-
-    int[]    capaCuves;
-    int      nbCapaCuve;
+    private int      nbCuves;
+    private Cuve[]   tabCuve;
     
-    Tuyau[]  tabTuyau;
-    int      nbTuyaux;
+    private Tuyau[]  tabTuyau;
+    private int      nbTuyaux;
 
     
     // liste d’adjacence
@@ -23,7 +19,7 @@ public class Reseau
 
     
     // matrice de cout (même constructeur pour matrice opti)
-    public Reseau( int[][] matriceCout, int[] capaCuves )
+    public Reseau( int[][] matriceCout, int[] tabCuves )
     {
         this.tabCuve = new Cuve[matriceCout.length];
         this.nbCuves = this.tabCuve.length+1;
@@ -39,12 +35,6 @@ public class Reseau
                 }
             }
         }
-    }
-    
-
-    public void ajouterCapa ( int capacite )
-    {
-        this.capaCuves[nbCapaCuve++] = capacite;
     }
 
 
