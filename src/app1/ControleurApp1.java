@@ -1,6 +1,7 @@
 package src.app1;
 
 import iut.algo.Clavier;
+import java.util.ArrayList;
 
 public class ControleurApp1
 {
@@ -14,6 +15,8 @@ public class ControleurApp1
     }
 
     public static void matriceAdjacence(){
+
+        ArrayList<Cuve> listCuve;
 
         while (Cuve.getNbCuves() < 26) {
 
@@ -38,6 +41,7 @@ public class ControleurApp1
             } while (!success);
 
             System.out.println("La cuve " + cuveEnCreation.getIdentifiant() + " a été créée avec succès.");
+            listCuve.add(cuveEnCreation);
         }
     }
 
