@@ -1,4 +1,4 @@
-package src;
+package src.app1;
 
 public class Tuyau
 {

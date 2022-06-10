@@ -13,3 +13,6 @@
 # IntelliJ Idea
 /.idea/
 /out/
+
+# VSCode
+/.vscode/

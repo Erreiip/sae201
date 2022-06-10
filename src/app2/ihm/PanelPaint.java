@@ -1,27 +1,21 @@
-package src.ihm;
-
-import src.Cuve;
-import src.Reseau;
-import src.Tuyau;
+package src.app2.ihm;
 
 import javax.swing.*;
 
+import src.app1.Cuve;
+import src.app2.ControleurApp2;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.io.PrintWriter;
 import java.awt.Color;
-
-import src.Controleur;
-import src.Reseau;
-import src.Cuve;
 
 
 
 public class PanelPaint extends JPanel
 {
-    private Controleur ctrl;
+    private ControleurApp2 ctrl;
 
-    public PanelPaint ( Controleur ctrl)
+    public PanelPaint ( ControleurApp2 ctrl)
     {
         this.ctrl = ctrl;
     }

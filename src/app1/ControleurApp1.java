@@ -1,12 +1,10 @@
-package src;
-
-import src.ihm.*;
-
-import java.sql.SQLTransientConnectionException;
+package src.app1;
 
 import iut.algo.Clavier;
+import src.app2.ihm.FrameReseau;
 
-public class Controleur {
+public class ControleurApp1
+{
 
     private static boolean debug = false;
 
@@ -14,12 +12,12 @@ public class Controleur {
 
     private Reseau       res;
 
-    public Controleur ( Reseau res)
+    public ControleurApp1(Reseau res)
     {
-        this.frame = new FrameReseau ( this );
+        
     }
 
-    public void matriceAdjacence(){
+    public static void matriceAdjacence(){
 
         while (Cuve.getNbCuves() < 26) {
 
