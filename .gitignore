@@ -9,3 +9,7 @@
 *.zip
 *.tar.gz
 *.rar
+
+# IntelliJ Idea
+/.idea/
+/out/
