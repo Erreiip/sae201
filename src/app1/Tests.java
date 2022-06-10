@@ -7,7 +7,9 @@ public class Tests
 {
 	public static void main(String[] args)
 	{
-		Tests.testerReseauEtMatrices();
+		//Tests.testerCuves();
+		Tests.testerMatriceInput();
+		//Tests.testerMatriceOutput();
 	}
 
 	public static void testerCuves()
@@ -30,7 +32,32 @@ public class Tests
 		}
 	}
 
-	public static void testerReseauEtMatrices() {
+
+	public static void testerMatriceInput()
+	{
+		Reseau reseau = new Reseau();
+		Cuve cuveA = Cuve.creer(1000);
+		Cuve cuveB = Cuve.creer(900);
+		Cuve cuveC = Cuve.creer(200);
+		Cuve cuveD = Cuve.creer(700);
+
+		cuveA.ajouterContenu(500);
+		cuveB.ajouterContenu(190);
+
+		reseau.ajouterCuve(cuveA);
+		reseau.ajouterCuve(cuveB);
+		reseau.ajouterCuve(cuveC);
+		reseau.ajouterCuve(cuveD);
+		System.out.println(reseau);
+
+		FormatteurMatrice formatteur = new FormatteurMatriceAdjacente();
+		formatteur.ajouterLiens(formatteur.fromString("0110\n1011\n1100\n0100"), reseau);
+
+		System.out.println(reseau);
+	}
+
+	public static void testerMatriceOutput()
+	{
 		Reseau reseau = new Reseau();
 		Cuve cuveA = Cuve.creer(1000);
 		Cuve cuveB = Cuve.creer(900);

@@ -46,7 +46,6 @@ public class Cuve
     public static int getNbCuves() { return nbCuves;}
 
     public char     getIdentifiant()    { return this.id; }
-    public int      getIdentifiantInt() { return this.id - 'A'; }
     public int      getX()              { return x; }
     public int      getY()              { return y; }
     public Position getPositionInfos()  { return positionInfos; }
@@ -97,7 +96,7 @@ public class Cuve
 
     public String toString()
     {
-        return "Cuve {" + this.id + " " +
+        return "Cuve{" + this.id + " " +
                 "[" + x +
                 ":" + y +
                 "] " +

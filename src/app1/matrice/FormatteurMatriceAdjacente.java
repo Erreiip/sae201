@@ -19,14 +19,16 @@ public class FormatteurMatriceAdjacente implements FormatteurMatrice
 					Cuve cuve2 = reseau.getCuve(col);
 					Tuyau tuyau = null;
 					boolean correct = false;
-					System.out.print("Rentrez la section du tuyau reliant " + cuve1 + " et " + cuve2 + " : ");
-					while(!correct)
-					{
-						tuyau = Tuyau.creer(Clavier.lire_int(), cuve1, cuve2);
-						if(tuyau != null) correct = true;
-						else System.out.println("Erreur de saisie ! Veuillez recommencer.");
+					if(!reseau.aUnTuyau(cuve1, cuve2)) {
+						System.out.print("Rentrez la section du tuyau reliant " + cuve1 + " et " + cuve2 + " : ");
+						while(!correct)
+						{
+							tuyau = Tuyau.creer(Clavier.lire_int(), cuve1, cuve2);
+							if(tuyau != null) correct = true;
+							else System.out.println("Erreur de saisie ! Veuillez recommencer.");
+						}
+						reseau.ajouterTuyau(tuyau);
 					}
-					reseau.ajouterTuyau(tuyau);
 				}
 			}
 		}
@@ -57,7 +59,7 @@ public class FormatteurMatriceAdjacente implements FormatteurMatrice
 				if(cuve1 == cuve2)
 					tab[lig][col] = 0;
 				else
-					tab[lig][col] = r.getTuyau(cuve1, cuve2) == null ? 0 : 1;
+					tab[lig][col] = r.aUnTuyau(cuve1, cuve2) ? 1 : 0;
 				col++;
 			}
 			sb.append("\n");

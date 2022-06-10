@@ -22,7 +22,7 @@ public class Reseau
     {
         for(Cuve c : this.cuves)
         {
-            if(c.getIdentifiantInt() == index)
+            if(c.getIdentifiant() == index + 'A')
             {
                 return c;
             }
@@ -63,14 +63,15 @@ public class Reseau
     public boolean ajouterTuyau(Tuyau tuyau)
     {
         if(tuyau == null) return false;
-        if(getTuyau(tuyau.getCuve1(), tuyau.getCuve2()) != null)
+        if(this.aUnTuyau(tuyau.getCuve1(), tuyau.getCuve2()))
         {
             return false;
         }
         return this.tuyaux.add(tuyau);
     }
 
-    public Tuyau getTuyau(Cuve cuve1, Cuve cuve2) {
+    public Tuyau getTuyau(Cuve cuve1, Cuve cuve2)
+    {
         for(Tuyau t : this.tuyaux)
         {
             if(t.estRelie(cuve1) && t.estRelie(cuve2))
@@ -79,6 +80,11 @@ public class Reseau
             }
         }
         return null;
+    }
+
+    public boolean aUnTuyau(Cuve cuve1, Cuve cuve2)
+    {
+        return getTuyau(cuve1, cuve2) != null;
     }
 
     @Override

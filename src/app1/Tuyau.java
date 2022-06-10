@@ -39,7 +39,7 @@ public class Tuyau
 
     @Override
     public String toString() {
-        return "Tuyau (" + this.section+ ")["
-                + cuve1.getIdentifiant() + "-> " + cuve2.getIdentifiant() + "]";
+        return "Tuyau(" + this.section+ ")["
+                + cuve1.getIdentifiant() + "<->" + cuve2.getIdentifiant() + "]";
     }
 }
