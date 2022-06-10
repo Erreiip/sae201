@@ -86,18 +86,4 @@ public class Cuve
             return true;
         }
     }
-
-    public boolean setContenu(int contenu)
-    {
-        if(contenu > capacite)
-        {
-            System.err.println("Erreur : le contenu de la cuve est supérieur à sa capacité");
-            return false;
-        }
-        else
-        {
-            this.contenu = contenu;
-            return true;
-        }
-    }
 }
