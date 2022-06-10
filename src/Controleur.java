@@ -12,7 +12,34 @@ public class Controleur {
         
         while (Cuve.getNbCuves()<26){
 
-            System.out.println("Cuve "+ (String (('A' + Cuve.getNbCuves()))) );
+            int  capaciteMaximal;
+            int  capaciteInitial;
+            Cuve cuveEnCreation;
+
+            System.out.println("Cuve "+ (char) ('A' + Cuve.getNbCuves()) + ", rentrez sa capacité initial et sa capacité maximum :" );
+
+            while (true){
+
+                System.out.print("Capacité maximal (entre 200 et 2000) : ");
+                capaciteMaximal = Clavier.lire_int(); 
+
+                cuveEnCreation = Cuve.creer(capaciteMaximal);
+
+                if (cuveEnCreation == null){
+
+                    System.out.println("Erreur, la capacité maximal doit être entre (200 et 2000), veuillez re-rentrer une valeur");
+
+                }
+                else {
+
+                    break;
+
+                }
+
+            }
+
+            System.out.print("Capacité maximal (entre 0 et "+ capaciteMaximal  +") : ");
+            capaciteInitial = Clavier.lire_int();
 
         }
 
