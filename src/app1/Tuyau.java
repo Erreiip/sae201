@@ -36,4 +36,10 @@ public class Tuyau
     {
         return this.cuve1 == cuve || this.cuve2 == cuve;
     }
+
+    @Override
+    public String toString() {
+        return "Tuyau (" + this.section+ ")["
+                + cuve1.getIdentifiant() + "-> " + cuve2.getIdentifiant() + "]";
+    }
 }
