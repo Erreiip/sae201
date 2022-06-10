@@ -16,18 +16,21 @@ public class Cuve
         this.contenu  = 0;
     }
 
-    public static Cuve creerCuve(int capacite)
+    public static Cuve creer(int capacite)
     {
+        // Vérifier que la capacité est correct
         if(capacite < 200 || capacite > 2000)
         {
             System.err.println("Erreur : la capacité de la cuve doit être comprise entre 200 et 2000");
             return null;
         }
+        // Vérifier qu'il n'y a pas trop de cuves
         else if(nbCuves >= 26)
         {
             System.err.println("Erreur : le nombre de cuves dépasse le nombre maximal autorisé (26)");
             return null;
         }
+        // Si toutes les vérifications sont passées, création de la cuve
         else
         {
             char id = (char) ('A' + nbCuves);
@@ -49,7 +52,7 @@ public class Cuve
     public void setY(int y)                              { this.y = y; }
     public void setPositionInfos(Position positionInfos) { this.positionInfos = positionInfos; }
 
-    public boolean ajouterContenu(int ajout)
+    public boolean ajouterContenu(double ajout)
     {
         if(ajout < 0)
         {
@@ -68,7 +71,7 @@ public class Cuve
         }
     }
 
-    public boolean retirerContenu(int retrait)
+    public boolean retirerContenu(double retrait)
     {
         if(retrait < 0)
         {
@@ -85,5 +88,14 @@ public class Cuve
             this.contenu -= retrait;
             return true;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Cuve " + this.id + " : " +
+                "[" + x +
+                ":" + y +
+                "] " +
+                contenu + "/" + capacite;
     }
 }
