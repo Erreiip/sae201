@@ -5,6 +5,7 @@ import src.ihm.*;
 import java.sql.SQLTransientConnectionException;
 
 import iut.algo.Clavier;
+import java.io.File;
 
 public class Controleur {
 
@@ -18,6 +19,19 @@ public class Controleur {
     {
         this.frame = new FrameReseau ( this );
     }
+
+    public boolean sendToText()
+    {
+        File f = new File("./../Reseau.txt");
+
+        try
+        {
+            PrintWriter pr = new PrintWriter( "./../Reseau.txt" );
+            
+            pr.print();
+        }
+    }
+
 
     public void matriceAdjacence(){
 
@@ -81,6 +95,8 @@ public class Controleur {
             if (continuation.equals("N")){
                 break;
             }
+
+            
 
         }
 
