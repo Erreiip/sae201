@@ -4,7 +4,7 @@ import javax.swing.*;
 
 import java.awt.Dimension;
 
-import src.Reseau;
+import src.Controleur;
 
 
 public class FrameReseau extends JFrame 
