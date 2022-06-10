@@ -31,7 +31,7 @@ public class PanelPaint extends JPanel
             int y = c.getY() - taille;
             
             g.setColor( this.degrade((int) c.getContenu(), c.getCapacite()) );
-            g.fillArc (x, y, taille, taille);
+            g.fillOval (x, y, taille, taille);
         }
 
         for ( Tuyau t : this.ctrl.getTuyaux() )

@@ -1,5 +1,6 @@
 package src.app2;
 
+import java.util.HashMap;
 
 import java.io.FileReader;
 import java.util.Scanner;
@@ -29,11 +30,38 @@ public class ControleurApp2
         this.pathMatrice = null; 
     }
 
+
+    public void optiCuve()
+    {
+        HashMap<String,String> voisinPref = new HashMap<>();
+
+        for ( Cuve c : this.metier.getCuves() )
+        {
+            String str = "";
+
+            for ( Tuyau t : this.metier.getTuyaux())
+            {
+                if ( t.getCuve1() != c && t.getCuve2() == c )
+                    str += t.getCuve1().getIdentifiant();
+
+                if ( t.getCuve1() == c && t.getCuve2() != c )
+                    str += t.getCuve2().getIdentifiant();
+            }
+
+            do {}
+                String idVoisin = this.plusGrandeOccu(str) + "";
+
+            voisinPref.put(c.getIdentifiant() + "",  idVoisin + "");
+        }
+    }
+
+
     public void setPath ( String path ) 
     { 
         this.pathMatrice = path;
         this.creerReseau(); 
     }
+
 
     public ArrayList<Tuyau> getTuyaux()
     {
@@ -55,6 +83,7 @@ public class ControleurApp2
         return lstTuyaus;
     }
 
+
     public ArrayList<Cuve> getCuves()
     {
         int cpt = 0;
@@ -74,6 +103,7 @@ public class ControleurApp2
         
         return lstCuve;
     }
+
 
     public boolean creerReseau()
     {
@@ -136,6 +166,28 @@ public class ControleurApp2
 
         return matrice;
         
+    }
+
+    private char plusGrandeOccu ( String str )
+    {
+        int count[] = new int[str.length()];
+      
+            
+        int len = str.length();
+        for (int i=0; i<len; i++)
+            count[str.charAt(i)]++;
+    
+        int max = -1; 
+        char result = ' ';
+
+        for (int i = 0; i < len; i++) {
+            if (max < count[str.charAt(i)]) {
+                max = count[str.charAt(i)];
+                result = str.charAt(i);
+            }
+        }
+
+        return result;
     }
 
     public static void main ( String args[] )
