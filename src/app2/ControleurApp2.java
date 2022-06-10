@@ -1,5 +1,6 @@
 package app2;
 
+
 import java.io.FileReader;
 import java.util.Scanner;
 
@@ -14,10 +15,9 @@ import app1.Tuyau;
 
 public class ControleurApp2
 {
-    private FrameReseau   frame;
+    private FrameReseau frame;
 
 	private String        pathMatrice;
-
 
     public ControleurApp2()
     {
