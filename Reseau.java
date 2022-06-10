@@ -32,10 +32,10 @@ public class Reseau
                 if ( matriceCout[lig][col] != 0 )
                 {
                     if ( this.tabCuve[lig] == null )
-                        this.tabCuve[lig] = Cuve.creerCuve(0); 
+                        this.tabCuve[lig] = Cuve.creer(0); 
                     
                     if ( this.tabCuve[col] == null )
-                        this.tabCuve[col] = Cuve.creerCuve(0); 
+                        this.tabCuve[col] = Cuve.creer(0); 
 
                     if ( !tuyauExiste( matriceCout[lig][col], this.tabCuve[lig], this.tabCuve[col] ) )
                         tabTuyau[nbTuyaux] = new Tuyau ( matriceCout[lig][col], this.tabCuve[lig], this.tabCuve[col] );
