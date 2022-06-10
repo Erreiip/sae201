@@ -7,7 +7,7 @@ public class ControleurApp1
 {
 
     private static boolean debug = false;
-    private Reseau         res;
+    private        Reseau  res;
 
 
     public ControleurApp1()
@@ -15,13 +15,13 @@ public class ControleurApp1
         this.res = new Reseau();
     }
 
-    public boolean ajouterTuyau (int section, Cuve cuve1, Cuve cuve2)
+    public boolean ajouterTuyau( int section, Cuve cuve1, Cuve cuve2 )
     {
         return res.ajouterTuyau(Tuyau.creer(section, cuve1, cuve2));
     }
 
 
-    public boolean ajouterCuve ( int capacite )
+    public boolean ajouterCuve( int capacite )
     {
         return res.ajouterCuve(Cuve.creer(capacite));
     }
@@ -41,15 +41,15 @@ public class ControleurApp1
     
 
     public static void main(String[] args) {
-        if(args.length > 0 && args[0].equals("debug")){
+        if (args.length > 0 && args[0].equals("debug")){
             lancerModeDebug();
             return;
         }
 
-        int nbCuves;            
-        int capaciteMaximal;
-        double capaciteInitiale;
-        Cuve cuveEnCreation;
+        int            nbCuves;            
+        int            capaciteMaximal;
+        double         capaciteInitiale;
+        Cuve           cuveEnCreation;
         ControleurApp1 controleur = new ControleurApp1();
 
         /*----------------------------*/
@@ -69,20 +69,12 @@ public class ControleurApp1
         {
             /**Renseigner capacite de cuve en creation */
             do {
-            System.out.print("Entrez la capacité maximale de la cuve "+ (char)('A'+cpt)+ " (entre 200 et 2000) :");
+            System.out.print("Entrez la capacité maximale de la cuve "+ (char)('A'+cpt)+ " (entre 200 et 2000) : ");
             capaciteMaximal = Clavier.lire_int();
 
             cuveEnCreation = Cuve.creer(capaciteMaximal);
             if (cuveEnCreation == null) System.out.println("Invalide");
             } while (cuveEnCreation == null);
-            
-            /**Renseigner la  capacite de cuve en creation*/
-            boolean success;
-            do{
-            System.out.print("Entrez la capacité initiale de la cuve (entre 0 et " + cuveEnCreation.getCapacite() + ") :");
-            capaciteInitiale = Clavier.lire_double();
-            success = cuveEnCreation.ajouterContenu(capaciteInitiale);
-            } while (!success);
             
             System.out.println("La cuve " + cuveEnCreation.getIdentifiant() + " a été créée avec succès.");
 
@@ -90,10 +82,10 @@ public class ControleurApp1
         }
 
         /*Creation des tuyaux*/
-        char resCreerTuyau;
-        int  section;
-        char idCuveA, idCuveB;
-        Cuve cuve1, cuve2;
+        char  resCreerTuyau;
+        int   section;
+        char  idCuveA, idCuveB;
+        Cuve  cuve1  , cuve2;
         Tuyau tuyau;
         
         do
@@ -126,7 +118,7 @@ public class ControleurApp1
             System.out.println ("Voulez-vous continuer de creer un tuyau (O/N) ?");    
             
         } while (resCreerTuyau == 'O');
-
+        System.out.println ("Reseau fini");
     }
 
 }
