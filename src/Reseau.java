@@ -12,7 +12,7 @@ public class Reseau
 
 
     // liste d’adjacence
-    public Reseau( int[][] listeAdja )
+    public Reseau( int[][] listeAdja, int[] tabCuves, int[] tabCouts )
     {
         this.tabCuve = new Cuve[listeAdja.length];
         this.nbCuves = this.tabCuve.length+1;
