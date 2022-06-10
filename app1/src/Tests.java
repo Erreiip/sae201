@@ -1,4 +1,4 @@
-package src;
+package app1.src;
 
 public class Tests
 {

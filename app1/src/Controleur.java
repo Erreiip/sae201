@@ -1,6 +1,4 @@
-package src;
-
-import src.ihm.*;
+package app1.src;
 
 import java.sql.SQLTransientConnectionException;
 
