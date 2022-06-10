@@ -1,10 +1,13 @@
 package src.app1;
 
+import src.app1.matrice.Matrice;
+import src.app1.matrice.MatriceAdjacente;
+
 public class Tests
 {
 	public static void main(String[] args)
 	{
-		Tests.testerCuves();
+		Tests.testerReseauEtMatrices();
 	}
 
 	public static void testerCuves()
@@ -25,5 +28,31 @@ public class Tests
 			System.out.println(cuveA.ajouterContenu(1000));
 			System.out.println(cuveA);
 		}
+	}
+
+	public static void testerReseauEtMatrices() {
+		Reseau reseau = new Reseau();
+		Cuve cuveA = Cuve.creer(1000);
+		Cuve cuveB = Cuve.creer(900);
+		Cuve cuveC = Cuve.creer(200);
+		Cuve cuveD = Cuve.creer(700);
+
+		cuveA.ajouterContenu(500);
+		cuveB.ajouterContenu(190);
+
+		reseau.ajouterCuve(cuveA);
+		reseau.ajouterCuve(cuveB);
+		reseau.ajouterCuve(cuveC);
+		reseau.ajouterCuve(cuveD);
+
+		reseau.ajouterTuyau(Tuyau.creer(2, cuveA, cuveB));
+		reseau.ajouterTuyau(Tuyau.creer(6, cuveA, cuveC));
+		reseau.ajouterTuyau(Tuyau.creer(4, cuveB, cuveC));
+		reseau.ajouterTuyau(Tuyau.creer(8, cuveB, cuveD));
+
+		System.out.println(reseau);
+
+		Matrice matrice = new MatriceAdjacente();
+		System.out.println(matrice.toString(matrice.fromReseau(reseau)));
 	}
 }

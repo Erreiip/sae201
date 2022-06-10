@@ -18,6 +18,18 @@ public class Reseau
     public ArrayList<Cuve>  getCuves()  { return cuves; }
     public ArrayList<Tuyau> getTuyaux() { return tuyaux; }
 
+    public Cuve getCuve(int index)
+    {
+        for(Cuve c : this.cuves)
+        {
+            if(c.getIdentifiantInt() == index)
+            {
+                return c;
+            }
+        }
+        return null;
+    }
+
     public Cuve getCuve(char identifiant)
     {
         for(Cuve c : this.cuves)
@@ -67,5 +79,13 @@ public class Reseau
             }
         }
         return null;
+    }
+
+    @Override
+    public String toString() {
+        return "Reseau{" +
+                "tuyaux=" + tuyaux +
+                ", cuves=" + cuves +
+                '}';
     }
 }

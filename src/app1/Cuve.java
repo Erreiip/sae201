@@ -97,10 +97,10 @@ public class Cuve
 
     public String toString()
     {
-        return "Cuve " + this.id + " : " +
+        return "Cuve {" + this.id + " " +
                 "[" + x +
                 ":" + y +
                 "] " +
-                contenu + "/" + capacite;
+                contenu + "/" + capacite + "}";
     }
 }
