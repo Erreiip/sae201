@@ -1,17 +1,44 @@
 package src.app1;
 
 import iut.algo.Clavier;
+import java.util.HashMap;
 
 public class ControleurApp1
 {
 
     private static boolean debug = false;
-    private Reseau       res;
+    private Reseau         res;
 
-    public ControleurApp1(Reseau res)
+
+    public ControleurApp1()
     {
-        
+        this.res = new Reseau();
     }
+
+    public boolean ajouterTuyau (int section, Cuve cuve1, Cuve cuve2)
+    {
+        return res.ajouterTuyau(Tuyau.creer(section, cuve1, cuve2));
+    }
+
+
+    public boolean ajouterCuve ( int capacite )
+    {
+        return res.ajouterCuve(Cuve.creer(capacite));
+    }
+
+
+    private static void lancerModeDebug() {
+        ControleurApp1.debug = true;
+        System.out.println("Mode debug activé");
+    }
+
+
+    public void sortieFichierTexte ()
+    {
+
+    }
+
+    
 
     public static void main(String[] args) {
         if(args.length > 0 && args[0].equals("debug")){
@@ -19,48 +46,87 @@ public class ControleurApp1
             return;
         }
 
-        int choixMatrice;
-        do {
-            System.out.println("Veuillez chosir une matrice :\n" +
-                    "[1] - Liste d'adjacence \n" +
-                    "[2] - Matrice de cout   \n" +
-                    "[3] - Matrice de cout optimisé");
+        int nbCuves;            
+        int capaciteMaximal;
+        double capaciteInitiale;
+        Cuve cuveEnCreation;
+        ControleurApp1 controleur = new ControleurApp1();
 
-            System.out.print("Veuillez choisir entre 1 et 3 : ");
-            choixMatrice = Clavier.lire_int();
-        } while (choixMatrice < 1 || choixMatrice > 3);
+        /*----------------------------*/
+        /**Demander le nombre de cuves*/
+        /*----------------------------*/
 
+        System.out.println("Veuillez entrez le nombre de cuves :");
+        do
+        {
+            nbCuves = Clavier.lire_int();
+            if (nbCuves >= 26) System.out.println("Le nombre de cuves maximum a été atteint.");
+        } while (nbCuves >= 26);
 
-        while (Cuve.getNbCuves() < 26) {
-
-            int capaciteMaximal;
-            double capaciteInitial;
-            Cuve cuveEnCreation;
-
-            System.out.println("Création de la cuve " + (char) ('A' + Cuve.getNbCuves()) + " :");
-
+        /**Creations des cuves */
+        /*---------------------*/
+        for (int cpt=0; cpt < nbCuves; cpt ++)
+        {
+            /**Renseigner capacite de cuve en creation */
             do {
-                System.out.print("Entrez la capacité maximale de la cuve (entre 200 et 2000) :");
-                capaciteMaximal = Clavier.lire_int();
+            System.out.print("Entrez la capacité maximale de la cuve "+ (char)('A'+cpt)+ " (entre 200 et 2000) :");
+            capaciteMaximal = Clavier.lire_int();
 
-                cuveEnCreation = Cuve.creer(capaciteMaximal);
+            cuveEnCreation = Cuve.creer(capaciteMaximal);
+            if (cuveEnCreation == null) System.out.println("Invalide");
             } while (cuveEnCreation == null);
-
+            
+            /**Renseigner la  capacite de cuve en creation*/
             boolean success;
-            do {
-                System.out.print("Entrez la capacité initiale de la cuve (entre 0 et " + cuveEnCreation.getCapacite() + ") :");
-                capaciteInitial = Clavier.lire_double();
-                success = cuveEnCreation.ajouterContenu(capaciteInitial);
+            do{
+            System.out.print("Entrez la capacité initiale de la cuve (entre 0 et " + cuveEnCreation.getCapacite() + ") :");
+            capaciteInitiale = Clavier.lire_double();
+            success = cuveEnCreation.ajouterContenu(capaciteInitiale);
             } while (!success);
-
+            
             System.out.println("La cuve " + cuveEnCreation.getIdentifiant() + " a été créée avec succès.");
+
+            controleur.res.ajouterCuve(cuveEnCreation);
         }
 
-    }
+        /*Creation des tuyaux*/
+        char resCreerTuyau;
+        int  section;
+        char idCuveA, idCuveB;
+        Cuve cuve1, cuve2;
+        Tuyau tuyau;
+        
+        do
+        {
+            System.out.println ("Voulez-vous creer un tuyau (O/N) ?");    
+            resCreerTuyau = Clavier.lire_char();
+            if (resCreerTuyau == 'O')
+            {
+                do {
+                    System.out.print ("\nSection ?");
+                    section = Clavier.lire_int();
 
-    private static void lancerModeDebug() {
-        ControleurApp1.debug = true;
-        System.out.println("Mode debug activé");
+                    System.out.print ("\nIDCuveA ?");
+                    idCuveA = Clavier.lire_char();
+                    
+                    System.out.print ("\nIDCuveB ?");
+                    idCuveB = Clavier.lire_char();
+                    
+                    cuve1   = controleur.res.getCuve(idCuveA);
+                    cuve2   = controleur.res.getCuve(idCuveB);
+                    tuyau   = Tuyau.creer(section, cuve1, cuve2);
+                    
+                    if (tuyau == null) System.out.println ("Invalide");
+                    
+                } while (tuyau == null);
+                controleur.res.ajouterTuyau(tuyau);
+            }
+            else break;
+        
+            System.out.println ("Voulez-vous continuer de creer un tuyau (O/N) ?");    
+            
+        } while (resCreerTuyau == 'O');
+
     }
 
 }
