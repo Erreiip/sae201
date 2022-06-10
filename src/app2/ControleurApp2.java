@@ -1,9 +1,9 @@
-package app2;
+package src.app2;
 
 import java.io.FileReader;
 import java.util.Scanner;
 
-import src.app2;
+import src.app2.ihm;
 
 
 public class ControleurApp2
@@ -69,6 +69,8 @@ public class ControleurApp2
         }
 
         matrice = new int[lig][col];
+
+        sc.close();
         
         return matrice;
     }
