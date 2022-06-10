@@ -5,7 +5,7 @@ import src.app1.Cuve;
 import src.app1.Reseau;
 import src.app1.Tuyau;
 
-public class MatriceAdjacente implements Matrice
+public class FormatteurMatriceAdjacente implements FormatteurMatrice
 {
 	public void ajouterLiens(int[][] matrice, Reseau reseau)
 	{

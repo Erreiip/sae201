@@ -1,7 +1,7 @@
 package src.app1;
 
-import src.app1.matrice.Matrice;
-import src.app1.matrice.MatriceAdjacente;
+import src.app1.matrice.FormatteurMatrice;
+import src.app1.matrice.FormatteurMatriceAdjacente;
 
 public class Tests
 {
@@ -52,7 +52,7 @@ public class Tests
 
 		System.out.println(reseau);
 
-		Matrice matrice = new MatriceAdjacente();
-		System.out.println(matrice.toString(matrice.fromReseau(reseau)));
+		FormatteurMatrice formatteur = new FormatteurMatriceAdjacente();
+		System.out.println(formatteur.toString(formatteur.fromReseau(reseau)));
 	}
 }

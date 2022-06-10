@@ -2,7 +2,7 @@ package src.app1.matrice;
 
 import src.app1.Reseau;
 
-public interface Matrice
+public interface FormatteurMatrice
 {
 	void ajouterLiens(int[][] matrice, Reseau reseau);
 	String toString(int[][] matrice);
