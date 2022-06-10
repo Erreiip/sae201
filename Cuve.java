@@ -1,15 +1,15 @@
 public class Cuve 
 {
-    private int      nbCuves;
-    private char     idCuve;
+    private static int nbCuves;
+    private char       idCuve;
 
-    private int      capacite;
-    private double   contenu;
+    private int        capacite;
+    private double     contenu;
 
-    private int      posX;
-    private int      posY;
+    private int        posX;
+    private int        posY;
 
-    private Position position;
+    private Position   position;
 
 
     public Cuve creerCuve( int capaCuve )

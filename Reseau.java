@@ -1,5 +1,3 @@
-import iut.algo.*;
-
 public class Reseau 
 {
     
