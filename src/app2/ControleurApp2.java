@@ -1,19 +1,20 @@
-package app2;
+package src.app2;
+
+import src.app2.app2.ihm.*;
+import src.app2.ihm.FrameReseau;
 
 import java.io.FileReader;
 import java.util.Scanner;
 
-import app2.ihm.*;
 
-
-public class Controleur
+public class ControleurApp2
 {
     private FrameReseau frame;
 
 	private String        pathMatrice;
 
 
-    public Controleur()
+    public ControleurApp2()
     {
         this.frame = new FrameReseau( this );
     }
@@ -58,6 +59,6 @@ public class Controleur
 
     public static void main ( String args[] )
     {
-        new Controleur();
+        new ControleurApp2();
     }
 }

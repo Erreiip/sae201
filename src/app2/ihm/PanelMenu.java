@@ -1,4 +1,4 @@
-package app2.ihm;
+package src.app2.ihm;
 
 import javax.swing.*;
 
@@ -6,17 +6,17 @@ import java.awt.BorderLayout;
 import java.awt.event.*;
 import java.io.File;
 
-import app2.Controleur;
+import src.app2.ControleurApp2;
 
 public class PanelMenu extends JFrame implements ActionListener
 {
-    private Controleur    ctrl;
+    private ControleurApp2 ctrl;
 
 	private JMenuItem     menuiFichierOuvrir;
 	private JMenuItem     menuiFichierQuitter;
 
 
-    public PanelMenu( Controleur ctrl )
+    public PanelMenu( ControleurApp2 ctrl )
     {
         this.ctrl = ctrl;
         

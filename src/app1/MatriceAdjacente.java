@@ -1,4 +1,4 @@
-package app1.src;
+package src.app1;
 
 public class MatriceAdjacente 
 {

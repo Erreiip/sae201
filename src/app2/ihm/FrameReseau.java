@@ -1,8 +1,8 @@
-package app2.ihm;
+package src.app2.ihm;
 
 import javax.swing.*;
 
-import app2.Controleur;
+import src.app2.ControleurApp2;
 
 import java.awt.Dimension;
 import java.awt.BorderLayout;
@@ -11,18 +11,18 @@ import java.awt.BorderLayout;
 public class FrameReseau extends JFrame 
 {
 
-    private Controleur ctrl;
+    private ControleurApp2 ctrl;
 
     private PanelPaint panelPrincipal;
     private PanelMenu  panelMenu;
 
-    public FrameReseau ( Controleur controleur )
+    public FrameReseau ( ControleurApp2 controleurApp2)
     {
         Dimension d = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         int height  = d.height;
         int width   = d.width;
 
-        this.ctrl = controleur;
+        this.ctrl = controleurApp2;
         
         /*-------------------------------------------------*/
         
