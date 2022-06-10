@@ -16,7 +16,7 @@ public class Reseau
 
     
     // liste d’adjacence
-    public Reseau( List<Tuyau> listAdja )
+    public Reseau( Tuyau[] listAdja )
     {
 
     }
@@ -58,9 +58,9 @@ public class Reseau
         boolean tuyauExiste = false;
         for ( Tuyau t:this.tabTuyau )
         {
-            if (  t.getSection() == section                             &&
-                 (t.getCuve(0) == cuve1 || t.getCuve(0) == cuve2 ) &&
-                 (t.getCuve(1) == cuve1 || t.getCuve(1) == cuve2 )    ) { tuyauExiste = true; }
+            if (  t.getSection() == section                          &&
+                 (t.getCuve(0)   == cuve1 || t.getCuve(0) == cuve2 ) &&
+                 (t.getCuve(1)   == cuve1 || t.getCuve(1) == cuve2 )    ) { tuyauExiste = true; }
         }
 
         return tuyauExiste;
