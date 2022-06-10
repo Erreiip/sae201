@@ -1,6 +1,7 @@
 package src.app1;
 
 import src.app1.matrice.FormatteurMatrice;
+import src.app1.matrice.FormatteursMatrice;
 import src.app1.matrice.FormatteurMatriceAdjacente;
 
 public class Tests
@@ -50,8 +51,10 @@ public class Tests
 		reseau.ajouterCuve(cuveD);
 		System.out.println(reseau);
 
-		FormatteurMatrice formatteur = new FormatteurMatriceAdjacente();
-		formatteur.ajouterLiens(formatteur.fromString("0110\n1011\n1100\n0100"), reseau);
+		int[][] matriceAdjacente = FormatteursMatrice.ADJACENTE.fromString("0110\n1011\n1100\n0100");
+		FormatteursMatrice.ADJACENTE.ajouterLiens(
+				matriceAdjacente,
+				reseau);
 
 		System.out.println(reseau);
 	}
@@ -79,7 +82,7 @@ public class Tests
 
 		System.out.println(reseau);
 
-		FormatteurMatrice formatteur = new FormatteurMatriceAdjacente();
-		System.out.println(formatteur.toString(formatteur.fromReseau(reseau)));
+		int[][] matriceAdjacente = FormatteursMatrice.ADJACENTE.fromReseau(reseau);
+		System.out.println(FormatteursMatrice.ADJACENTE.toString(matriceAdjacente));
 	}
 }
