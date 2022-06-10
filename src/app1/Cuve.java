@@ -45,12 +45,13 @@ public class Cuve
 
     public static int getNbCuves() { return nbCuves;}
 
-    public char     getIdentifiant()   { return this.id; }
-    public int      getX()             { return x; }
-    public int      getY()             { return y; }
-    public Position getPositionInfos() { return positionInfos; }
-    public int      getCapacite()      { return capacite; }
-    public double   getContenu()       { return contenu; }
+    public char     getIdentifiant()    { return this.id; }
+    public int      getIdentifiantInt() { return this.id - 'A'; }
+    public int      getX()              { return x; }
+    public int      getY()              { return y; }
+    public Position getPositionInfos()  { return positionInfos; }
+    public int      getCapacite()       { return capacite; }
+    public double   getContenu()        { return contenu; }
 
     public void setX(int x)                              { this.x = x; }
     public void setY(int y)                              { this.y = y; }
