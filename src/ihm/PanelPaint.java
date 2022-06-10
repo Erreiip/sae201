@@ -12,11 +12,11 @@ import java.awt.Graphics2D;
 
 public class PanelPaint extends JPanel
 {
-    private FrameReseau frameMere;
+    private Controleur ctrl;
 
-    public PanelPaint ( FrameReseau frameMere)
+    public PanelPaint ( Controleur ctrl)
     {
-        this.frameMere = frameMere;
+        this.ctrl = ctrl;
     }
 
     public void paintComponent (Graphics g)
@@ -25,23 +25,23 @@ public class PanelPaint extends JPanel
 
         Graphics2D g = (Graphics2D) g; 
 
-        for ( Cuve c : Reseau.getCuves() )
+        for ( Cuve c : this.ctrl.getCuves() )
         {
             int taille = c.getCapacite() / 100;
 
-            int x = c.getPosX() + taille;
-            int y = c.getPosY() - taille;
+            int x = c.getX() + taille;
+            int y = c.getY() - taille;
             
             g.fillArc(x, y, taille, taille);
         }
 
-        for ( Tuyau t : Reseau.getTuyaux() )
+        for ( Tuyau t : this.ctrl.getTuyaux() )
         {
-            int xDepart = t.getCuve(0).getPosX;
-            int xFin    = t.getCuve(1).getPosX;
+            int xDepart = t.getCuve(0).getX();
+            int xFin    = t.getCuve(1).getX();
 
-            int yDepart = t.getCuve(0).getPosY;
-            int yFin    = t.getCuve(1).getPosY;
+            int yDepart = t.getCuve(0).getY();
+            int yFin    = t.getCuve(1).getY();
 
 
             g.drawLine( xDepart, yDepart, xFin, yFin );
