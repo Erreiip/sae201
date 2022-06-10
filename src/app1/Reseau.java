@@ -1,19 +1,14 @@
 package src.app1;
 
-
 import java.util.ArrayList;
-
 
 public class Reseau 
 {
-    
     private final ArrayList<Tuyau> lstTuyau;
     private final ArrayList<Cuve>  lstCuve;
 
-    private int nbCuve;
-
     // Constructeur
-    public Reseau(int nbCuve)
+    public Reseau()
     {
         this.lstTuyau = new ArrayList<>();
         this.lstCuve  = new ArrayList<>();
@@ -64,6 +59,4 @@ public class Reseau
         }
         return false;
     }
-
-
 }
