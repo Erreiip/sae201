@@ -1,60 +1,54 @@
 package src;
 
 
+import java.util.ArrayList;
+
+
 public class Reseau 
 {
     
-    private int      nbCuves;
-    private Cuve[]   tabCuve;
-    
-    private Tuyau[]  tabTuyau;
-    private int      nbTuyaux;
+    private ArrayList<Tuyau> lstTuyau;
+    private ArrayList<Cuve>  lstCuve;
 
+    private int nbCuve;
 
-    // liste d’adjacence
-    public Reseau( int[][] listeAdja, int[] tabCuves, int[] tabCouts )
+    // Constructeur
+    public Reseau( int nbCuve )
     {
-        this.tabCuve = new Cuve[listeAdja.length];
-        this.nbCuves = this.tabCuve.length+1;
+        this.lstTuyau = new ArrayList<Tuyau>();
+        this.lstCuve  = new ArrayList<Cuve>();
 
-        for ( int lig=0 ; lig < listeAdja.length ; lig++ )
-        {
-            for ( int col=0 ; col < listeAdja[lig].length ; col++ )
-            {
-                if ( listeAdja[lig][col] != 0 )
-                {
-                    if ( !tuyauExiste( listeAdja[lig][col], this.tabCuve[lig], this.tabCuve[col] ) )
-                        tabTuyau[nbTuyaux++] = new Tuyau ( listeAdja[lig][col], this.tabCuve[lig], this.tabCuve[col] );
-                }
-            }
-        }
     }
 
-    
-    // matrice de cout (même constructeur pour matrice opti)
-    public Reseau( int[][] matriceCout, int[] tabCuves )
+    // Accesseurs
+    public Cuve getCuve( char indice ) 
     {
-        this.tabCuve = new Cuve[matriceCout.length];
-        this.nbCuves = this.tabCuve.length+1;
+        return this.lstCuve.get( (int) (indice - 'A') );
+    }
 
-        for ( int lig=0 ; lig < matriceCout.length ; lig++ )
-        {
-            for ( int col=0 ; col < matriceCout[lig].length ; col++ )
-            {
-                if ( matriceCout[lig][col] != 0 )
-                {
-                    if ( !tuyauExiste( matriceCout[lig][col], this.tabCuve[lig], this.tabCuve[col] ) )
-                        tabTuyau[nbTuyaux++] = new Tuyau ( matriceCout[lig][col], this.tabCuve[lig], this.tabCuve[col] );
-                }
-            }
-        }
+    public Tuyau getTuyau( int indice )
+    {
+        return this.lstTuyau.get( indice );
+    }
+
+    public boolean ajouterTuyau( int section, Cuve cuve1, Cuve cuve2 )
+    {
+        if ( tuyauExiste(section, cuve1, cuve2) )
+            return false;
+        this.lstTuyau.add( new Tuyau(section, cuve1, cuve2) );
+        return true;
+    }
+
+    public boolean ajouterCuve( int capacite )
+    {
+        this.lstCuve.add( Cuve.creer(capacite) );
     }
 
 
-    public boolean tuyauExiste ( int section, Cuve cuve1, Cuve cuve2 )
+    public boolean tuyauExiste( int section, Cuve cuve1, Cuve cuve2 )
     {
         boolean tuyauExiste = false;
-        for ( Tuyau t:this.tabTuyau )
+        for ( Tuyau t:this.lstTuyau )
         {
             if ( t.getSection() == section &&
                  t.estRelie  (cuve1)       &&
