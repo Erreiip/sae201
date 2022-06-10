@@ -4,20 +4,23 @@ import java.util.ArrayList;
 
 public class Reseau 
 {
-    private final ArrayList<Tuyau> lstTuyau;
-    private final ArrayList<Cuve>  lstCuve;
+    private final ArrayList<Tuyau> tuyaux;
+    private final ArrayList<Cuve>  cuves;
 
     // Constructeur
     public Reseau()
     {
-        this.lstTuyau = new ArrayList<>();
-        this.lstCuve  = new ArrayList<>();
+        this.tuyaux = new ArrayList<>();
+        this.cuves  = new ArrayList<>();
     }
 
     // Accesseurs
-    public Cuve getCuve( char identifiant )
+    public ArrayList<Cuve>  getCuves()  { return cuves; }
+    public ArrayList<Tuyau> getTuyaux() { return tuyaux; }
+
+    public Cuve getCuve(char identifiant)
     {
-        for( Cuve c : this.lstCuve )
+        for(Cuve c : this.cuves)
         {
             if( c.getIdentifiant() == identifiant )
             {
@@ -27,36 +30,42 @@ public class Reseau
         return null;
     }
 
-    public Tuyau getTuyau( int indice )
+    public Tuyau getTuyau(int indice)
     {
-        return this.lstTuyau.get( indice );
+        try
+        {
+            return tuyaux.get(indice);
+        }
+        catch (IndexOutOfBoundsException e)
+        {
+            return null;
+        }
     }
 
     public boolean ajouterCuve(Cuve cuve)
     {
         if(cuve == null) return false;
-        return this.lstCuve.add( cuve );
+        return this.cuves.add( cuve );
     }
 
     public boolean ajouterTuyau(Tuyau tuyau)
     {
         if(tuyau == null) return false;
-        if(sontRelies(tuyau.getCuve1(), tuyau.getCuve2()))
+        if(getTuyau(tuyau.getCuve1(), tuyau.getCuve2()) != null)
         {
             return false;
         }
-        return this.lstTuyau.add(tuyau);
+        return this.tuyaux.add(tuyau);
     }
 
-    public boolean sontRelies(Cuve cuve1, Cuve cuve2 )
-    {
-        for(Tuyau t : this.lstTuyau)
+    public Tuyau getTuyau(Cuve cuve1, Cuve cuve2) {
+        for(Tuyau t : this.tuyaux)
         {
             if(t.estRelie(cuve1) && t.estRelie(cuve2))
             {
-                return true;
+                return t;
             }
         }
-        return false;
+        return null;
     }
 }
