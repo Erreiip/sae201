@@ -1,15 +1,14 @@
-package src.app2;
-
-import src.app2.app2.ihm.*;
-import src.app2.ihm.FrameReseau;
+package app2;
 
 import java.io.FileReader;
 import java.util.Scanner;
 
+import src.app2;
+
 
 public class ControleurApp2
 {
-    private FrameReseau frame;
+    private FrameReseau   frame;
 
 	private String        pathMatrice;
 
@@ -55,6 +54,23 @@ public class ControleurApp2
             System.out.println(e);
             return false;
         }
+    }
+
+    private int[][] initScan()
+    {
+        int     lig, col;
+        int[][] matrice;
+
+        Scanner sc = new Scanner( new FileReader( this.pathMatrice ) );
+
+        for ( lig = 0; sc.hasNextLine(); lig++ )
+        {
+            for ( col = 0; sc.hasNextInt(); col++ ) {}
+        }
+
+        matrice = new int[lig][col];
+        
+        return matrice;
     }
 
     public static void main ( String args[] )
