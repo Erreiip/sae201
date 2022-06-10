@@ -25,4 +25,15 @@ public class Tuyau
 
         return cuveId + ":" + quantite;
     }
+
+    
+    public boolean equals(Object tuyau)
+    {
+        if(tuyau == null)
+            return false;
+
+        Cuve[] cuves = ((Tuyau)tuyau).cuves;
+        return this.cuves[0].equals(cuves[0]) && this.cuves[1].equals(cuves[1]);
+    }
+
 }
