@@ -2,13 +2,19 @@ package src;
 
 import iut.algo.Clavier;
 
-public class Main {
+public class Controleur {
 
     private static boolean debugActiver = false;
 
     private static void matriceAdjacence(){
 
+        //Boucle pour avoir toute les cuves
         
+        while (Cuve.getNbCuves()<26){
+
+            System.out.println("Cuve "+ (String (('A' + Cuve.getNbCuves()))) );
+
+        }
 
     }
 
