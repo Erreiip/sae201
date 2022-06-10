@@ -1,4 +1,6 @@
-public class Cuve 
+package src;
+
+public class Cuve
 {
     private static int nbCuves = 0;
 
@@ -41,8 +43,7 @@ public class Cuve
         }
     }
 
-    public char getIdentifiant() { return this.id; }
-
+    public char     getIdentifiant()   { return this.id; }
     public int      getX()             { return x; }
     public int      getY()             { return y; }
     public Position getPositionInfos() { return positionInfos; }
@@ -93,7 +94,7 @@ public class Cuve
 
     public String toString()
     {
-        return "Cuve " + this.id + " : " +
+        return "src.Cuve " + this.id + " : " +
                 "[" + x +
                 ":" + y +
                 "] " +

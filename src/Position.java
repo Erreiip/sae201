@@ -1,4 +1,6 @@
-public enum Position 
+package src;
+
+public enum Position
 {
     HAUT   (0),
     BAS    (1),

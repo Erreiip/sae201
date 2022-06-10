@@ -1,10 +1,10 @@
-package ihm;
+package src.ihm;
 
 import javax.swing.*;
 
 import java.awt.Dimension;
 
-import Reseau;
+import src.Reseau;
 
 
 public class FrameReseau extends JFrame 

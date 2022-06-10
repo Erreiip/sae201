@@ -1,6 +1,6 @@
-import java.nio.CharBuffer;
+package src;
 
-public class Tuyau 
+public class Tuyau
 {
     private int section;
     private Cuve[] cuves;

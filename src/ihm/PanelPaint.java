@@ -1,4 +1,8 @@
-package ihm;
+package src.ihm;
+
+import src.Cuve;
+import src.Reseau;
+import src.Tuyau;
 
 import javax.swing.*;
 
