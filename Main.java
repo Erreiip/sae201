@@ -2,18 +2,34 @@ import iut.algo.Clavier;
 
 public class Main {
 
-    //private boolean debugActiver;
+    private static boolean debugActiver = false;
 
     private static void matriceAdjacence(){
 
-
+        
 
     }
 
-    public static void main(boolean debug) {
+    private static void applicationDebug(String[] args){
 
+        if (args[0].equals("true")){
 
-        //this.debugActiver = debug;
+            debugActiver = true;
+
+        }
+
+    }
+
+    public static void main(String[] args) {
+
+        if (args.length == 0){
+            System.out.println("Vide");
+        }
+        else {
+            
+            applicationDebug(args);
+
+        }
 
         int choixMatrice;
 
@@ -29,6 +45,7 @@ public class Main {
             choixMatrice = Clavier.lire_int(); 
 
             if (choixMatrice < 1 || choixMatrice > 3){
+
 
                 System.out.print("Entrez invalide, veuillez choisir entre 1 et 3 : ");
 
