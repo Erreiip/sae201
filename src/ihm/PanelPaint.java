@@ -8,6 +8,7 @@ import javax.swing.*;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.io.PrintWriter;
 import java.awt.Color;
 
 import src.Controleur;
@@ -38,7 +39,7 @@ public class PanelPaint extends JPanel
             int x = c.getX() + taille;
             int y = c.getY() - taille;
             
-            g.setColor( this.degrade(c.getCapacite()) );
+            g.setColor( this.degrade(c.getContenu(), c.getCapacite()) );
             g.fillArc (x, y, taille, taille);
         }
 
@@ -57,8 +58,24 @@ public class PanelPaint extends JPanel
                
     }
 
-    private Color degrade ( int capa )
+    private Color degrade ( int contenu, int capa)
     {
-        return null;
+        Color c = Color.RED ;
+
+        int nombreIte = (int) Math.ceil(contenu/ (double) capa) * 100;
+
+        if ( nombreIte == 50 )
+        {
+            for ( int cpt = 0; cpt < nombreIte; cpt++ )
+            {
+                if ( nombreIte > 250 )
+                    c = c.darker();
+                else
+                    c = c.brighter();
+            }
+        }
+
+        return c;
     }
+
 }
