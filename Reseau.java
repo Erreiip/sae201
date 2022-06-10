@@ -32,12 +32,13 @@ public class Reseau
                 if ( matriceCout[lig][col] != 0 )
                 {
                     if ( this.tabCuve[lig] == null )
-                        this.tabCuve[lig] = new Cuve ();
+                        this.tabCuve[lig] = Cuve.creerCuve(0); 
                     
                     if ( this.tabCuve[col] == null )
-                        this.tabCuve[col] = new Cuve ();
+                        this.tabCuve[col] = Cuve.creerCuve(0); 
 
-                    tabTuyau[nbTuyaux] = new Tuyau ( matriceCout[lig][col], tabCuve[lig], tabCuve[col] );
+                    if ( !tuyauExiste( matriceCout[lig][col], this.tabCuve[lig], this.tabCuve[col] ) )
+                        tabTuyau[nbTuyaux] = new Tuyau ( matriceCout[lig][col], this.tabCuve[lig], this.tabCuve[col] );
                 }
             }
         }
@@ -51,7 +52,20 @@ public class Reseau
     public void ajouterCapa ( int[] tabCapacite )
     {
         
-        this.nbCapaCuve = 
+        this.nbCapaCuve = 0;
+    }
+
+    public boolean tuyauExiste ( int section, Cuve cuve1, Cuve cuve2 )
+    {
+        boolean tuyauExiste = false;
+        for ( Tuyau t:this.tabTuyau )
+        {
+            if (  t.getSection() == section                             &&
+                 (t.getCuve(0) == cuve1 || t.getCuve(0) == cuve2 ) &&
+                 (t.getCuve(1) == cuve1 || t.getCuve(1) == cuve2 )    ) { tuyauExiste = true; }
+        }
+
+        return tuyauExiste;
     }
 
 }
