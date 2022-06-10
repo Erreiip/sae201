@@ -10,11 +10,24 @@ public class Reseau
     private Tuyau[]  tabTuyau;
     private int      nbTuyaux;
 
-    
-    // liste d’adjacence
-    public Reseau( Tuyau[] listAdja )
-    {
 
+    // liste d’adjacence
+    public Reseau( int[][] listeAdja )
+    {
+        this.tabCuve = new Cuve[listeAdja.length];
+        this.nbCuves = this.tabCuve.length+1;
+
+        for ( int lig=0 ; lig < listeAdja.length ; lig++ )
+        {
+            for ( int col=0 ; col < listeAdja[lig].length ; col++ )
+            {
+                if ( listeAdja[lig][col] != 0 )
+                {
+                    if ( !tuyauExiste( listeAdja[lig][col], this.tabCuve[lig], this.tabCuve[col] ) )
+                        tabTuyau[nbTuyaux++] = new Tuyau ( listeAdja[lig][col], this.tabCuve[lig], this.tabCuve[col] );
+                }
+            }
+        }
     }
 
     
