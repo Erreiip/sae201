@@ -26,9 +26,10 @@ public class Controleur {
         while (Cuve.getNbCuves()<26)
         {
 
-            int  capaciteMaximal;
-            int  capaciteInitial;
-            Cuve cuveEnCreation;
+            int     capaciteMaximal;
+            double  capaciteInitial;
+            Cuve    cuveEnCreation;
+            String  continuation;
 
             System.out.println("Cuve "+ (char) ('A' + Cuve.getNbCuves()) + ", rentrez sa capacité initial et sa capacité maximum :" );
 
@@ -52,31 +53,34 @@ public class Controleur {
 
             }
 
-            System.out.print("Capacité maximal (entre 0 et "+ capaciteMaximal  +") : ");
-            capaciteInitial = Clavier.lire_int();
-<<<<<<< HEAD
-
             while (true){
 
-                System.out.print("Capacité maximal (entre 200 et 2000) : ");
-                capaciteMaximal = Clavier.lire_int(); 
+                System.out.print("Capacité maximal (entre 0 et "+ capaciteMaximal  +") : ");
+                capaciteInitial = Clavier.lire_double(); 
 
-                cuveEnCreation = Cuve.creer(capaciteMaximal);
-
-                if (cuveEnCreation == null){
-
-                    System.out.println("Erreur, la capacité maximal doit être entre (200 et 2000), veuillez re-rentrer une valeur");
-
-                }
-                else {
-
+                if (cuveEnCreation.ajouterContenu(capaciteInitial)){
                     break;
-
                 }
 
             }
-=======
->>>>>>> 9fc5ff833853d204cf3fbfb84d0ed4d8039fb340
+
+            while (true){
+
+                System.out.print("Voulez vous créer d'autre cuve O/N :");
+
+                continuation = Clavier.lireString(); 
+
+                if (continuation.equals("O") || continuation.equals("N") ){
+                    break;
+                }
+
+                System.out.println("Veuillez rentrer une entré valide.");
+
+            }
+
+            if (continuation.equals("N")){
+                break;
+            }
 
         }
 
