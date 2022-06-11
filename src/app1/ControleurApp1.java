@@ -2,46 +2,46 @@ package src.app1;
 
 import iut.algo.Clavier;
 import src.app1.ihm.FrameApp1;
+import src.common.Cuve;
+import src.common.Reseau;
+import src.common.Tuyau;
 
-import javax.naming.ldap.Control;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Scanner;
 import java.io.PrintWriter;
 import java.io.FileOutputStream;
+
 public class ControleurApp1
 {
+    private static final boolean debug = false;
 
-    private static boolean debug = false;
-    private        Reseau  res;
-
+    private Reseau reseau;
 
     public ControleurApp1()
     {
-        this.res = new Reseau();
+        this.reseau = new Reseau();
     }
 
-    public boolean ajouterTuyau (int section, Cuve cuve1, Cuve cuve2)
+    public List<Cuve> getCuves()   { return this.reseau.getCuves(); }
+    public List<Tuyau> getTuyaux() { return this.reseau.getTuyaux(); }
+
+    public boolean creerTuyau(int section, Cuve cuve1, Cuve cuve2)
     {
-        return res.ajouterTuyau(Tuyau.creer(section, cuve1, cuve2));
+        return reseau.creerTuyau(section, cuve1, cuve2) != null;
     }
 
-    public boolean ajouterTuyau (int section, char idCuve1, char idCuve2)
+    public boolean creerTuyau(int section, char idCuve1, char idCuve2)
     {
-        return this.res.ajouterTuyau(section, idCuve1, idCuve2);
+        return reseau.creerTuyau(section, idCuve1, idCuve2) != null;
     }
 
-    public boolean ajouterCuve ( int capacite )
+    public boolean creerCuve(int capacite )
     {
-        return res.ajouterCuve(capacite);
+        return reseau.creerCuve(capacite) != null;
     }
-
-    public List<Cuve> getCuves() { return this.res.getCuves(); }
-    public List<Tuyau> getTuyaux() { return this.res.getTuyaux(); }
 
     public void sortieFichierTexteMatriceCout ()
     {
-        String sRet = this.res.getMatriceCout();
+        String sRet = this.reseau.getMatriceCout();
         try
 		{
 			PrintWriter pw = new PrintWriter( new FileOutputStream("sortie.txt") );
@@ -91,7 +91,7 @@ public class ControleurApp1
             System.out.print("Entrez la capacité maximale de la cuve "+ idCuveEnCreation + " (entre 200 et 2000) :");
             capaciteMaximal = Clavier.lire_int();
 
-            valideCuve = controleur.ajouterCuve(capaciteMaximal);
+            valideCuve = controleur.creerCuve(capaciteMaximal);
             
             if (!valideCuve) { System.out.println("Invalide"); continue ;}
             idCuveEnCreation ++;
@@ -121,7 +121,7 @@ public class ControleurApp1
                     System.out.print ("\nidCuve2 ? ");
                     idCuve2 = Clavier.lire_char();
                     
-                    valideTuyau = controleur.ajouterTuyau(section, idCuve1, idCuve2);
+                    valideTuyau = controleur.creerTuyau(section, idCuve1, idCuve2);
                     if (!valideTuyau) System.out.println ("Invalide");
                     
                 } while (!valideTuyau);

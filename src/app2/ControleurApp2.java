@@ -5,14 +5,10 @@ import java.util.HashMap;
 import java.io.FileReader;
 import java.util.Scanner;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Collections;
-
 import src.app2.ihm.*;
-import src.app1.Reseau;
-import src.app1.Tuyau;
-import src.app1.Cuve;
+import src.common.Reseau;
+import src.common.Tuyau;
+import src.common.Cuve;
 
 
 public class ControleurApp2

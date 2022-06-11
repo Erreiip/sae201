@@ -1,6 +1,6 @@
 package src.app1.matrice;
 
-import src.app1.Reseau;
+import src.common.Reseau;
 
 public interface FormatteurMatrice
 {

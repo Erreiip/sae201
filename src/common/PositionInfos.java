@@ -1,6 +1,6 @@
-package src.app1;
+package src.common;
 
-public enum Position
+public enum PositionInfos
 {
     HAUT   ,
     BAS    ,

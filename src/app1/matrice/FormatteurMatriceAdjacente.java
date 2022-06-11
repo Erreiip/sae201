@@ -1,9 +1,9 @@
 package src.app1.matrice;
 
 import iut.algo.Clavier;
-import src.app1.Cuve;
-import src.app1.Reseau;
-import src.app1.Tuyau;
+import src.common.Cuve;
+import src.common.Reseau;
+import src.common.Tuyau;
 
 public class FormatteurMatriceAdjacente implements FormatteurMatrice
 {
@@ -19,15 +19,14 @@ public class FormatteurMatriceAdjacente implements FormatteurMatrice
 					Cuve cuve2 = reseau.getCuve(col);
 					Tuyau tuyau = null;
 					boolean correct = false;
-					if(!reseau.aUnTuyau(cuve1, cuve2)) {
+					if(!reseau.sontRelies(cuve1, cuve2)) {
 						System.out.print("Rentrez la section du tuyau reliant " + cuve1 + " et " + cuve2 + " : ");
 						while(!correct)
 						{
-							tuyau = Tuyau.creer(Clavier.lire_int(), cuve1, cuve2);
+							tuyau = reseau.creerTuyau(Clavier.lire_int(), cuve1, cuve2);
 							if(tuyau != null) correct = true;
 							else System.out.println("Erreur de saisie ! Veuillez recommencer.");
 						}
-						reseau.ajouterTuyau(tuyau);
 					}
 				}
 			}
@@ -59,7 +58,7 @@ public class FormatteurMatriceAdjacente implements FormatteurMatrice
 				if(cuve1 == cuve2)
 					tab[lig][col] = 0;
 				else
-					tab[lig][col] = r.aUnTuyau(cuve1, cuve2) ? 1 : 0;
+					tab[lig][col] = r.sontRelies(cuve1, cuve2) ? 1 : 0;
 				col++;
 			}
 			sb.append("\n");

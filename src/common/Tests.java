@@ -1,8 +1,6 @@
-package src.app1;
+package src.common;
 
-import src.app1.matrice.FormatteurMatrice;
 import src.app1.matrice.FormatteursMatrice;
-import src.app1.matrice.FormatteurMatriceAdjacente;
 
 public class Tests
 {
@@ -15,12 +13,14 @@ public class Tests
 
 	public static void testerCuves()
 	{
-		Cuve cuveIncorrecte1 = Cuve.creer(100);
-		Cuve cuveIncorrecte2 = Cuve.creer(3000);
+		Reseau reseau = new Reseau();
+
+		Cuve cuveIncorrecte1 = reseau.creerCuve(100);
+		Cuve cuveIncorrecte2 = reseau.creerCuve(3000);
 		if (cuveIncorrecte1 != null) System.err.println("La cuve incorrecte 1 doit être nulle ! Valeur : " + cuveIncorrecte1);
 		if (cuveIncorrecte2 != null) System.err.println("La cuve incorrecte 1 doit être nulle ! Valeur : " + cuveIncorrecte1);
 
-		Cuve cuveA = Cuve.creer(200);
+		Cuve cuveA = reseau.creerCuve(200);
 		if (cuveA == null) System.err.println("La cuve A ne doit pas être nulle !");
 		else
 		{
@@ -37,18 +37,15 @@ public class Tests
 	public static void testerMatriceInput()
 	{
 		Reseau reseau = new Reseau();
-		Cuve cuveA = Cuve.creer(1000);
-		Cuve cuveB = Cuve.creer(900);
-		Cuve cuveC = Cuve.creer(200);
-		Cuve cuveD = Cuve.creer(700);
+
+		Cuve cuveA = reseau.creerCuve(1000);
+		Cuve cuveB = reseau.creerCuve(900);
+		Cuve cuveC = reseau.creerCuve(200);
+		Cuve cuveD = reseau.creerCuve(700);
 
 		cuveA.ajouterContenu(500);
 		cuveB.ajouterContenu(190);
 
-		reseau.ajouterCuve(cuveA);
-		reseau.ajouterCuve(cuveB);
-		reseau.ajouterCuve(cuveC);
-		reseau.ajouterCuve(cuveD);
 		System.out.println(reseau);
 
 		int[][] matriceAdjacente = FormatteursMatrice.ADJACENTE.fromString("0110\n1011\n1100\n0100");
@@ -62,23 +59,19 @@ public class Tests
 	public static void testerMatriceOutput()
 	{
 		Reseau reseau = new Reseau();
-		Cuve cuveA = Cuve.creer(1000);
-		Cuve cuveB = Cuve.creer(900);
-		Cuve cuveC = Cuve.creer(200);
-		Cuve cuveD = Cuve.creer(700);
+
+		Cuve cuveA = reseau.creerCuve(1000);
+		Cuve cuveB = reseau.creerCuve(900);
+		Cuve cuveC = reseau.creerCuve(200);
+		Cuve cuveD = reseau.creerCuve(700);
 
 		cuveA.ajouterContenu(500);
 		cuveB.ajouterContenu(190);
 
-		reseau.ajouterCuve(cuveA);
-		reseau.ajouterCuve(cuveB);
-		reseau.ajouterCuve(cuveC);
-		reseau.ajouterCuve(cuveD);
-
-		reseau.ajouterTuyau(Tuyau.creer(2, cuveA, cuveB));
-		reseau.ajouterTuyau(Tuyau.creer(6, cuveA, cuveC));
-		reseau.ajouterTuyau(Tuyau.creer(4, cuveB, cuveC));
-		reseau.ajouterTuyau(Tuyau.creer(8, cuveB, cuveD));
+		reseau.creerTuyau(2, cuveA, cuveB);
+		reseau.creerTuyau(6, cuveA, cuveC);
+		reseau.creerTuyau(4, cuveB, cuveC);
+		reseau.creerTuyau(8, cuveB, cuveD);
 
 		System.out.println(reseau);
 

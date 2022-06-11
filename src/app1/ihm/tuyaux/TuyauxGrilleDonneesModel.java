@@ -1,7 +1,7 @@
 package src.app1.ihm.tuyaux;
 
 import src.app1.ControleurApp1;
-import src.app1.Tuyau;
+import src.common.Tuyau;
 import src.app1.ihm.AGrilleDonneesModel;
 
 import java.util.List;

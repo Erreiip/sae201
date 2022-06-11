@@ -1,3 +1,3 @@
-package src.app1;
+package src.common;
 
 public interface IReseauElement {}

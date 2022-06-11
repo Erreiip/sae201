@@ -1,7 +1,7 @@
 package src.app1.ihm;
 
 import src.app1.ControleurApp1;
-import src.app1.IReseauElement;
+import src.common.IReseauElement;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
