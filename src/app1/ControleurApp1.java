@@ -1,7 +1,11 @@
 package src.app1;
 
 import iut.algo.Clavier;
+import src.app1.ihm.FrameApp1;
+
+import javax.naming.ldap.Control;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 import java.io.PrintWriter;
 import java.io.FileOutputStream;
@@ -32,6 +36,9 @@ public class ControleurApp1
         return res.ajouterCuve(capacite);
     }
 
+    public List<Cuve> getCuves() { return this.res.getCuves(); }
+    public List<Tuyau> getTuyaux() { return this.res.getTuyaux(); }
+
     public void sortieFichierTexteMatriceCout ()
     {
         String sRet = this.res.getMatriceCout();
@@ -53,12 +60,16 @@ public class ControleurApp1
 
     public static void main(String[] args) 
     {
+        ControleurApp1 controleur = new ControleurApp1();
+        if(args.length > 0 && args[0].equalsIgnoreCase("gui")) {
+            new FrameApp1(controleur);
+            return;
+        }
 
-        int            nbCuves;            
+        int            nbCuves;
         int            capaciteMaximal;
         double         capaciteInitiale;
         boolean        valideCuve;
-        ControleurApp1 controleur = new ControleurApp1();
 
         /*----------------------------*/
         /**Demander le nombre de cuves*/
