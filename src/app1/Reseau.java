@@ -57,8 +57,27 @@ public class Reseau
     public boolean ajouterCuve(Cuve cuve)
     {
         if (cuve == null) return false;
+
+        for (Cuve c : this.cuves)
+            if (cuve.getIdentifiant() == c.getIdentifiant() ) return false;
+        
         return this.cuves.add( cuve );
     }
+    public boolean ajouterCuve (int capacite)
+    {
+        //Verification si cuve est valide
+        Cuve cuve = Cuve.creer(capacite);
+        if (cuve ==null) return false;
+        
+        //Verification si cuve existe dans la liste
+        for (Cuve c : this.cuves)
+            if (cuve.getIdentifiant() == c.getIdentifiant() ) return false;
+        
+        //Ajouter
+        this.cuves.add (cuve);
+        return true;
+    }
+
 
     public boolean ajouterTuyau(Tuyau tuyau)
     {
@@ -68,6 +87,30 @@ public class Reseau
             return false;
         }
         return false;
+    }
+    
+    public boolean ajouterTuyau(int section, char idCuve1, char idCuve2)
+    {
+        //Verification si idCuve1 et idCuve2 exist dans la liste
+        Cuve cuve1,cuve2;
+        cuve1 = cuve2 = null;
+        for (Cuve c : this.cuves)
+        {
+            if (idCuve1 == c.getIdentifiant()) cuve1 = c;
+            if (idCuve2 == c.getIdentifiant()) cuve2 = c;
+        }
+        if (cuve1 == null || cuve2 == null) return false;
+
+        //Verification si cuve1 et cuve2 sont deja lié
+        if (this.aUnTuyau(cuve1, cuve2) )   return false;
+
+        //Creer un tuyau et verfier si possible
+        Tuyau tuyau = Tuyau.creer(section, cuve1, cuve2);
+        if (tuyau ==null) return false;
+
+        //ajouter le tuyau
+        this.tuyaux.add(tuyau);
+        return true;
     }
 
     public Tuyau getTuyau(Cuve cuve1, Cuve cuve2)
