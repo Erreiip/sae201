@@ -22,18 +22,15 @@ public class ControleurApp1
         return res.ajouterTuyau(Tuyau.creer(section, cuve1, cuve2));
     }
 
+    public boolean ajouterTuyau (int section, char idCuve1, char idCuve2)
+    {
+        return this.res.ajouterTuyau(section, idCuve1, idCuve2);
+    }
 
     public boolean ajouterCuve ( int capacite )
     {
-        return res.ajouterCuve(Cuve.creer(capacite));
+        return res.ajouterCuve(capacite);
     }
-
-
-    private static void lancerModeDebug() {
-        ControleurApp1.debug = true;
-        System.out.println("Mode debug activé");
-    }
-
 
     public void sortieFichierTexteMatriceCout ()
     {
@@ -74,16 +71,13 @@ public class ControleurApp1
 
     
 
-    public static void main(String[] args) {
-        if(args.length > 0 && args[0].equals("debug")){
-            lancerModeDebug();
-            return;
-        }
+    public static void main(String[] args) 
+    {
 
         int            nbCuves;            
         int            capaciteMaximal;
         double         capaciteInitiale;
-        Cuve           cuveEnCreation;
+        boolean        valideCuve;
         ControleurApp1 controleur = new ControleurApp1();
 
         /*----------------------------*/
@@ -98,29 +92,28 @@ public class ControleurApp1
 
         /**Creations des cuves */
         /*---------------------*/
+        char idCuveEnCreation = 'A';
         for (int cpt=0; cpt < nbCuves; cpt ++)
         {
             /**Renseigner capacite de cuve en creation */
             do {
-            System.out.print("Entrez la capacité maximale de la cuve "+ (char)('A'+cpt)+ " (entre 200 et 2000) :");
+            System.out.print("Entrez la capacité maximale de la cuve "+ idCuveEnCreation + " (entre 200 et 2000) :");
             capaciteMaximal = Clavier.lire_int();
 
-            cuveEnCreation = Cuve.creer(capaciteMaximal);
-            if (cuveEnCreation == null) System.out.println("Invalide");
-            } while (cuveEnCreation == null);
+            valideCuve = controleur.ajouterCuve(capaciteMaximal);
             
-            System.out.println("La cuve " + cuveEnCreation.getIdentifiant() + " a été créée avec succès.");
-
-            controleur.res.ajouterCuve(cuveEnCreation);
+            if (!valideCuve) { System.out.println("Invalide"); continue ;}
+            idCuveEnCreation ++;
+            } while (!valideCuve);
+            
+            System.out.println("La cuve " + idCuveEnCreation + " a été créée avec succès.");
         }
 
         /*Creation des tuyaux*/
         char  resCreerTuyau;
         int   section;
-        char  idCuveA, idCuveB;
-        Cuve  cuve1  , cuve2;
-        Tuyau tuyau;
-        
+        char  idCuve1, idCuve2;
+        boolean valideTuyau;
         do
         {
             System.out.println ("Voulez-vous creer un tuyau (O/N) ?");    
@@ -128,23 +121,19 @@ public class ControleurApp1
             if (resCreerTuyau == 'O')
             {
                 do {
-                    System.out.print ("\nSection ?");
+                    System.out.print ("\nSection ? ");
                     section = Clavier.lire_int();
 
-                    System.out.print ("\nIDCuveA ?");
-                    idCuveA = Clavier.lire_char();
+                    System.out.print ("\nidCuve1 ? ");
+                    idCuve1 = Clavier.lire_char();
                     
-                    System.out.print ("\nIDCuveB ?");
-                    idCuveB = Clavier.lire_char();
+                    System.out.print ("\nidCuve2 ? ");
+                    idCuve2 = Clavier.lire_char();
                     
-                    cuve1   = controleur.res.getCuve(idCuveA);
-                    cuve2   = controleur.res.getCuve(idCuveB);
-                    tuyau   = Tuyau.creer(section, cuve1, cuve2);
+                    valideTuyau = controleur.ajouterTuyau(section, idCuve1, idCuve2);
+                    if (!valideTuyau) System.out.println ("Invalide");
                     
-                    if (tuyau == null) System.out.println ("Invalide");
-                    
-                } while (tuyau == null);
-                controleur.res.ajouterTuyau(tuyau);
+                } while (!valideTuyau);
             }
             else break;
         
