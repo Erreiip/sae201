@@ -62,110 +62,136 @@ public class ControleurApp2
     }
 
 
-    public ArrayList<Tuyau> getTuyaux()
-    {
-        int cpt = 0;
-        Tuyau c;
-
-        ArrayList<Tuyau> lstTuyaus = new ArrayList<Tuyau>();
-
-        do {
-            c = this.metier.getTuyau(cpt);
-            
-            if ( c != null )
-                lstTuyaus.add(c);
-
-            cpt++;
-
-        } while ( c != null );
-        
-        return lstTuyaus;
-    }
-
-
-    public ArrayList<Cuve> getCuves()
-    {
-        int cpt = 0;
-        Cuve c;
-
-        ArrayList<Cuve> lstCuve = new ArrayList<Cuve>();
-
-        do {
-            c = this.metier.getCuve((char) (cpt + 'A'));
-            
-            if ( c != null )
-                lstCuve.add(c);
-
-            cpt++;
-
-        } while ( c != null );
-        
-        return lstCuve;
-    }
-
-
     public boolean creerReseau()
     {
         try
         {
-            int[][]  matrice   = initScan();
+            boolean continuer = true;
 
-            Scanner sc = new Scanner( new FileReader( this.pathMatrice ) );
-            
-            String type = sc.nextLine();
-            
 
-            for ( int lig = 0; sc.hasNextLine() && !sc.nextLine().equals("---"); lig++ )
+            String   type      = Test.getType(); 
+
+            Object[][] matrice;
+
             {
-                for ( int col = 0; sc.hasNextInt(); col++ )
+                String temp = Test.initScan();
+                int lig     = Integer.parseInt(temp.charAt(0) + ""); 
+                int col     = Integer.parseInt(temp.charAt(1) + ""); 
+
+                matrice   = new Object[lig][col];
+            }
+
+            Scanner sc = new Scanner( new FileReader( "./source.data" ) );              
+            sc.nextLine();
+
+            for ( int lig = 0; sc.hasNextLine() && continuer; lig++ )
+            {
+                String str = sc.nextLine();
+                continuer  = !str.equals("---");
+
+                String[] strSplit = str.split(" ");
+
+                for ( int col = 0; col < strSplit.length && continuer; col++ )
                 {
-                    matrice[lig][col] = sc.nextInt();
+                    matrice[lig][col] = strSplit[col];
                 }
                 
             }
+            
 
-            //a completer
-            if ( type.equals("Matrice Adjacente"))
+            continuer = true;
+            while( sc.hasNextLine() && continuer )
             {
-        
+                String str = sc.nextLine();
+                continuer  = !str.equals("---");
+                
+                if ( continuer )
+                    /*création de nouelle cuve sans position*/ System.out.println(str);
             }
 
+
+            if ( type.equals("Liste d'adjacence"))
+            {
+                for ( int lig = 0; lig < matrice.length; lig++ )
+                {
+                    //création d'un tuyau entre matrice[lig][0] et matrice [lig][1]
+                }
+            }
+
+
+            /* test pour voir la matrice */
+            /*
+            for ( int lig = 0; lig < matrice.length; lig++ )
+            {
+                for ( int col = 0; col < matrice[lig].length; col++ )
+                {
+                    System.out.print(matrice[lig][col] + "|");
+                }
+                System.out.println();
+            }
+            */
+            
+            
         } 
         catch (Exception e) 
         {
-            System.out.println(e);
-            return false;
+            e.printStackTrace();
         }
-
-        return true;
     }
 
-    private int[][] initScan() 
+
+    private static String initScan() 
     {  
-        int     lig, col;
-        int[][] matrice;
+        int     lig = 0;
+        int     col = 0;
+        int maxCol  = 0;
+
+        boolean continuer = true;
 
         try 
         {
-            Scanner sc = new Scanner( new FileReader( this.pathMatrice ) );
+            Scanner sc = new Scanner( new FileReader( "./source.data" ) );
 
             sc.nextLine();
 
-            for ( lig = 0; sc.hasNextLine() && !sc.nextLine().equals("---"); lig++ )
-            {
-                for ( col = 0; sc.hasNextInt(); col++ ) 
-                    sc.nextInt();
+            for ( lig = 0; sc.hasNextLine() && continuer; lig++ ) 
+            { 
+                String str = sc.nextLine();
+                continuer = !str.equals("---");
+                
+                col = str.split(" ").length;
+
+                if ( col > maxCol )
+                    maxCol = col;
             }
     
-            matrice = new int[lig][col];
-    
             sc.close();
-            
-        } catch (Exception e) { System.out.println(e); return null;}
 
-        return matrice;
-        
+
+            //paassage en coordonnées réels de lig//
+            lig--;
+
+            return lig + "" + maxCol;
+            
+        } catch (Exception e) { System.out.println(e); return null;}   
     }
+
+    
+    private static String getType()
+    {
+        try  
+        {
+            Scanner sc = new Scanner( new FileReader( "./source.data" ) );
+
+            String temp = sc.nextLine(); 
+
+            sc.close();
+
+            return temp;    
+        } 
+        catch ( Exception e ) { return null; }
+    }
+    
 
     public static void main ( String args[] )
     {
