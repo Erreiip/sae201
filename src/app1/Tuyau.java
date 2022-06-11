@@ -1,6 +1,6 @@
 package src.app1;
 
-public class Tuyau
+public class Tuyau implements IReseauElement
 {
     private int  section;
     private Cuve cuve1;

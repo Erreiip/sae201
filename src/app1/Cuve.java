@@ -1,6 +1,6 @@
 package src.app1;
 
-public class Cuve
+public class Cuve implements IReseauElement
 {
     private static int nbCuves = 0;
 
