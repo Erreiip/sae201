@@ -22,13 +22,13 @@ public class Cuve
     public static Cuve creer(int capacite)
     {
         // Vérifier que la capacité est correct
-        if(capacite < 200 || capacite > 2000)
+        if (capacite < 200 || capacite > 2000)
         {
             System.err.println("Erreur : la capacité de la cuve doit être comprise entre 200 et 2000");
             return null;
         }
         // Vérifier qu'il n'y a pas trop de cuves
-        else if(nbCuves >= 26)
+        else if (nbCuves >= 26)
         {
             System.err.println("Erreur : le nombre de cuves dépasse le nombre maximal autorisé (26)");
             return null;
@@ -36,7 +36,7 @@ public class Cuve
         // Si toutes les vérifications sont passées, création de la cuve
         else
         {
-            char id = (char) ('A' + nbCuves);
+            char id   = (char) ('A' + nbCuves);
             Cuve cuve = new Cuve(id, capacite);
             nbCuves++;
             return cuve;
@@ -46,7 +46,6 @@ public class Cuve
     public static int getNbCuves() { return nbCuves;}
 
     public char     getIdentifiant()    { return this.id; }
-    public int      getIdentifiantInt() { return this.id - 'A'; }
     public int      getX()              { return x; }
     public int      getY()              { return y; }
     public Position getPositionInfos()  { return positionInfos; }
@@ -59,12 +58,12 @@ public class Cuve
 
     public boolean ajouterContenu(double ajout)
     {
-        if(ajout < 0)
+        if (ajout < 0)
         {
             System.err.println("Erreur : l'ajout de contenu doit être positif");
             return false;
         }
-        else if(this.contenu + ajout > capacite)
+        else if (this.contenu + ajout > capacite)
         {
             System.err.println("Erreur : l'ajout de contenu fait déborder la cuve");
             return false;
@@ -78,12 +77,12 @@ public class Cuve
 
     public boolean retirerContenu(double retrait)
     {
-        if(retrait < 0)
+        if (retrait < 0)
         {
             System.err.println("Erreur : le retrait de contenu doit être positif");
             return false;
         }
-        else if(this.contenu < retrait)
+        else if (this.contenu < retrait)
         {
             System.err.println("Erreur : le retrait de contenu est supérieur à ce qu'il reste");
             return false;
@@ -97,10 +96,10 @@ public class Cuve
 
     public String toString()
     {
-        return "Cuve " + this.id + " : " +
+        return "Cuve{" + this.id + " " +
                 "[" + x +
                 ":" + y +
                 "] " +
-                contenu + "/" + capacite;
+                contenu + "/" + capacite + "}";
     }
 }
