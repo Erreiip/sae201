@@ -129,7 +129,31 @@ public class Reseau
     {
         return getTuyau(cuve1, cuve2) != null;
     }
-
+    public String getMatriceCout()
+    {
+		String sRet = "";
+        String [][] matrice;
+        int nbCuves = this.getCuves().size();
+        matrice = new String[nbCuves][nbCuves];
+        for (Tuyau tuyau : this.getTuyaux())
+        {
+            int lig,col;
+            lig = tuyau.getCuve1().getIdentifiant() - 'A';
+            col = tuyau.getCuve2().getIdentifiant() - 'A';
+            matrice[lig][col] = tuyau.getSection() + "" ;
+            matrice[col][lig] = tuyau.getSection() + "";
+        }
+        for (int lig =0;lig < nbCuves; lig ++)
+        {
+            for (int col = 0; col < nbCuves; col ++)
+            {
+                sRet += matrice[lig][col] != null ? String.format("%3s",matrice[lig][col]):"  0";
+            }
+            
+            sRet += "\n";
+        }
+        return sRet;           
+    }
     @Override
     public String toString() {
         return "Reseau{" +
