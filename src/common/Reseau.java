@@ -2,6 +2,10 @@ package src.common;
 
 import java.util.ArrayList;
 
+/**
+ * Un réseau représente un espace dans lequel se trouvent des {@link Cuve}s et des {@link Tuyau}.<br>
+ * La création d'éléments doit se faire par l'utilisation de cette classe.
+ */
 public class Reseau 
 {
     private final ArrayList<Tuyau> tuyaux;
@@ -48,16 +52,29 @@ public class Reseau
     }
 
     // Fabriques
+
+    /**
+     * Fabrique une cuve.<br>
+     * Si une des contraintes n'est pas respectée, alors cette méthode retourne {@code null}.
+     */
     public Cuve creerCuve(int capacite)
     {
         return Cuve.creer(this, capacite);
     }
 
+    /**
+     * Fabrique un tuyau.<br>
+     * Si une des contraintes n'est pas respectée, alors cette méthode retourne {@code null}.
+     */
     public Tuyau creerTuyau(int section, Cuve cuve1, Cuve cuve2)
     {
         return Tuyau.creer(this, section, cuve1, cuve2);
     }
 
+    /**
+     * Fabrique un tuyau.<br>
+     * Si une des contraintes n'est pas respectée, alors cette méthode retourne {@code null}.
+     */
     public Tuyau creerTuyau(int section, char idCuve1, char idCuve2)
     {
         return this.creerTuyau(section, this.getCuve(idCuve1), this.getCuve(idCuve2));
