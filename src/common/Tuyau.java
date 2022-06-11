@@ -1,5 +1,7 @@
 package src.common;
 
+import src.util.Transfert;
+
 /**
  * Un tuyau représente une connexion entre deux {@link Cuve}.<br>
  * Elle se définit par ses deux connections aux cuves, ainsi que de sa capacité de transfert, appelée "section".
@@ -57,12 +59,17 @@ public class Tuyau implements IReseauElement
     public Cuve getCuve1  () { return cuve1;        }
     public Cuve getCuve2  () { return cuve2;        }
 
-    public String transverser()
+    public Transfert transverser()
     {
-        char cuveId   = this.cuve1.getCapacite() > this.cuve2.getCapacite() ? this.cuve1.getIdentifiant() : this.cuve2.getIdentifiant();
-        int  quantite = Math.abs(this.cuve1.getCapacite() - this.cuve2.getCapacite());
+        int quantite;
+        
+        Cuve cuveDepart  = this.cuve1.getCapacite() > this.cuve2.getCapacite() ? this.cuve1 : this.cuve2;
+        Cuve cuveArrivee = this.cuve1.getCapacite() < this.cuve2.getCapacite() ? this.cuve1 : this.cuve2;
 
-        return cuveId + ":" + quantite;
+        if ( this.cuve1.getContenu() > this.getSection() ) quantite = this.getSection();
+        else                                               quantite = cuveDepart.getContenu();
+
+        return new Transfert (cuveDepart, cuveArrivee, quantite);
     }
 
     public boolean estRelie(Cuve cuve)
