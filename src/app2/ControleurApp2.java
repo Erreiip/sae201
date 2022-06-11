@@ -1,12 +1,13 @@
 package src.app2;
 
+import java.util.HashMap;
 
 import java.io.FileReader;
 import java.util.Scanner;
 
 import java.util.List;
 import java.util.ArrayList;
-
+import java.util.Collections;
 
 import src.app2.ihm.*;
 import src.app1.Reseau;
@@ -29,11 +30,37 @@ public class ControleurApp2
         this.pathMatrice = null; 
     }
 
+
+    public void optiCuve()
+    {
+        HashMap<String,Integer> voisinPref = new HashMap<>();
+
+        for ( Cuve c : this.metier.getCuves() )
+        {
+            String str = "";
+
+            for ( Tuyau t : this.metier.getTuyaux())
+            {
+                if ( t.getCuve1() != c && t.getCuve2() == c )
+                    str += t.getCuve1().getIdentifiant();
+
+                if ( t.getCuve1() == c && t.getCuve2() != c )
+                    str += t.getCuve2().getIdentifiant();
+            }
+
+            voisinPref.put(c.getIdentifiant() + "",  str.length());
+        }
+
+        //completer
+    }
+
+
     public void setPath ( String path ) 
     { 
         this.pathMatrice = path;
         this.creerReseau(); 
     }
+
 
     public ArrayList<Tuyau> getTuyaux()
     {
@@ -55,6 +82,7 @@ public class ControleurApp2
         return lstTuyaus;
     }
 
+
     public ArrayList<Cuve> getCuves()
     {
         int cpt = 0;
@@ -74,6 +102,7 @@ public class ControleurApp2
         
         return lstCuve;
     }
+
 
     public boolean creerReseau()
     {

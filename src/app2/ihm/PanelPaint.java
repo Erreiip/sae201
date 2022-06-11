@@ -10,19 +10,25 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Color;
 
+import java.awt.geom.Ellipse2D;
+
 public class PanelPaint extends JPanel
 {
     private ControleurApp2 ctrl;
 
+    private Ellipse2D[]    tabPoints;
+
     public PanelPaint ( ControleurApp2 ctrl)
     {
         this.ctrl = ctrl;
+        this.tabPoints = new Ellipse2D[this.ctrl.getCuves().size()];
     }
 
     public void paintComponent (Graphics g)
     {
         super.paintComponent(g); 
 
+        int i = 0;
         for ( Cuve c : this.ctrl.getCuves() )
         {
             int taille = c.getCapacite() / 100;
@@ -31,7 +37,7 @@ public class PanelPaint extends JPanel
             int y = c.getY() - taille;
             
             g.setColor( this.degrade((int) c.getContenu(), c.getCapacite()) );
-            g.fillArc (x, y, taille, taille);
+            tabPoints[i++] = new Ellipse2D.Double(x, y, taille, taille);
         }
 
         for ( Tuyau t : this.ctrl.getTuyaux() )
