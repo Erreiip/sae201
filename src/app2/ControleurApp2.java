@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 import java.util.List;
 import java.util.ArrayList;
-
+import java.util.Collections;
 
 import src.app2.ihm.*;
 import src.app1.Reseau;
@@ -33,7 +33,7 @@ public class ControleurApp2
 
     public void optiCuve()
     {
-        HashMap<String,String> voisinPref = new HashMap<>();
+        HashMap<String,Integer> voisinPref = new HashMap<>();
 
         for ( Cuve c : this.metier.getCuves() )
         {
@@ -48,11 +48,10 @@ public class ControleurApp2
                     str += t.getCuve2().getIdentifiant();
             }
 
-            do {}
-                String idVoisin = this.plusGrandeOccu(str) + "";
-
-            voisinPref.put(c.getIdentifiant() + "",  idVoisin + "");
+            voisinPref.put(c.getIdentifiant() + "",  str.length());
         }
+
+        //completer
     }
 
 
@@ -166,28 +165,6 @@ public class ControleurApp2
 
         return matrice;
         
-    }
-
-    private char plusGrandeOccu ( String str )
-    {
-        int count[] = new int[str.length()];
-      
-            
-        int len = str.length();
-        for (int i=0; i<len; i++)
-            count[str.charAt(i)]++;
-    
-        int max = -1; 
-        char result = ' ';
-
-        for (int i = 0; i < len; i++) {
-            if (max < count[str.charAt(i)]) {
-                max = count[str.charAt(i)];
-                result = str.charAt(i);
-            }
-        }
-
-        return result;
     }
 
     public static void main ( String args[] )
