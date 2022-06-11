@@ -15,7 +15,7 @@ public class PanelTuyaux extends APanelTable {
 
     @Override
     protected String getLabel() {
-        return null;
+        return "Tuyau";
     }
 
     @Override

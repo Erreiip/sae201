@@ -13,8 +13,9 @@ public class FrameApp1 extends JFrame
     public FrameApp1(ControleurApp1 ctrl)
     {
         this.setTitle  ( "Créateur de cuves et tuyaux"  );
-        this.setSize   ( 500, 250 );
+        this.setSize   ( 1000, 500 );
         this.setLayout(new GridLayout(2, 1));
+        this.setLocationRelativeTo(null);
 
         /*-------------------------------*/
         /* Création des composants       */
