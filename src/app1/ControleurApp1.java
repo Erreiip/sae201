@@ -34,27 +34,7 @@ public class ControleurApp1
 
     public void sortieFichierTexteMatriceCout ()
     {
-		String sRet = "";
-        String [][] matrice;
-        int nbCuves = this.res.getCuves().size();
-        matrice = new String[nbCuves][nbCuves];
-        for (Tuyau tuyau : this.res.getTuyaux())
-        {
-            int lig,col;
-            lig = tuyau.getCuve1().getIdentifiant() - 'A';
-            col = tuyau.getCuve2().getIdentifiant() - 'A';
-            matrice[lig][col] = tuyau.getSection() + "" ;
-            matrice[col][lig] = tuyau.getSection() + "";
-        }
-        for (int lig =0;lig < nbCuves; lig ++)
-        {
-            for (int col = 0; col < nbCuves; col ++)
-            {
-                sRet += matrice[lig][col] != null ? String.format("%3s",matrice[lig][col]):"  0";
-            }
-            
-            sRet += "\n";
-        }    
+        String sRet = this.res.getMatriceCout();
         try
 		{
 			PrintWriter pw = new PrintWriter( new FileOutputStream("sortie.txt") );
