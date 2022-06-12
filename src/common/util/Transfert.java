@@ -1,4 +1,4 @@
-package src.util;
+package src.common.util;
 
 import src.common.Cuve;
 

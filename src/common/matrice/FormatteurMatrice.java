@@ -1,4 +1,4 @@
-package src.app1.matrice;
+package src.common.matrice;
 
 import src.common.Reseau;
 

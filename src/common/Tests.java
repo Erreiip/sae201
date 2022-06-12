@@ -1,6 +1,6 @@
 package src.common;
 
-import src.app1.matrice.FormatteursMatrice;
+import src.common.matrice.FormatteursMatrice;
 
 public class Tests
 {

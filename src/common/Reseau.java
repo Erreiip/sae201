@@ -8,23 +8,23 @@ import java.util.ArrayList;
  */
 public class Reseau 
 {
-    private final ArrayList<Tuyau> listTuyaux;
-    private final ArrayList<Cuve>  listCuves;
+    private final ArrayList<Tuyau> tuyaux;
+    private final ArrayList<Cuve> cuves;
 
     // Constructeur
     public Reseau()
     {
-        this.listTuyaux = new ArrayList<>();
-        this.listCuves  = new ArrayList<>();
+        this.tuyaux = new ArrayList<>();
+        this.cuves  = new ArrayList<>();
     }
 
     // Accesseurs
-    public ArrayList<Cuve>  getCuves()  { return listCuves; }
-    public ArrayList<Tuyau> getTuyaux() { return listTuyaux; }
+    public ArrayList<Cuve>  getCuves()  { return cuves; }
+    public ArrayList<Tuyau> getTuyaux() { return tuyaux; }
 
     public Cuve getCuve(char identifiant)
     {
-        for (Cuve c : this.listCuves)
+        for (Cuve c : this.cuves)
         {
             if ( c.getIdentifiant() == identifiant )
             {
@@ -41,7 +41,7 @@ public class Reseau
 
     public Tuyau getTuyau(Cuve cuve1, Cuve cuve2)
     {
-        for(Tuyau t : this.listTuyaux)
+        for(Tuyau t : this.tuyaux)
         {
             if (t.estRelie(cuve1) && t.estRelie(cuve2))
             {
@@ -129,7 +129,7 @@ public class Reseau
     public String toStringListAdjac()
     {
         String sRet = "List d'adjacence:\n";
-        for (Tuyau t :this.listTuyaux)
+        for (Tuyau t :this.tuyaux)
             sRet += t.getCuve1().getIdentifiant() + t.getCuve2().getIdentifiant() + "\n";
         
         return sRet;
@@ -159,8 +159,8 @@ public class Reseau
     @Override
     public String toString() {
         return "Reseau{" +
-                "listTuyaux=" + listTuyaux +
-                ", listCuves=" + listCuves +
+                "tuyaux=" + tuyaux +
+                ", cuves=" + cuves +
                 '}';
     }
 }
