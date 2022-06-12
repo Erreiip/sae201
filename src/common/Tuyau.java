@@ -1,6 +1,6 @@
 package src.common;
 
-import src.util.Transfert;
+import src.common.util.Transfert;
 
 /**
  * Un tuyau représente une connexion entre deux {@link Cuve}.<br>
