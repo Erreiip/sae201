@@ -28,12 +28,11 @@ public class Cuve implements IReseauElement
     {
         if (capacite < 200 || capacite > 2000)
         {
-            System.err.println("Erreur : la capacité de la cuve doit être comprise entre 200 et 2000");
-            return null;
+            throw new IllegalArgumentException("La capacité doit être comprise entre 200 et 2000");
         }
-        if (reseau.getCuves().size() >= 26) {
-            System.err.println("Erreur : le nombre de cuves dans le réseau dépasse le nombre maximal autorisé (26)");
-            return null;
+        if (reseau.getCuves().size() >= 26)
+        {
+            throw new IllegalArgumentException("Le nombre de cuves est trop élevé (maximum 26)");
         }
 
         char id   = (char) ('A' + reseau.getCuves().size());
@@ -53,42 +52,30 @@ public class Cuve implements IReseauElement
     public void setY(int y)                              { this.y = y; }
     public void setPositionInfos(PositionInfos positionInfos) { this.positionInfos = positionInfos; }
 
-    public boolean ajouterContenu(double ajout)
+    public void ajouterContenu(double ajout)
     {
         if (ajout < 0)
         {
-            System.err.println("Erreur : l'ajout de contenu doit être positif");
-            return false;
+            throw new IllegalArgumentException("le montant à ajouter doit être positif");
         }
         else if (this.contenu + ajout > capacite)
         {
-            System.err.println("Erreur : l'ajout de contenu fait déborder la cuve");
-            return false;
+            throw new IllegalArgumentException("le montant à ajouter fait dépasser la capacité de la cuve");
         }
-        else
-        {
-            this.contenu += ajout;
-            return true;
-        }
+        this.contenu += ajout;
     }
 
-    public boolean retirerContenu(double retrait)
+    public void retirerContenu(double retrait)
     {
         if (retrait < 0)
         {
-            System.err.println("Erreur : le retrait de contenu doit être positif");
-            return false;
+            throw new IllegalArgumentException("le retrait de contenu doit être positif");
         }
         else if (this.contenu < retrait)
         {
-            System.err.println("Erreur : le retrait de contenu est supérieur à ce qu'il reste");
-            return false;
+            throw new IllegalArgumentException("le retrait de contenu est supérieur au contenu de la cuve");
         }
-        else
-        {
-            this.contenu -= retrait;
-            return true;
-        }
+        this.contenu -= retrait;
     }
 
     public String toString()

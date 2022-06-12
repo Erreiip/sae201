@@ -17,7 +17,7 @@ public class FormatteurMatriceAdjacente implements FormatteurMatrice
 				{
 					Cuve cuve1 = reseau.getCuve(lig);
 					Cuve cuve2 = reseau.getCuve(col);
-					Tuyau tuyau = null;
+					Tuyau tuyau;
 					boolean correct = false;
 					if(!reseau.sontRelies(cuve1, cuve2)) {
 						System.out.print("Rentrez la section du tuyau reliant " + cuve1 + " et " + cuve2 + " : ");
