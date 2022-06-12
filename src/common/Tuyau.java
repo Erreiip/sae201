@@ -61,7 +61,7 @@ public class Tuyau implements IReseauElement
 
     public Transfert transverser()
     {
-        int quantite;
+        double quantite;
         
         Cuve cuveDepart  = this.cuve1.getCapacite() > this.cuve2.getCapacite() ? this.cuve1 : this.cuve2;
         Cuve cuveArrivee = this.cuve1.getCapacite() < this.cuve2.getCapacite() ? this.cuve1 : this.cuve2;
