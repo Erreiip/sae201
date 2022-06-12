@@ -22,7 +22,8 @@ public class ControleurApp2
     public ControleurApp2()
     {
         this.frame       = new FrameReseau( this );
-        this.metier      = null;
+        this.metier      = new Reseau();
+
         this.pathMatrice = null; 
     }
 
@@ -57,27 +58,31 @@ public class ControleurApp2
         this.creerReseau(); 
     }
 
+    public Reseau getMetier() { return this.metier; }
+
 
     public boolean creerReseau()
     {
+        boolean continuer = true;
+        String   type      = this.getType(); 
+
+        Cuve[]     tabCuves;
+        Object[][] matrice;
+
+        {
+            String temp = this.initScan(type);
+            int lig     = Integer.parseInt(temp.charAt(0) + ""); 
+            int col     = Integer.parseInt(temp.charAt(1) + ""); 
+
+            matrice   = new Object[lig][col];
+            tabCuves  = new Cuve  [col];
+        }
+
+
         try
         {
-            boolean continuer = true;
 
-
-            String   type      = Test.getType(); 
-
-            Object[][] matrice;
-
-            {
-                String temp = Test.initScan();
-                int lig     = Integer.parseInt(temp.charAt(0) + ""); 
-                int col     = Integer.parseInt(temp.charAt(1) + ""); 
-
-                matrice   = new Object[lig][col];
-            }
-
-            Scanner sc = new Scanner( new FileReader( "./source.data" ) );              
+            Scanner sc = new Scanner( new FileReader( "./source3.data" ) );              
             sc.nextLine();
 
             for ( int lig = 0; sc.hasNextLine() && continuer; lig++ )
@@ -93,8 +98,31 @@ public class ControleurApp2
                 }
                 
             }
-            
 
+                
+            if ( type.equals("Liste d'adjacence"))
+            {
+                System.out.println(type);
+                int lig = 0;
+                continuer = true;
+                while( sc.hasNextLine() && continuer )
+                {
+                    String str = sc.nextLine();
+                    continuer  = !str.equals("---");
+                    
+
+                    if ( continuer )
+                        matrice[lig][matrice[lig].length-1] = str;
+                    
+                    lig++;
+                }
+            } 
+
+
+            if ( type.equals("Matrice de couts opti")) { matrice = this.replacement( matrice ); }
+
+            
+            int cpt = 0;
             continuer = true;
             while( sc.hasNextLine() && continuer )
             {
@@ -102,41 +130,61 @@ public class ControleurApp2
                 continuer  = !str.equals("---");
                 
                 if ( continuer )
-                    /*création de nouelle cuve sans position*/ System.out.println(str);
+                    tabCuves[cpt] = this.metier.creerCuve(Integer.parseInt(str)); 
+                
+                cpt++;
             }
 
 
-            if ( type.equals("Liste d'adjacence"))
-            {
+            //Création du réseau pour la matrice des couts (opti et non)//
+            if ( type.equals("Matrice des couts")  )
+            { 
                 for ( int lig = 0; lig < matrice.length; lig++ )
                 {
-                    //création d'un tuyau entre matrice[lig][0] et matrice [lig][1]
+                    for ( int col = 0; col < matrice[lig].length; col++ )
+                    {
+                        if ( matrice[lig][col] != null ) 
+                            this.metier.creerTuyau( Integer.parseInt((String)matrice[lig][col]), tabCuves[lig], tabCuves[col]);
+                    }
                 }
             }
 
 
             /* test pour voir la matrice */
-            /*
             for ( int lig = 0; lig < matrice.length; lig++ )
             {
                 for ( int col = 0; col < matrice[lig].length; col++ )
                 {
-                    System.out.print(matrice[lig][col] + "|");
+                    System.out.print((matrice[lig][col] != null?matrice[lig][col]:" ") + "|");
                 }
                 System.out.println();
             }
-            */
             
-            
-        } 
-        catch (Exception e) 
-        {
-            e.printStackTrace();
-        }
+        } catch (Exception e) { e.printStackTrace(); return false; }
+
+
+        return true;
     }
 
 
-    private static String initScan() 
+    private Object[][] replacement( Object[][] matrice)
+    {
+        Object[][] tabRet = new Object[matrice.length][matrice[0].length];
+        
+        for ( int lig = 0; lig < matrice.length; lig++ )
+        {
+            for ( int col = 0; col < matrice[lig].length; col++ )
+            {
+                if (matrice[lig][col] != null)
+                    tabRet[lig][col + lig] = matrice[lig][col];
+            }
+        }
+
+        return tabRet;
+    }
+
+
+    private String initScan( String type ) 
     {  
         int     lig = 0;
         int     col = 0;
@@ -146,7 +194,7 @@ public class ControleurApp2
 
         try 
         {
-            Scanner sc = new Scanner( new FileReader( "./source.data" ) );
+            Scanner sc = new Scanner( new FileReader( "./source3.data" ) );
 
             sc.nextLine();
 
@@ -167,17 +215,19 @@ public class ControleurApp2
             //paassage en coordonnées réels de lig//
             lig--;
 
+            if ( type.equals("Liste d'adjacence"))  maxCol++;
+
             return lig + "" + maxCol;
             
         } catch (Exception e) { System.out.println(e); return null;}   
     }
 
     
-    private static String getType()
+    private String getType()
     {
         try  
         {
-            Scanner sc = new Scanner( new FileReader( "./source.data" ) );
+            Scanner sc = new Scanner( new FileReader( "./source3.data" ) );
 
             String temp = sc.nextLine(); 
 

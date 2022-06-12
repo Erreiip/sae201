@@ -87,6 +87,8 @@ public class Reseau
     {
         return getTuyau(cuve1, cuve2) != null;
     }
+
+
     public int[][] getMatriceCout()
     {
         int [][] matrice;
@@ -102,6 +104,8 @@ public class Reseau
         }
         return matrice;
     }
+
+
     public String toStringMatriceCout()
     {
 		String sRet = "";
@@ -120,6 +124,8 @@ public class Reseau
         }
         return sRet;           
     }
+
+
     public String toStringListAdjac()
     {
         String sRet = "List d'adjacence:\n";
@@ -128,6 +134,8 @@ public class Reseau
         
         return sRet;
     }
+
+
     public String toStringMatriceCoutOptimise()
     {
         String sRet = "";
@@ -146,6 +154,8 @@ public class Reseau
         }
         return sRet; 
     }
+
+    
     @Override
     public String toString() {
         return "Reseau{" +

@@ -20,7 +20,7 @@ public class PanelPaint extends JPanel
     public PanelPaint ( ControleurApp2 ctrl)
     {
         this.ctrl = ctrl;
-        this.tabPoints = new Ellipse2D[this.ctrl.getCuves().size()];
+        this.tabPoints = new Ellipse2D[this.ctrl.getMetier().getCuves().size()];
     }
 
     public void paintComponent (Graphics g)
@@ -28,7 +28,7 @@ public class PanelPaint extends JPanel
         super.paintComponent(g); 
 
         int i = 0;
-        for ( Cuve c : this.ctrl.getCuves() )
+        for ( Cuve c : this.ctrl.getMetier().getCuves() )
         {
             int taille = c.getCapacite() / 100;
 
@@ -39,7 +39,7 @@ public class PanelPaint extends JPanel
             tabPoints[i++] = new Ellipse2D.Double(x, y, taille, taille);
         }
 
-        for ( Tuyau t : this.ctrl.getTuyaux() )
+        for ( Tuyau t : this.ctrl.getMetier().getTuyaux() )
         {
             int xDepart = t.getCuve1().getX();
             int xFin    = t.getCuve2().getX();
