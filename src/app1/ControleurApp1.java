@@ -41,7 +41,7 @@ public class ControleurApp1
 
     public void sortieFichierTexteMatriceCout ()
     {
-        String sRet = this.reseau.getMatriceCout();
+        String sRet = this.reseau.toStringMatriceCout();
         try
 		{
 			PrintWriter pw = new PrintWriter( new FileOutputStream("sortie.txt") );
