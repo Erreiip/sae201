@@ -36,7 +36,7 @@ public class Reseau
 
     public Cuve getCuve(int index)
     {
-        return this.getCuve((char)(index - 'A'));
+        return this.getCuve((char)('A' + index));
     }
 
     public Tuyau getTuyau(Cuve cuve1, Cuve cuve2)

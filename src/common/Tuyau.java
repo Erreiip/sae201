@@ -2,6 +2,8 @@ package src.common;
 
 import src.common.util.Transfert;
 
+import java.util.Objects;
+
 /**
  * Un tuyau représente une connexion entre deux {@link Cuve}.<br>
  * Elle se définit par ses deux connections aux cuves, ainsi que de sa capacité de transfert, appelée "section".
@@ -25,30 +27,23 @@ public class Tuyau implements IReseauElement
      */
     protected static Tuyau creer(Reseau reseau, int section, Cuve cuve1, Cuve cuve2)
     {
-        if (cuve1 == null || cuve2 == null)
-        {
-            System.err.println("Erreur : un tuyau doit être relié à deux cuves non nulles.");
-            return null;
-        }
-        if (cuve1 == cuve2)
-        {
-            System.err.println("Erreur : un tuyau doit être relié à deux cuves différentes.");
-            return null;
-        }
+        Objects.requireNonNull(cuve1, "la première cuve ne doit pas être nulle");
+        Objects.requireNonNull(cuve2, "la deuxième cuve ne doit pas être nulle");
         if (section < 2 || section > 10)
         {
-            System.err.println("Erreur : un tuyau doit avoir une section comprise entre 2 et 10.");
-            return null;
+            throw new IllegalArgumentException("la section doit être comprise entre 2 et 10");
         }
-        if (!reseau.getCuves().contains(cuve1) || reseau.getCuves().contains(cuve2))
+        if(!reseau.getCuves().contains(cuve1))
         {
-            System.err.println("Erreur : un tuyau doit être relié à deux cuves qui sont présentes dans le réseau.");
-            return null;
+            throw new IllegalArgumentException("la première cuve n'est pas dans le réseau");
+        }
+        if(!reseau.getCuves().contains(cuve2))
+        {
+            throw new IllegalArgumentException("la deuxième cuve n'est pas dans le réseau");
         }
         if(reseau.sontRelies(cuve1, cuve2))
         {
-            System.err.println("Erreur : un tuyau doit être relié à deux cuves qui ne sont pas déjà reliées par un autre tuyau.");
-            return null;
+            throw new IllegalArgumentException("les cuves sont déjà reliées par le tuyau " + reseau.getTuyau(cuve1, cuve2));
         }
         Tuyau tuyau = new Tuyau(section, cuve1, cuve2);
         reseau.getTuyaux().add(tuyau);
