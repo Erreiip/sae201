@@ -1,4 +1,4 @@
-package src.app1.matrice;
+package src.common.matrice;
 
 import iut.algo.Clavier;
 import src.common.Cuve;
