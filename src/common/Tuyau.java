@@ -10,6 +10,9 @@ import java.util.Objects;
  */
 public class Tuyau implements IReseauElement
 {
+    public static final int SECTION_MIN = 2;
+    public static final int SECTION_MAX = 10;
+
     private int  section;
     private Cuve cuve1;
     private Cuve cuve2;
@@ -29,9 +32,11 @@ public class Tuyau implements IReseauElement
     {
         Objects.requireNonNull(cuve1, "la première cuve ne doit pas être nulle");
         Objects.requireNonNull(cuve2, "la deuxième cuve ne doit pas être nulle");
-        if (section < 2 || section > 10)
+        if (section < Tuyau.SECTION_MIN || section > Tuyau.SECTION_MAX)
         {
-            throw new IllegalArgumentException("la section doit être comprise entre 2 et 10");
+            throw new IllegalArgumentException("la section (ici " + section + ") doit être comprise entre "
+                    + Tuyau.SECTION_MIN + " et "
+                    + Tuyau.SECTION_MAX);
         }
         if(!reseau.getCuves().contains(cuve1))
         {
