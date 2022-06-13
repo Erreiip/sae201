@@ -31,7 +31,7 @@ public class PanelCuves extends APanelTable
 
     @Override
     protected void supprimerElement() {
-        this.
+        
     }
 
     public void majListe() {
