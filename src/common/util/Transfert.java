@@ -2,9 +2,7 @@ package src.common.util;
 
 import src.common.Cuve;
 
-import java.util.Objects;
-
-public class Transfert 
+public class Transfert implements Comparable<Transfert> 
 {
     private Cuve   cuveDepart;
     private Cuve   cuveArrivee;
@@ -12,12 +10,8 @@ public class Transfert
 
     public static Transfert creer(Cuve cuveDepart, Cuve cuveArrivee, double quantite)
     {
-        Objects.requireNonNull(cuveDepart,  "la cuve de départ ne doit pas être nulle");
-        Objects.requireNonNull(cuveArrivee, "la cuve d'arrivée ne doit pas être nulle");
-        if(cuveDepart == cuveArrivee)
-            throw new IllegalArgumentException("les deux cuves doivent être différentes");
-        if(quantite <= 0.0D)
-            throw new IllegalArgumentException("la quantite doit être positive");
+        if ( cuveDepart == null || cuveArrivee == null || cuveDepart == cuveArrivee ) return null;
+        if ( quantite   <= 0                                                        ) return null;
         return new Transfert(cuveDepart, cuveArrivee, quantite);
     }
 
@@ -36,4 +30,9 @@ public class Transfert
     public void setCuveArrivee(Cuve c) { this.cuveArrivee = c; }
     public void setQuantite(int q)     { this.quantite = q; }
 
+    
+    public int compareTo( Transfert autreTransfert )
+    {
+        return (int) this.cuveDepart.getContenu() - (int) autreTransfert.cuveDepart.getContenu();
+    }
 }
