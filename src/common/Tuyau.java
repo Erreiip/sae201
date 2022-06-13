@@ -67,7 +67,7 @@ public class Tuyau implements IReseauElement
         Cuve cuveArrivee = this.cuve1.getCapacite() < this.cuve2.getCapacite() ? this.cuve1 : this.cuve2;
 
         if ( this.cuve1.getContenu() > this.getSection() ) quantite = this.getSection();
-        else                                               quantite = cuveDepart.getContenu();
+        else                                               quantite = (int)cuveDepart.getContenu();
 
         return new Transfert (cuveDepart, cuveArrivee, quantite);
     }
