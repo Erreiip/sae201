@@ -1,4 +1,4 @@
-package src.app1.matrice;
+package src.common.matrice;
 
 import iut.algo.Clavier;
 import src.common.Cuve;
@@ -17,15 +17,17 @@ public class FormatteurMatriceAdjacente implements FormatteurMatrice
 				{
 					Cuve cuve1 = reseau.getCuve(lig);
 					Cuve cuve2 = reseau.getCuve(col);
-					Tuyau tuyau = null;
-					boolean correct = false;
 					if(!reseau.sontRelies(cuve1, cuve2)) {
 						System.out.print("Rentrez la section du tuyau reliant " + cuve1 + " et " + cuve2 + " : ");
-						while(!correct)
+						while(true)
 						{
-							tuyau = reseau.creerTuyau(Clavier.lire_int(), cuve1, cuve2);
-							if(tuyau != null) correct = true;
-							else System.out.println("Erreur de saisie ! Veuillez recommencer.");
+							try {
+								reseau.creerTuyau(Clavier.lire_int(), cuve1, cuve2);
+								break;
+							}
+							catch(Exception e) {
+								System.out.println("Erreur de saisie : " + e.getMessage() +"\nVeuillez recommencer.");
+							}
 						}
 					}
 				}

@@ -2,29 +2,31 @@ package src.common;
 
 import java.util.ArrayList;
 
+import src.common.util.Transfert;
+
 /**
  * Un réseau représente un espace dans lequel se trouvent des {@link Cuve}s et des {@link Tuyau}.<br>
  * La création d'éléments doit se faire par l'utilisation de cette classe.
  */
 public class Reseau 
 {
-    private final ArrayList<Tuyau> listTuyaux;
-    private final ArrayList<Cuve>  listCuves;
+    private final ArrayList<Tuyau> tuyaux;
+    private final ArrayList<Cuve> cuves;
 
     // Constructeur
     public Reseau()
     {
-        this.listTuyaux = new ArrayList<>();
-        this.listCuves  = new ArrayList<>();
+        this.tuyaux = new ArrayList<>();
+        this.cuves  = new ArrayList<>();
     }
 
     // Accesseurs
-    public ArrayList<Cuve>  getCuves()  { return listCuves; }
-    public ArrayList<Tuyau> getTuyaux() { return listTuyaux; }
+    public ArrayList<Cuve>  getCuves()  { return cuves; }
+    public ArrayList<Tuyau> getTuyaux() { return tuyaux; }
 
     public Cuve getCuve(char identifiant)
     {
-        for (Cuve c : this.listCuves)
+        for (Cuve c : this.cuves)
         {
             if ( c.getIdentifiant() == identifiant )
             {
@@ -36,12 +38,12 @@ public class Reseau
 
     public Cuve getCuve(int index)
     {
-        return this.getCuve(index - 'A');
+        return this.getCuve((char)('A' + index));
     }
 
     public Tuyau getTuyau(Cuve cuve1, Cuve cuve2)
     {
-        for(Tuyau t : this.listTuyaux)
+        for(Tuyau t : this.tuyaux)
         {
             if (t.estRelie(cuve1) && t.estRelie(cuve2))
             {
@@ -87,6 +89,18 @@ public class Reseau
     {
         return getTuyau(cuve1, cuve2) != null;
     }
+
+    public void transverser()
+    {
+        for ( Tuyau t : this.tuyaux )
+        {
+            Transfert iteTrans = t.transverser();
+            iteTrans.getCuveDepart ().retirerContenu( iteTrans.getQuantite() );
+            iteTrans.getCuveArrivee().ajouterContenu( iteTrans.getQuantite() );
+        }
+    }
+
+
     public int[][] getMatriceCout()
     {
         int [][] matrice;
@@ -102,6 +116,8 @@ public class Reseau
         }
         return matrice;
     }
+
+
     public String toStringMatriceCout()
     {
 		String sRet = "";
@@ -120,14 +136,18 @@ public class Reseau
         }
         return sRet;           
     }
+
+
     public String toStringListAdjac()
     {
         String sRet = "List d'adjacence:\n";
-        for (Tuyau t :this.listTuyaux)
+        for (Tuyau t :this.tuyaux)
             sRet += t.getCuve1().getIdentifiant() + t.getCuve2().getIdentifiant() + "\n";
         
         return sRet;
     }
+
+
     public String toStringMatriceCoutOptimise()
     {
         String sRet = "";
@@ -146,11 +166,13 @@ public class Reseau
         }
         return sRet; 
     }
+
+    
     @Override
     public String toString() {
         return "Reseau{" +
-                "listTuyaux=" + listTuyaux +
-                ", listCuves=" + listCuves +
+                "tuyaux=" + tuyaux +
+                ", cuves=" + cuves +
                 '}';
     }
 }

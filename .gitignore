@@ -9,6 +9,7 @@
 *.zip
 *.tar.gz
 *.rar
+*.txt
 
 # IntelliJ Idea
 /.idea/

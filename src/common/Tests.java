@@ -1,6 +1,6 @@
 package src.common;
 
-import src.app1.matrice.FormatteursMatrice;
+import src.common.matrice.FormatteursMatrice;
 
 public class Tests
 {
@@ -15,22 +15,49 @@ public class Tests
 	{
 		Reseau reseau = new Reseau();
 
-		Cuve cuveIncorrecte1 = reseau.creerCuve(100);
-		Cuve cuveIncorrecte2 = reseau.creerCuve(3000);
-		if (cuveIncorrecte1 != null) System.err.println("La cuve incorrecte 1 doit être nulle ! Valeur : " + cuveIncorrecte1);
-		if (cuveIncorrecte2 != null) System.err.println("La cuve incorrecte 1 doit être nulle ! Valeur : " + cuveIncorrecte1);
-
-		Cuve cuveA = reseau.creerCuve(200);
-		if (cuveA == null) System.err.println("La cuve A ne doit pas être nulle !");
-		else
+		try
 		{
-			System.out.println(cuveA.retirerContenu(100));
-			System.out.println(cuveA);
-			System.out.println(cuveA.ajouterContenu(100));
-			System.out.println(cuveA);
-			System.out.println(cuveA.ajouterContenu(1000));
-			System.out.println(cuveA);
+			throw new RuntimeException(reseau.creerCuve(100) + " doit être égal à null");
 		}
+		catch (Exception e)
+		{
+			System.out.println("Test OK : création cuve de capacité trop basse (" + e.getMessage() + ")");
+		}
+
+		try
+		{
+			throw new RuntimeException(reseau.creerCuve(3000) + " doit être égal à null");
+		}
+		catch (Exception e)
+		{
+			System.out.println("Test OK : création cuve de capacité trop haute (" + e.getMessage() + ")");
+		}
+
+		Cuve cuveA;
+
+		cuveA = reseau.creerCuve(200);
+		System.out.println("Test OK : création cuve de capacité correcte");
+
+		try
+		{
+			cuveA.retirerContenu(100);
+		}
+		catch (Exception e)
+		{
+			System.out.println("Test OK : retrait de contenu à une cuve vide (" + e.getMessage() + ")");
+		}
+		cuveA.ajouterContenu(100);
+		System.out.println("Test OK : ajout de contenu à une cuve");
+
+		try
+		{
+			cuveA.ajouterContenu(1000);
+		}
+		catch (Exception e)
+		{
+			System.out.println("Test OK : ajout trop important de contenu à une cuve (" + e.getMessage() + ")");
+		}
+
 	}
 
 
