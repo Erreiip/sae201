@@ -7,32 +7,33 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public abstract class APanelTable extends JPanel implements ActionListener {
+public abstract class APanelTable extends JPanel implements ActionListener
+{
 
     private final ControleurApp1 ctrl;
-    private final JTable       tblGrilleDonnees;
-    private final JScrollPane  spGrilleDonnees;
-    private final JButton      btnCreerElement;
-    private final JButton      btnSupprimerElement;
+    private final JTable         tblGrilleDonnees;
+    private final JScrollPane    spGrilleDonnees;
+    private final JButton        btnCreerElement;
+    private final JButton        btnSupprimerElement;
 
     public APanelTable(ControleurApp1 ctrl, AGrilleDonneesModel<?> grilleDonneesModel)
     {
         this.ctrl = ctrl;
-        this.setLayout ( new BorderLayout() );
+        this.setLayout(new BorderLayout());
 
         /*-------------------------------*/
         /* Création des composants       */
         /*-------------------------------*/
-        this.tblGrilleDonnees = new JTable ( grilleDonneesModel );
+        this.tblGrilleDonnees = new JTable(grilleDonneesModel);
         this.tblGrilleDonnees.setFillsViewportHeight(true);
         this.tblGrilleDonnees.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-        this.spGrilleDonnees   = new JScrollPane( this.tblGrilleDonnees );
+        this.spGrilleDonnees = new JScrollPane(this.tblGrilleDonnees);
 
         JPanel panelBas = new JPanel();
 
-        this.btnCreerElement     = new JButton ( "Créer " + this.getLabel() );
-        this.btnSupprimerElement = new JButton ( "Supprimer " + this.getLabel() );
+        this.btnCreerElement = new JButton("Créer " + this.getLabel());
+        this.btnSupprimerElement = new JButton("Supprimer " + this.getLabel());
 
         /*-------------------------------*/
         /* Positionnement des composants */
@@ -41,8 +42,8 @@ public abstract class APanelTable extends JPanel implements ActionListener {
         panelBas.add(this.btnCreerElement);
         panelBas.add(this.btnSupprimerElement);
 
-        this.add ( this.spGrilleDonnees, BorderLayout.CENTER );
-        this.add ( panelBas,             BorderLayout.SOUTH);
+        this.add(this.spGrilleDonnees, BorderLayout.CENTER);
+        this.add(panelBas, BorderLayout.SOUTH);
 
         /*-------------------------------*/
         /* Activation des composants     */
@@ -54,6 +55,7 @@ public abstract class APanelTable extends JPanel implements ActionListener {
     protected abstract String getLabel();
 
     protected abstract void ajouterElement();
+
     protected abstract void supprimerElement();
 
     public ControleurApp1 getCtrl()
@@ -61,14 +63,16 @@ public abstract class APanelTable extends JPanel implements ActionListener {
         return ctrl;
     }
 
-    public JTable getTblGrilleDonnees() {
+    public JTable getTblGrilleDonnees()
+    {
         return tblGrilleDonnees;
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == this.btnCreerElement) ajouterElement();
-        else if(e.getSource() == this.btnSupprimerElement) supprimerElement();
+    public void actionPerformed(ActionEvent e)
+    {
+        if (e.getSource() == this.btnCreerElement) ajouterElement();
+        else if (e.getSource() == this.btnSupprimerElement) supprimerElement();
     }
 
     public void majListe(AGrilleDonneesModel<?> model)

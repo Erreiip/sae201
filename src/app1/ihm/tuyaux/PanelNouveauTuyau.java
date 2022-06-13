@@ -1,7 +1,6 @@
 package src.app1.ihm.tuyaux;
 
 import src.app1.ihm.composants.APanelNouvelElement;
-import src.app1.ihm.composants.APanelTable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +17,8 @@ public class PanelNouveauTuyau extends APanelNouvelElement
     }
 
     @Override
-    protected void initComposants(JPanel panelNord) {
+    protected void initComposants(JPanel panelNord)
+    {
         panelNord.setLayout(new GridLayout(3, 2));
 
         JLabel lblSection = new JLabel("Section:");
@@ -41,8 +41,10 @@ public class PanelNouveauTuyau extends APanelNouvelElement
     }
 
     @Override
-    protected void valider() {
-        try {
+    protected void valider()
+    {
+        try
+        {
             this.getPanelTable().getCtrl().creerTuyau(Integer.parseInt(this.txtSection.getText()), this.txtCuve1.getText().toUpperCase().charAt(0), this.txtCuve2.getText().toUpperCase().charAt(0));
 
             this.txtSection.setText("");
@@ -50,9 +52,11 @@ public class PanelNouveauTuyau extends APanelNouvelElement
             this.txtCuve2.setText("");
             this.close();
 
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException e)
+        {
             JOptionPane.showMessageDialog(this, "La section doit être un nombre entier.", "Une erreur s'est produite !", JOptionPane.ERROR_MESSAGE);
-        } catch (Exception ex) {
+        } catch (Exception ex)
+        {
             JOptionPane.showMessageDialog(null, ex.getMessage(),
                     "Une erreur s'est produite !", JOptionPane.ERROR_MESSAGE);
         }

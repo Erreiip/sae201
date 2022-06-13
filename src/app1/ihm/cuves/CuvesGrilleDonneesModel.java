@@ -6,24 +6,29 @@ import src.app1.ihm.composants.AGrilleDonneesModel;
 
 import java.util.List;
 
-public class CuvesGrilleDonneesModel extends AGrilleDonneesModel<Cuve> {
+public class CuvesGrilleDonneesModel extends AGrilleDonneesModel<Cuve>
+{
 
-    public CuvesGrilleDonneesModel(ControleurApp1 ctrl) {
+    public CuvesGrilleDonneesModel(ControleurApp1 ctrl)
+    {
         super(ctrl);
     }
 
     @Override
-    protected List<Cuve> getElements() {
+    protected List<Cuve> getElements()
+    {
         return this.ctrl.getCuves();
     }
 
     @Override
-    protected String[] getEntetes() {
-        return new String[] { "Identifiant", "Capacité" };
+    protected String[] getEntetes()
+    {
+        return new String[]{"Identifiant", "Capacité"};
     }
 
     @Override
-    protected void initTab(int lig, Cuve element) {
+    protected void initTab(int lig, Cuve element)
+    {
         this.tabDonnees[lig][0] = element.getIdentifiant();
         this.tabDonnees[lig][1] = element.getCapacite();
     }
