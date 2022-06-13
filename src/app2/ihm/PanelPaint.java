@@ -33,8 +33,10 @@ public class PanelPaint extends JPanel
         {
             int taille = c.getCapacite();
 
-            int x = c.getX() + taille;
-            int y = c.getY() - taille;
+            int x = c.getX();
+            int y = c.getY();
+
+            System.out.println(x + "/" + y);
             
             
             tabPoints[i++] = new Ellipse2D.Double(x, y, taille, taille);
