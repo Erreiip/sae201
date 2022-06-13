@@ -8,6 +8,7 @@ import src.common.Tuyau;
 
 import java.util.List;
 import java.io.PrintWriter;
+import java.security.cert.CertPathValidatorException.Reason;
 import java.io.FileOutputStream;
 
 public class ControleurApp1
@@ -37,6 +38,10 @@ public class ControleurApp1
     public boolean creerCuve(int capacite )
     {
         return reseau.creerCuve(capacite) != null;
+    }
+
+    public String toStringReseau(){
+        return reseau.toString();
     }
 
     public void sortieFichierTexteMatriceCout ()
@@ -106,6 +111,13 @@ public class ControleurApp1
             } while (!valideCuve);
             
             System.out.println("La cuve " + idCuveEnCreation + " a été créée avec succès.");
+        }
+
+
+        if (debug){
+
+            System.out.println(controleur.toStringReseau());
+
         }
 
         /*Creation des tuyaux*/
