@@ -93,6 +93,16 @@ public class Reseau
         return true;
     }
 
+    public char getNextCuveId()
+    {
+        char c = 'A';
+        while(this.getCuve(c) != null)
+        {
+            c++;
+        }
+        return c;
+    }
+
     /**
      * Retourne vrai si les deux listCuves sont reliées par un tuyau dans ce réseau.
      */

@@ -5,8 +5,12 @@ package src.common;
  */
 public class Cuve implements IReseauElement
 {
-    private final char      id;
-    private final int       capacite;
+    public static final int MIN_CAPACITE = 200;
+    public static final int MAX_CAPACITE = 2000;
+    public static final int NB_CUVES_MAX = 26;
+
+    private final char id;
+    private final int  capacite;
 
     private double        contenu;
     private int           x;
@@ -26,17 +30,16 @@ public class Cuve implements IReseauElement
      */
     protected static Cuve creer(Reseau reseau, int capacite)
     {
-        if (capacite < 200 || capacite > 2000)
+        if (capacite < Cuve.MIN_CAPACITE || capacite > Cuve.MAX_CAPACITE)
         {
             throw new IllegalArgumentException("La capacité doit être comprise entre 200 et 2000");
         }
-        if (reseau.getCuves().size() >= 26)
+        if (reseau.getCuves().size() >= Cuve.NB_CUVES_MAX)
         {
-            throw new IllegalArgumentException("Le nombre de cuves est trop élevé (maximum 26)");
+            throw new IllegalArgumentException("Le nombre de cuves est trop élevé (maximum " + Cuve.NB_CUVES_MAX + ")");
         }
 
-        char id   = (char) ('A' + reseau.getCuves().size());
-        Cuve cuve = new Cuve(id, capacite);
+        Cuve cuve = new Cuve(reseau.getNextCuveId(), capacite);
         reseau.getCuves().add(cuve);
         return cuve;
     }
@@ -48,8 +51,8 @@ public class Cuve implements IReseauElement
     public int           getCapacite()       { return capacite; }
     public double        getContenu()        { return contenu; }
 
-    public void setX(int x)                              { this.x = x; }
-    public void setY(int y)                              { this.y = y; }
+    public void setX(int x)                                   { this.x = x; }
+    public void setY(int y)                                   { this.y = y; }
     public void setPositionInfos(PositionInfos positionInfos) { this.positionInfos = positionInfos; }
 
     public void ajouterContenu(double ajout)
