@@ -68,7 +68,7 @@ public class ControleurApp2
             voisinPref.remove( maxEntry.getKey() );
         }
 
-
+        
         int       heightUnique;
         int       widthUnique;
         int       ancienneWidth, ancienneHeight;
@@ -81,15 +81,16 @@ public class ControleurApp2
             heightUnique     = height  / (int) Math.ceil(tabCuves.length  / (double)2);
             widthUnique      = width   / 4;
 
-            //widthUnique  -= widthUnique  / 2;
-            //heightUnique -= heightUnique / 2;
+            heightUnique -= heightUnique / Math.ceil(tabCuves.length  / (double)2);
+            widthUnique  -= widthUnique / 4;
+
 
         }
 
         ancienneWidth  = widthUnique;
         ancienneHeight = heightUnique;
         
-        int i= 1;
+        int i= 2;
         for ( int cpt = 1; cpt <= tabCuves.length; cpt++)
         {
             tabCuves[cpt - 1].setX(widthUnique);
@@ -99,14 +100,14 @@ public class ControleurApp2
             {
                 if ( (i % 2) == 0) widthUnique  =  ancienneWidth * 2; 
                 else               widthUnique  =  ancienneWidth; 
-                
+
                 heightUnique += ancienneHeight;
                 
                 i++;
             }
             else
             {
-                widthUnique += widthUnique * 2;
+                widthUnique += ancienneWidth * 2;
             }
         }
 
@@ -180,10 +181,6 @@ public class ControleurApp2
                     lig++;
                 }
             } 
-
-
-            if ( type.equals("Matrice de couts opti")) { matrice = this.replacement( matrice ); }
-
             
             int cpt = 0;
             continuer = true;
@@ -232,23 +229,6 @@ public class ControleurApp2
 
 
         return true;
-    }
-
-
-    private Object[][] replacement( Object[][] matrice)
-    {
-        Object[][] tabRet = new Object[matrice.length][matrice[0].length];
-        
-        for ( int lig = 0; lig < matrice.length; lig++ )
-        {
-            for ( int col = 0; col < matrice[lig].length; col++ )
-            {
-                if (matrice[lig][col] != null)
-                    tabRet[lig][col + lig] = matrice[lig][col];
-            }
-        }
-
-        return tabRet;
     }
 
 

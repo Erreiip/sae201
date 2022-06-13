@@ -56,7 +56,7 @@ public abstract class APanelTable extends JPanel implements ActionListener {
     protected abstract void ajouterElement();
     protected abstract void supprimerElement();
 
-    protected ControleurApp1 getCtrl()
+    public ControleurApp1 getCtrl()
     {
         return ctrl;
     }
@@ -65,5 +65,10 @@ public abstract class APanelTable extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == this.btnCreerElement) ajouterElement();
         else if(e.getSource() == this.btnSupprimerElement) supprimerElement();
+    }
+
+    public void majListe(AGrilleDonneesModel<?> model)
+    {
+        this.tblGrilleDonnees.setModel(model);
     }
 }

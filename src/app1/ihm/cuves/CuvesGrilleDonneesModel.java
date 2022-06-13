@@ -19,14 +19,12 @@ public class CuvesGrilleDonneesModel extends AGrilleDonneesModel<Cuve> {
 
     @Override
     protected String[] getEntetes() {
-        return new String[] { "Identifiant", "Capacité", "X", "Y" };
+        return new String[] { "Identifiant", "Capacité" };
     }
 
     @Override
     protected void initTab(int lig, Cuve element) {
         this.tabDonnees[lig][0] = element.getIdentifiant();
         this.tabDonnees[lig][1] = element.getCapacite();
-        this.tabDonnees[lig][2] = element.getX();
-        this.tabDonnees[lig][3] = element.getY();
     }
 }

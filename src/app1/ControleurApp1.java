@@ -8,7 +8,6 @@ import src.common.Tuyau;
 
 import java.util.List;
 import java.io.PrintWriter;
-import java.security.cert.CertPathValidatorException.Reason;
 import java.io.FileOutputStream;
 
 public class ControleurApp1
@@ -16,6 +15,7 @@ public class ControleurApp1
     private static final boolean debug = false;
 
     private Reseau reseau;
+    private FrameApp1 ihm;
 
     public ControleurApp1()
     {
@@ -37,7 +37,20 @@ public class ControleurApp1
 
     public boolean creerCuve(int capacite )
     {
-        return reseau.creerCuve(capacite) != null;
+        Cuve cuve = reseau.creerCuve(capacite);
+        if ( cuve == null ) return false;
+
+        if(ihm != null) this.ihm.majListeCuves();
+
+        return true;
+    }
+
+    public FrameApp1 getIhm() {
+        return ihm;
+    }
+
+    public void setIhm(FrameApp1 ihm) {
+        this.ihm = ihm;
     }
 
     public String toStringReseau(){
@@ -101,7 +114,8 @@ public class ControleurApp1
     {
         ControleurApp1 controleur = new ControleurApp1();
         if(args.length > 0 && args[0].equalsIgnoreCase("gui")) {
-            new FrameApp1(controleur);
+            FrameApp1 ihm = new FrameApp1(controleur);
+            controleur.setIhm(ihm);
             return;
         }
 
