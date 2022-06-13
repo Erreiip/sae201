@@ -66,6 +66,13 @@ public class ControleurApp1
         return true;
     }
 
+    public void setReseau(String absolutePath)
+    {
+
+        if(this.ihm != null) this.ihm.majListeCuves();
+        if(this.ihm != null) this.ihm.majListeTuyaux();
+    }
+
     public FrameApp1 getIhm() {
         return ihm;
     }

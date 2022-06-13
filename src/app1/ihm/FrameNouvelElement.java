@@ -11,11 +11,10 @@ public class FrameNouvelElement extends JFrame
     {
         this.setTitle("Nouvelle cuve");
         this.setSize(300, 200);
-
         this.setResizable(false);
-        this.add(APanelNouvelElement);
-
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        this.add(APanelNouvelElement);
     }
 }
