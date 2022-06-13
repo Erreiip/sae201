@@ -33,24 +33,18 @@ public class FormatReseauMatrice extends FormatReseau<int[][]>
 
 				int i = matrice[lig][col];
 
-				if(this.binaire)
+				if(this.binaire && i == 1 && !reseau.sontRelies(cuve1, cuve2))
 				{
-					if(i == 1)
+					System.out.print("Rentrez la section du tuyau reliant " + cuve1 + " et " + cuve2 + " : ");
+					while(true)
 					{
-						if(!reseau.sontRelies(cuve1, cuve2))
+						try
 						{
-							System.out.print("Rentrez la section du tuyau reliant " + cuve1 + " et " + cuve2 + " : ");
-							while(true)
-							{
-								try
-								{
-									reseau.creerTuyau(Clavier.lire_int(), cuve1, cuve2);
-									break;
-								} catch(Exception e)
-								{
-									System.out.println("Erreur de saisie : " + e.getMessage() + "\nVeuillez recommencer.");
-								}
-							}
+							reseau.creerTuyau(Clavier.lire_int(), cuve1, cuve2);
+							break;
+						} catch(Exception e)
+						{
+							System.out.println("Erreur de saisie : " + e.getMessage() + "\nVeuillez recommencer.");
 						}
 					}
 				}

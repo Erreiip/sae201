@@ -93,6 +93,16 @@ public class Reseau
         return true;
     }
 
+    public char getNextCuveId()
+    {
+        char c = 'A';
+        while(this.getCuve(c) != null)
+        {
+            c++;
+        }
+        return c;
+    }
+
     /**
      * Retourne vrai si les deux listCuves sont reliées par un tuyau dans ce réseau.
      */
@@ -161,6 +171,7 @@ public class Reseau
     }
 
 
+
     public String toStringListAdjac()
     {
         String sRet = "List d'adjacence:\n";
@@ -169,28 +180,6 @@ public class Reseau
         
         return sRet;
     }
-
-
-    public String toStringMatriceCoutOptimise()
-    {
-        String sRet = "";
-        int[][] matrice = this.getMatriceCout();
-        int etage = 1;
-        
-        for (int lig =0;lig < matrice.length; lig ++)
-        {
-            for (int col = 0; col < etage; col ++)
-            {
-                sRet += String.format("%3d",matrice[lig][col]);
-                /*default value of integer array is 0*/
-            }
-            sRet += "\n";
-            etage ++;
-
-        }
-        return sRet; 
-    }
-
     
     @Override
     public String toString() {
