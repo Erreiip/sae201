@@ -128,44 +128,6 @@ public class Reseau
         }
     }
 
-
-    public int[][] getMatriceCout()
-    {
-        int [][] matrice;
-        int nbCuves = this.getCuves().size();
-        matrice = new int[nbCuves][nbCuves];
-        for (Tuyau tuyau : this.getTuyaux())
-        {
-            int lig,col;
-            lig = tuyau.getCuve1().getIdentifiant() - 'A';
-            col = tuyau.getCuve2().getIdentifiant() - 'A';
-            matrice[lig][col] = tuyau.getSection() ;
-            matrice[col][lig] = tuyau.getSection() ;
-        }
-        return matrice;
-    }
-
-
-    public String toStringMatriceCout()
-    {
-		String sRet = "";
-        int [][] matrice;
-        matrice = this.getMatriceCout();
-        int nbCuves = this.getMatriceCout().length;
-
-        for (int lig =0;lig < nbCuves; lig ++)
-        {
-            for (int col = 0; col < nbCuves; col ++)
-            {
-                sRet += String.format("%3d",matrice[lig][col]);
-                /*default value of integer array is 0*/
-            }
-            sRet += "\n";
-        }
-        return sRet;           
-    }
-
-
     public String toStringListAdjac()
     {
         String sRet = "List d'adjacence:\n";
@@ -174,28 +136,6 @@ public class Reseau
         
         return sRet;
     }
-
-
-    public String toStringMatriceCoutOptimise()
-    {
-        String sRet = "";
-        int[][] matrice = this.getMatriceCout();
-        int etage = 1;
-        
-        for (int lig =0;lig < matrice.length; lig ++)
-        {
-            for (int col = 0; col < etage; col ++)
-            {
-                sRet += String.format("%3d",matrice[lig][col]);
-                /*default value of integer array is 0*/
-            }
-            sRet += "\n";
-            etage ++;
-
-        }
-        return sRet; 
-    }
-
     
     @Override
     public String toString() {

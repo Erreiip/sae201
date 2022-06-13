@@ -5,6 +5,7 @@ import src.app1.ihm.FrameApp1;
 import src.common.Cuve;
 import src.common.Reseau;
 import src.common.Tuyau;
+import src.common.matrice.FormatsReseau;
 
 import java.util.List;
 import java.io.PrintWriter;
@@ -96,7 +97,8 @@ public class ControleurApp1
 
     public void sortieFichierTexteMatriceCout ()
     {
-        String sRet = this.reseau.toStringMatriceCout();
+        int[][] matrice = FormatsReseau.COUTS.fromReseau(this.reseau);
+        String sRet = FormatsReseau.COUTS.toString(matrice);
         try
 		{
 			PrintWriter pw = new PrintWriter( new FileOutputStream("sortie.txt") );
@@ -113,7 +115,8 @@ public class ControleurApp1
 
     public void sortieFichierTexteMatriceCoutOpti()
     {
-        String sRet = this.reseau.toStringMatriceCoutOptimise();
+        int[][] matrice = FormatsReseau.COUTS_OPTI.fromReseau(this.reseau);
+        String sRet = FormatsReseau.COUTS_OPTI.toString(matrice);
         try
 		{
 			PrintWriter pw = new PrintWriter( new FileOutputStream("sortie.txt") );
