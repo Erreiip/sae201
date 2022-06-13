@@ -127,6 +127,8 @@ public class ControleurApp2
 
     public boolean creerReseau()
     {
+        this.metier = new Reseau();
+
         boolean continuer = true;
         String   type      = this.getType(); 
 
