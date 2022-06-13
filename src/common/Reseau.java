@@ -92,14 +92,18 @@ public class Reseau
 
     public void transverser()
     {
-        for ( Tuyau t : this.tuyaux )
+        ArrayList<Transfert> ensTransfert = new ArrayList<>();
+        
+        for ( Tuyau ty : this.tuyaux )
         {
-            Transfert iteTrans = t.transverser();
-            if ( iteTrans != null )
-            {
-                iteTrans.getCuveDepart ().retirerContenu( iteTrans.getQuantite() );
-                iteTrans.getCuveArrivee().ajouterContenu( iteTrans.getQuantite() );
-            }
+            Transfert iteTrans = ty.transverser();
+            if ( iteTrans != null ) ensTransfert.add(iteTrans);   
+        }
+
+        for ( Transfert tr : ensTransfert )
+        {
+            tr.getCuveDepart ().retirerContenu( tr.getQuantite() );
+            tr.getCuveArrivee().ajouterContenu( tr.getQuantite() );
         }
     }
 

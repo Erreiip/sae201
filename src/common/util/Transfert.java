@@ -8,7 +8,14 @@ public class Transfert
     private Cuve   cuveArrivee;
     private double quantite;
 
-    public Transfert(Cuve cuveDepart, Cuve cuveArrivee, double quantite)
+    public Transfert creer(Cuve cuveDepart, Cuve cuveArrivee, double quantite)
+    {
+        if ( cuveDepart == null || cuveArrivee == null || cuveDepart == cuveArrivee ) return null;
+        if ( quantite   <= 0                                                        ) return null;
+        return new Transfert(cuveDepart, cuveArrivee, quantite);
+    }
+
+    private Transfert(Cuve cuveDepart, Cuve cuveArrivee, double quantite)
     {
         this.cuveDepart  = cuveDepart;
         this.cuveArrivee = cuveArrivee;
