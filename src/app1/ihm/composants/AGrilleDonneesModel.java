@@ -1,4 +1,4 @@
-package src.app1.ihm;
+package src.app1.ihm.composants;
 
 import src.app1.ControleurApp1;
 import src.common.IReseauElement;

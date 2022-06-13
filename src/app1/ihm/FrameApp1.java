@@ -11,6 +11,7 @@ public class FrameApp1 extends JFrame
 {
 
     private final PanelCuves panelCuves;
+    private final PanelTuyaux panelTuyaux;
 
     public FrameApp1(ControleurApp1 ctrl)
     {
@@ -23,7 +24,7 @@ public class FrameApp1 extends JFrame
         /* Création des composants       */
         /*-------------------------------*/
         this.panelCuves  = new PanelCuves(ctrl);
-        JPanel panelTuyaux = new PanelTuyaux(ctrl);
+        this.panelTuyaux = new PanelTuyaux(ctrl);
 
 
         /*-------------------------------*/
@@ -42,5 +43,9 @@ public class FrameApp1 extends JFrame
 
     public int getCuveActive() {
         return this.panelCuves.getTblGrilleDonnees().getSelectedRow();
+    }
+
+    public void majListeTuyaux() {
+        this.panelTuyaux.majListe();
     }
 }

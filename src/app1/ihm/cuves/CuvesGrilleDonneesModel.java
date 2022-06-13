@@ -2,7 +2,7 @@ package src.app1.ihm.cuves;
 
 import src.app1.ControleurApp1;
 import src.common.Cuve;
-import src.app1.ihm.AGrilleDonneesModel;
+import src.app1.ihm.composants.AGrilleDonneesModel;
 
 import java.util.List;
 

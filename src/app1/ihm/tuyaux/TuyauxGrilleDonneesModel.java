@@ -2,7 +2,7 @@ package src.app1.ihm.tuyaux;
 
 import src.app1.ControleurApp1;
 import src.common.Tuyau;
-import src.app1.ihm.AGrilleDonneesModel;
+import src.app1.ihm.composants.AGrilleDonneesModel;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class TuyauxGrilleDonneesModel extends AGrilleDonneesModel<Tuyau> {
     @Override
     protected void initTab(int lig, Tuyau element) {
         this.tabDonnees[lig][0] = element.getCuve1().getIdentifiant();
-        this.tabDonnees[lig][1] = element.getCuve1().getIdentifiant();
+        this.tabDonnees[lig][1] = element.getCuve2().getIdentifiant();
         this.tabDonnees[lig][2] = element.getSection();
     }
 }
