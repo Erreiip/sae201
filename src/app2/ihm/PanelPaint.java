@@ -1,7 +1,6 @@
 package src.app2.ihm;
 
 import javax.swing.*;
-import javax.swing.text.Position;
 
 import src.common.Cuve;
 import src.common.PositionInfos;
