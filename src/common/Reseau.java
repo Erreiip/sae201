@@ -174,11 +174,14 @@ public class Reseau
 
     public String toStringListAdjac()
     {
-        String sRet = "List d'adjacence:\n";
+        String sRet = "Liste d'adjacence\n";
         for (Tuyau t :this.tuyaux)
             sRet += Character.toString(t.getCuve1().getIdentifiant()) + Character.toString(t.getCuve2().getIdentifiant()) + "\n";
-        
-        return sRet;
+       
+        sRet += "---\n";
+        for (Cuve c : this.cuves)
+            sRet += c.getCapacite() + "\n";            
+        return sRet;  
     }
     
     @Override
