@@ -78,8 +78,8 @@ public class ControleurApp1
         do
         {
             nbCuves = Clavier.lire_int();
-            if (nbCuves >= 26) System.out.println("Le nombre de cuves maximum a été atteint.");
-        } while (nbCuves >= 26);
+            if (nbCuves > 26) System.out.println("Le nombre de cuves maximum a été atteint.");
+        } while (nbCuves > 26);
 
         /**Creations des cuves */
         /*---------------------*/
@@ -90,9 +90,17 @@ public class ControleurApp1
             do {
             System.out.print("Entrez la capacité maximale de la cuve "+ idCuveEnCreation + " (entre 200 et 2000) :");
             capaciteMaximal = Clavier.lire_int();
-
-            valideCuve = controleur.creerCuve(capaciteMaximal);
             
+            valideCuve = false;
+
+            try {
+                valideCuve = controleur.creerCuve(capaciteMaximal);
+            } catch (Exception e) {
+                //TODO: handle exception
+            }
+
+            
+
             if (!valideCuve) { System.out.println("Invalide"); continue ;}
             idCuveEnCreation ++;
             } while (!valideCuve);
@@ -105,9 +113,12 @@ public class ControleurApp1
         int   section;
         char  idCuve1, idCuve2;
         boolean valideTuyau;
+
+        System.out.println ("Voulez-vous creer un tuyau (O/N) ?");   
+
         do
         {
-            System.out.println ("Voulez-vous creer un tuyau (O/N) ?");    
+             
             resCreerTuyau = Clavier.lire_char();
             if (resCreerTuyau == 'O')
             {
@@ -121,7 +132,14 @@ public class ControleurApp1
                     System.out.print ("\nidCuve2 ? ");
                     idCuve2 = Clavier.lire_char();
                     
-                    valideTuyau = controleur.creerTuyau(section, idCuve1, idCuve2);
+                    valideTuyau = false;
+
+                    try {
+                        valideTuyau = controleur.creerTuyau(section, idCuve1, idCuve2);
+                    } catch (Exception e) {
+                        //TODO: handle exception
+                    }
+                    
                     if (!valideTuyau) System.out.println ("Invalide");
                     
                 } while (!valideTuyau);
