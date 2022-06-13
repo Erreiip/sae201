@@ -1,4 +1,4 @@
-package src.common.matrice;
+package src.common.reseau.format;
 
 import iut.algo.Clavier;
 import src.common.Cuve;
@@ -6,18 +6,18 @@ import src.common.Reseau;
 import src.common.Tuyau;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
-public class FormatReseauMatrice extends FormatReseau<int[][]>
+class ReseauFormatMatrice implements ReseauFormat<int[][]>
 {
 	public static final char SANS_CONNECTION_CHAR = 'X';
-	public static final int  SANS_CONNECTION_INT = -1;
+	public static final int  SANS_CONNECTION_INT  = -1;
 
 	private final boolean binaire;
 	private final boolean optimise;
 
-	public FormatReseauMatrice(String nom, boolean binaire, boolean optimise)
+	public ReseauFormatMatrice(boolean binaire, boolean optimise)
 	{
-		super(nom);
 		this.binaire = binaire;
 		this.optimise = optimise;
 	}
@@ -61,7 +61,7 @@ public class FormatReseauMatrice extends FormatReseau<int[][]>
 		int [][] matrice;
 		int nbCuves = r.getCuves().size();
 		matrice = new int[nbCuves][nbCuves];
-		for(int[] ligne : matrice) Arrays.fill(ligne, FormatReseauMatrice.SANS_CONNECTION_INT);
+		for(int[] ligne : matrice) Arrays.fill(ligne, ReseauFormatMatrice.SANS_CONNECTION_INT);
 
 		for(Tuyau tuyau : r.getTuyaux())
 		{
@@ -107,9 +107,9 @@ public class FormatReseauMatrice extends FormatReseau<int[][]>
 				}
 				else
 				{
-					if(valeurs[col].length() == 1 && valeurs[col].charAt(0) == FormatReseauMatrice.SANS_CONNECTION_CHAR)
+					if(valeurs[col].length() == 1 && valeurs[col].charAt(0) == ReseauFormatMatrice.SANS_CONNECTION_CHAR)
 					{
-						i = FormatReseauMatrice.SANS_CONNECTION_INT;
+						i = ReseauFormatMatrice.SANS_CONNECTION_INT;
 					}
 					else
 					{
@@ -132,8 +132,8 @@ public class FormatReseauMatrice extends FormatReseau<int[][]>
 		StringBuilder sb = new StringBuilder();
 		for(int[] lig : matrice) {
 			for(int col : lig) {
-				if(col == FormatReseauMatrice.SANS_CONNECTION_INT)
-					sb.append(FormatReseauMatrice.SANS_CONNECTION_CHAR);
+				if(col == ReseauFormatMatrice.SANS_CONNECTION_INT)
+					sb.append(ReseauFormatMatrice.SANS_CONNECTION_CHAR);
 				else
 					sb.append(col);
 				sb.append(" ");

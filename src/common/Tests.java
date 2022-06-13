@@ -1,9 +1,6 @@
 package src.common;
 
-import src.common.matrice.FormatReseau;
-import src.common.matrice.FormatsReseau;
-
-import java.util.Arrays;
+import src.common.reseau.format.ReseauFormatType;
 
 public class Tests
 {
@@ -77,12 +74,8 @@ public class Tests
 
 		System.out.println(reseau);
 
-		FormatReseau<int[][]> format = FormatsReseau.COUTS;
-
-		int[][] matriceAdjacente = format.fromString("X 2 6 X\n2 X 4 8\n6 4 X X\nX 8 X X");
-		System.out.println(Arrays.deepToString(matriceAdjacente));
-		format.ajouterLiens(
-				matriceAdjacente,
+		ReseauFormatType.COUTS.getFormat().ajouterLiens(
+				"X 2 6 X\n2 X 4 8\n6 4 X X\nX 8 X X",
 				reseau);
 
 		System.out.println(reseau);
@@ -107,6 +100,6 @@ public class Tests
 
 		System.out.println(reseau);
 
-		System.out.println(FormatsReseau.COUTS.toString(reseau));
+		System.out.println(ReseauFormatType.COUTS.getFormat().toString(reseau));
 	}
 }
