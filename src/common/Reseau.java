@@ -157,7 +157,7 @@ public class Reseau
         {
             for (int col = 0; col < nbCuves; col ++)
             {
-                sRet += String.format("%3d",matrice[lig][col]);
+                sRet += String.format("%-3d",matrice[lig][col]);
                 /*default value of integer array is 0*/
             }
             sRet += "\n";
@@ -175,8 +175,23 @@ public class Reseau
     public String toStringListAdjac()
     {
         String sRet = "Liste d'adjacence\n";
+        for (Cuve c : this.cuves)
+        {
+            sRet += String.format("%-3s", Character.toString (c.getIdentifiant() ));
+            for (Tuyau t : this.tuyaux)
+            {
+                Cuve cuve1, cuve2;
+                cuve1 = t.getCuve1();
+                cuve2 = t.getCuve2();
+                if (c == cuve1) sRet += String.format("%-3s", cuve2.getIdentifiant() );
+                if (c == cuve2) sRet += String.format("%-3s", cuve1.getIdentifiant() );
+            }
+            sRet += "\n";
+        }
+        sRet += "---\n";
+
         for (Tuyau t :this.tuyaux)
-            sRet += Character.toString(t.getCuve1().getIdentifiant()) + Character.toString(t.getCuve2().getIdentifiant()) + "\n";
+            sRet += t.getSection() + "\n";
        
         sRet += "---\n";
         for (Cuve c : this.cuves)
