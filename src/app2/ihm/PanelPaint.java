@@ -1,8 +1,10 @@
 package src.app2.ihm;
 
 import javax.swing.*;
+import javax.swing.text.Position;
 
 import src.common.Cuve;
+import src.common.PositionInfos;
 import src.common.Tuyau;
 import src.app2.ControleurApp2;
 
@@ -65,6 +67,19 @@ public class PanelPaint extends JPanel
         {
             g.setColor( this.degrade((int) c.getContenu(), c.getCapacite()) );
             g2d.fill  ( tabPoints[i] );
+
+
+            int taille = c.getCapacite()/10;
+
+            int x = c.getX() - taille/2;
+            int y = c.getY() - taille/2;
+
+            g.setColor(Color.BLACK);
+            if ( c.getPositionInfos() == PositionInfos.HAUT   )  g.drawString( c.getInfos(), x             , y              );
+            if ( c.getPositionInfos() == PositionInfos.BAS    )  g.drawString( c.getInfos(), x             , y + taille + 10);
+            if ( c.getPositionInfos() == PositionInfos.GAUCHE )  g.drawString( c.getInfos(), x - 60        , y + taille /  2);
+            if ( c.getPositionInfos() == PositionInfos.DROITE )  g.drawString( c.getInfos(), x + taille +10, y + taille/2   );
+
             i++;
         }
 
@@ -74,21 +89,6 @@ public class PanelPaint extends JPanel
 
     private Color degrade ( int contenu, int capa)
     {
-        Color c = Color.RED ;
-
-        int nombreIte = (int) Math.ceil( contenu / (double) capa ) * 100;
-
-        if ( nombreIte == 50 )
-        {
-            for ( int cpt = 0; cpt < nombreIte; cpt++ )
-            {
-                if ( nombreIte > 250 )
-                    c = c.darker();
-                else
-                    c = c.brighter();
-            }
-        }
-
         return Color.RED;
     }
 

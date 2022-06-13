@@ -44,12 +44,16 @@ public class Cuve implements IReseauElement
         return cuve;
     }
 
+    
+
     public char          getIdentifiant()    { return this.id; }
-    public int           getX()              { return x; }
-    public int           getY()              { return y; }
-    public PositionInfos getPositionInfos()  { return positionInfos; }
-    public int           getCapacite()       { return capacite; }
-    public double        getContenu()        { return contenu; }
+    public int           getX()              { return this.x; }
+    public int           getY()              { return this.y; }
+    public PositionInfos getPositionInfos()  { return this.positionInfos; }
+    public int           getCapacite()       { return this.capacite; }
+    public double        getContenu()        { return this.contenu; }
+
+    public String        getInfos()          { return this.id + "\n" + this.capacite + "/" + this.contenu; }
 
     public void setX(int x)                                   { this.x = x; }
     public void setY(int y)                                   { this.y = y; }

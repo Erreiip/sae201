@@ -12,6 +12,7 @@ import src.app2.ihm.*;
 import src.common.Reseau;
 import src.common.Tuyau;
 import src.common.Cuve;
+import src.common.PositionInfos;
 
 
 public class ControleurApp2
@@ -78,10 +79,10 @@ public class ControleurApp2
             int       height = temp.height;
             int       width  = temp.width;
 
-            heightUnique     = height  / (int) Math.ceil(tabCuves.length  / (double)2);
+            heightUnique     = height  / (int) Math.ceil(tabCuves.length  / (double) 2);
             widthUnique      = width   / 4;
 
-            heightUnique -= heightUnique / Math.ceil(tabCuves.length  / (double)2);
+            heightUnique -= heightUnique / Math.ceil(tabCuves.length  / (double) 2);
             widthUnique  -= widthUnique / 4;
 
 
@@ -93,16 +94,22 @@ public class ControleurApp2
         int i= 2;
         for ( int cpt = 1; cpt <= tabCuves.length; cpt++)
         {
+
             tabCuves[cpt - 1].setX(widthUnique);
             tabCuves[cpt - 1].setY(heightUnique);
 
+            if ( ( cpt % 2 ) == 0                           ) tabCuves[cpt - 1].setPositionInfos( PositionInfos.DROITE );
+            if ( (( cpt % 2 ) != 0) && cpt != 1 && cpt != 2 ) tabCuves[cpt - 1].setPositionInfos( PositionInfos.GAUCHE );
+            if (   cpt == tabCuves.length                   ) tabCuves[cpt - 1].setPositionInfos( PositionInfos.BAS    );
+            if (   cpt == 1  || cpt == 2                    ) tabCuves[cpt - 1].setPositionInfos( PositionInfos.HAUT   );
+
+
             if ( ( cpt % 2 ) == 0 ) 
             {
-                if ( (i % 2) == 0) widthUnique  =  ancienneWidth * 2; 
+                if ( (i % 2) == 0) widthUnique  =  ancienneWidth * 2;  
                 else               widthUnique  =  ancienneWidth; 
-
                 heightUnique += ancienneHeight;
-                
+
                 i++;
             }
             else
@@ -110,7 +117,6 @@ public class ControleurApp2
                 widthUnique += ancienneWidth * 2;
             }
         }
-
     }
 
 
