@@ -97,8 +97,7 @@ public class ControleurApp1
 
     public void sortieFichierTexteMatriceCout ()
     {
-        int[][] matrice = FormatsReseau.COUTS.fromReseau(this.reseau);
-        String sRet = FormatsReseau.COUTS.toString(matrice);
+        String sRet = FormatsReseau.COUTS.toString(this.reseau);
         try
 		{
 			PrintWriter pw = new PrintWriter( new FileOutputStream("sortie.txt") );
@@ -115,8 +114,7 @@ public class ControleurApp1
 
     public void sortieFichierTexteMatriceCoutOpti()
     {
-        int[][] matrice = FormatsReseau.COUTS_OPTI.fromReseau(this.reseau);
-        String sRet = FormatsReseau.COUTS_OPTI.toString(matrice);
+        String sRet = FormatsReseau.COUTS_OPTI.toString(this.reseau);
         try
 		{
 			PrintWriter pw = new PrintWriter( new FileOutputStream("sortie.txt") );

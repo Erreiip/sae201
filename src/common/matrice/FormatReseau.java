@@ -24,4 +24,9 @@ public abstract class FormatReseau<T>
 	public abstract T fromReseau(Reseau r);
 	public abstract T fromString(String s);
 	public abstract String toString(T matrice);
+
+	public String toString(Reseau r)
+	{
+		return this.toString(this.fromReseau(r));
+	}
 }

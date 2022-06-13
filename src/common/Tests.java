@@ -63,7 +63,6 @@ public class Tests
 
 	}
 
-
 	public static void testerMatriceInput()
 	{
 		Reseau reseau = new Reseau();
@@ -108,7 +107,6 @@ public class Tests
 
 		System.out.println(reseau);
 
-		int[][] matriceAdjacente = FormatsReseau.COUTS.fromReseau(reseau);
-		System.out.println(FormatsReseau.COUTS.toString(matriceAdjacente));
+		System.out.println(FormatsReseau.COUTS.toString(reseau));
 	}
 }
