@@ -1,4 +1,6 @@
-package src.app1.ihm.cuves.popup;
+package src.app1.ihm;
+
+import src.app1.ihm.composants.APanelNouvelElement;
 
 import javax.swing.*;
 

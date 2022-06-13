@@ -2,6 +2,8 @@ package src.common.util;
 
 import src.common.Cuve;
 
+import java.util.Objects;
+
 public class Transfert 
 {
     private Cuve   cuveDepart;
@@ -10,8 +12,12 @@ public class Transfert
 
     public static Transfert creer(Cuve cuveDepart, Cuve cuveArrivee, double quantite)
     {
-        if ( cuveDepart == null || cuveArrivee == null || cuveDepart == cuveArrivee ) return null;
-        if ( quantite   <= 0                                                        ) return null;
+        Objects.requireNonNull(cuveDepart,  "la cuve de départ ne doit pas être nulle");
+        Objects.requireNonNull(cuveArrivee, "la cuve d'arrivée ne doit pas être nulle");
+        if(cuveDepart == cuveArrivee)
+            throw new IllegalArgumentException("les deux cuves doivent être différentes");
+        if(quantite <= 0.0D)
+            throw new IllegalArgumentException("la quantite doit être positive");
         return new Transfert(cuveDepart, cuveArrivee, quantite);
     }
 

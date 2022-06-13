@@ -1,10 +1,8 @@
 package src.app1.ihm.cuves;
 
 import src.app1.ControleurApp1;
-import src.app1.ihm.AGrilleDonneesModel;
-import src.app1.ihm.APanelTable;
-import src.app1.ihm.cuves.popup.FrameNouvelElement;
-import src.app1.ihm.cuves.popup.PanelNouvelleCuve;
+import src.app1.ihm.composants.APanelTable;
+import src.app1.ihm.FrameNouvelElement;
 
 public class PanelCuves extends APanelTable
 {
@@ -31,7 +29,6 @@ public class PanelCuves extends APanelTable
 
     @Override
     protected void supprimerElement() {
-        //this.getTblGrilleDonnees().getSelectedRow()
         this.getCtrl().supprimerCuve();
     }
 

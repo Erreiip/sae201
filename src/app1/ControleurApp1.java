@@ -32,7 +32,12 @@ public class ControleurApp1
 
     public boolean creerTuyau(int section, char idCuve1, char idCuve2)
     {
-        return reseau.creerTuyau(section, idCuve1, idCuve2) != null;
+        Tuyau tuyau = reseau.creerTuyau(section, idCuve1, idCuve2);
+        if( tuyau == null ) return false;
+
+        if(this.ihm != null) this.ihm.majListeTuyaux();
+
+        return true;
     }
 
     public boolean creerCuve(int capacite )
@@ -56,7 +61,7 @@ public class ControleurApp1
         if(!this.reseau.supprimerCuve(ligne)) return false;
 
         this.ihm.majListeCuves();
-        // this.ihm.majListeTuyaux();
+        this.ihm.majListeTuyaux();
         return true;
     }
 

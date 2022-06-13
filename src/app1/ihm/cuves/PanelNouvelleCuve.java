@@ -1,21 +1,24 @@
-package src.app1.ihm.cuves.popup;
+package src.app1.ihm.cuves;
 
+import src.app1.ihm.composants.APanelNouvelElement;
 import src.app1.ihm.cuves.PanelCuves;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class PanelNouvelleCuve extends APanelNouvelElement
 {
 
     private JTextField txtCapacite;
-
     public PanelNouvelleCuve(PanelCuves panelCuves) {
         super(panelCuves);
     }
 
     @Override
     protected void initComposants(JPanel panelNord) {
+        panelNord.setLayout(new GridLayout(1, 2));
+
         JLabel lblCapacite = new JLabel("Capacité:");
         this.txtCapacite = new JTextField();
 
