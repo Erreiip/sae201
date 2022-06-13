@@ -5,10 +5,15 @@ import src.app1.ihm.FrameApp1;
 import src.common.Cuve;
 import src.common.Reseau;
 import src.common.Tuyau;
+import src.common.reseau.fichier.FichierReseau;
 import src.common.reseau.format.ReseauFormatType;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.List;
 
 public class ControleurApp1
@@ -68,9 +73,19 @@ public class ControleurApp1
 
     public void setReseau(String absolutePath)
     {
+        try {
+            FichierReseau fichierReseau = FichierReseau.fromString(Files.readString(Path.of(absolutePath)));
+            this.reseau = fichierReseau.getReseau();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-        if(this.ihm != null) this.ihm.majListeCuves();
-        if(this.ihm != null) this.ihm.majListeTuyaux();
+    public void sauvegarderReseau(ReseauFormatType reseauFormatType, String path) {
+        try
+        {
+            Files.writeString(Path.of(path), reseauFormatType.getFormat().toString(this.reseau));
+        } catch (Exception e){ e.printStackTrace(); }
     }
 
     public FrameApp1 getIhm() {
@@ -98,7 +113,7 @@ public class ControleurApp1
 		}
 		catch (Exception e){ e.printStackTrace(); }
         /*Test sur le console*/
-        
+
         System.out.println(sRet);
     }
 
@@ -115,7 +130,7 @@ public class ControleurApp1
 		}
 		catch (Exception e){ e.printStackTrace(); }
         /*Test sur le console*/
-        
+
         System.out.println(sRet);
     }
 
@@ -132,13 +147,13 @@ public class ControleurApp1
 		}
 		catch (Exception e){ e.printStackTrace(); }
         /*Test sur le console*/
-        
+
         System.out.println(sRet);
     }
 
-    
 
-    public static void main(String[] args) 
+
+    public static void main(String[] args)
     {
         ControleurApp1 controleur = new ControleurApp1();
         if(args.length > 0 && args[0].equalsIgnoreCase("gui")) {
@@ -171,7 +186,7 @@ public class ControleurApp1
             do {
             System.out.print("Entrez la capacité maximale de la cuve "+ idCuveEnCreation + " (entre 200 et 2000) :");
             capaciteMaximal = Clavier.lire_int();
-            
+
             valideCuve = false;
 
             try {
@@ -180,7 +195,7 @@ public class ControleurApp1
                 //TODO: handle exception
             }
 
-            
+
 
             if (!valideCuve) { System.out.println("Invalide"); continue ;}
             } while (!valideCuve);
@@ -202,11 +217,11 @@ public class ControleurApp1
         char  idCuve1, idCuve2;
         boolean valideTuyau;
 
-        System.out.println ("Voulez-vous creer un tuyau (O/N) ?");   
+        System.out.println ("Voulez-vous creer un tuyau (O/N) ?");
 
         do
         {
-             
+
             resCreerTuyau = Clavier.lire_char();
             if (resCreerTuyau == 'O')
             {
@@ -216,10 +231,10 @@ public class ControleurApp1
 
                     System.out.print ("\nidCuve1 ? ");
                     idCuve1 = Clavier.lire_char();
-                    
+
                     System.out.print ("\nidCuve2 ? ");
                     idCuve2 = Clavier.lire_char();
-                    
+
                     valideTuyau = false;
 
                     try {
@@ -227,57 +242,57 @@ public class ControleurApp1
                     } catch (Exception e) {
                         //TODO: handle exception
                     }
-                    
+
                     if (!valideTuyau) System.out.println ("Invalide");
-                    
+
                 } while (!valideTuyau);
             }
             else break;
-        
-            System.out.println ("Voulez-vous continuer de creer un tuyau (O/N) ?");    
-            
+
+            System.out.println ("Voulez-vous continuer de creer un tuyau (O/N) ?");
+
         } while (resCreerTuyau == 'O');
-        
+
         /*Sélection de la Matrice voulu*/
 
         int selectionFormat;
 
         do
         {
-             
+
             System.out.println("Veuillez choisir le format de la structure de sortie :\n"+
                                "[1]-Liste d'adjacence        \n"+
                                "[2]-Matrice de cout          \n"+
                                "[3]-Matrice de cout optimisée\n"+
                                "[4]-Quitter l'application    \n"+
-                               "Veuillez chosir entre 1 et 3 : "); 
+                               "Veuillez chosir entre 1 et 3 : ");
             do
             {
             selectionFormat = Clavier.lire_int();
 
             switch (selectionFormat) {
                 case 1:
-        
+
                     controleur.sortieFichierTexteMatriceAdjacente();
                     break;
 
                 case 2:
-                    
+
                     controleur.sortieFichierTexteMatriceCout();
                     break;
 
                 case 3:
-                    
+
                     controleur.sortieFichierTexteMatriceCoutOpti();
                     break;
-            
+
                 default:
                     break;
             }
             } while (selectionFormat != 4);
-            
+
         } while (selectionFormat < 1 || selectionFormat > 3);
 
-        
+
     }
 }

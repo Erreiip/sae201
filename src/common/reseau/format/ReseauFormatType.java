@@ -39,4 +39,13 @@ public enum ReseauFormatType
 	{
 		return format;
 	}
+
+	public static ReseauFormatType get(String nom)
+	{
+		for (ReseauFormatType reseauFormatType : ReseauFormatType.values())
+			if(reseauFormatType.getNom().equals(nom))
+				return reseauFormatType;
+		return null;
+	}
+
 }
