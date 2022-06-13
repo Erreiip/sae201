@@ -95,8 +95,11 @@ public class Reseau
         for ( Tuyau t : this.tuyaux )
         {
             Transfert iteTrans = t.transverser();
-            iteTrans.getCuveDepart ().retirerContenu( iteTrans.getQuantite() );
-            iteTrans.getCuveArrivee().ajouterContenu( iteTrans.getQuantite() );
+            if ( iteTrans != null )
+            {
+                iteTrans.getCuveDepart ().retirerContenu( iteTrans.getQuantite() );
+                iteTrans.getCuveArrivee().ajouterContenu( iteTrans.getQuantite() );
+            }
         }
     }
 
