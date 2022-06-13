@@ -31,10 +31,12 @@ public class PanelCuves extends APanelTable
 
     @Override
     protected void supprimerElement() {
-        
+        //this.getTblGrilleDonnees().getSelectedRow()
+        this.getCtrl().supprimerCuve();
     }
 
     public void majListe() {
         super.majListe(new CuvesGrilleDonneesModel(this.getCtrl()));
     }
+
 }

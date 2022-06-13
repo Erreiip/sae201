@@ -45,6 +45,21 @@ public class ControleurApp1
         return true;
     }
 
+    public boolean supprimerCuve()
+    {
+        if(this.ihm == null) return false;
+
+        int ligne = this.ihm.getCuveActive();
+
+        if(ligne == -1) return false;
+
+        if(!this.reseau.supprimerCuve(ligne)) return false;
+
+        this.ihm.majListeCuves();
+        // this.ihm.majListeTuyaux();
+        return true;
+    }
+
     public FrameApp1 getIhm() {
         return ihm;
     }
@@ -252,5 +267,4 @@ public class ControleurApp1
 
         
     }
-
 }

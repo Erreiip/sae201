@@ -82,6 +82,17 @@ public class Reseau
         return this.creerTuyau(section, this.getCuve(idCuve1), this.getCuve(idCuve2));
     }
 
+    public boolean supprimerCuve(int ligne) {
+        if(ligne >= this.cuves.size())
+            return false;
+
+        Cuve cuve = this.cuves.get(ligne);
+        this.tuyaux.removeIf(t -> t.estRelie(cuve));
+        this.cuves.remove(ligne);
+
+        return true;
+    }
+
     /**
      * Retourne vrai si les deux listCuves sont reliées par un tuyau dans ce réseau.
      */
@@ -92,14 +103,18 @@ public class Reseau
 
     public void transverser()
     {
-        for ( Tuyau t : this.tuyaux )
+        ArrayList<Transfert> ensTransfert = new ArrayList<>();
+        
+        for ( Tuyau ty : this.tuyaux )
         {
-            Transfert iteTrans = t.transverser();
-            if ( iteTrans != null )
-            {
-                iteTrans.getCuveDepart ().retirerContenu( iteTrans.getQuantite() );
-                iteTrans.getCuveArrivee().ajouterContenu( iteTrans.getQuantite() );
-            }
+            Transfert iteTrans = ty.transverser();
+            if ( iteTrans != null ) ensTransfert.add(iteTrans);   
+        }
+
+        for ( Transfert tr : ensTransfert )
+        {
+            tr.getCuveDepart ().retirerContenu( tr.getQuantite() );
+            tr.getCuveArrivee().ajouterContenu( tr.getQuantite() );
         }
     }
 

@@ -39,4 +39,8 @@ public class FrameApp1 extends JFrame
     public void majListeCuves() {
         this.panelCuves.majListe();
     }
+
+    public int getCuveActive() {
+        return this.panelCuves.getTblGrilleDonnees().getSelectedRow();
+    }
 }
