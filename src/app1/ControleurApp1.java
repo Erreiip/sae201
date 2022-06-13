@@ -44,6 +44,23 @@ public class ControleurApp1
         return reseau.toString();
     }
 
+    public void sortieFichierTexteMatriceAdjacente()
+    {
+        String sRet = this.reseau.toStringListAdjac();
+        try
+		{
+			PrintWriter pw = new PrintWriter( new FileOutputStream("sortie.txt") );
+
+            pw.println (sRet);
+
+			pw.close();
+		}
+		catch (Exception e){ e.printStackTrace(); }
+        /*Test sur le console*/
+        
+        System.out.println(sRet);
+    }
+
     public void sortieFichierTexteMatriceCout ()
     {
         String sRet = this.reseau.toStringMatriceCout();
@@ -108,7 +125,7 @@ public class ControleurApp1
 
             if (!valideCuve) { System.out.println("Invalide"); continue ;}
             } while (!valideCuve);
-            
+
             System.out.println("La cuve " + idCuveEnCreation + " a été créée avec succès.");
             idCuveEnCreation ++;
         }
@@ -161,8 +178,47 @@ public class ControleurApp1
             System.out.println ("Voulez-vous continuer de creer un tuyau (O/N) ?");    
             
         } while (resCreerTuyau == 'O');
-        System.out.println ("Finir de Creer le Reseau ");
-        controleur.sortieFichierTexteMatriceCout();
+        
+        /*Sélection de la Matrice voulu*/
+
+        int selectionFormat;
+
+        do
+        {
+             
+            System.out.println("Veuillez choisir le format de la structure de sortie :\n"+
+                               "[1]-Liste d'adjacence        \n"+
+                               "[2]-Matrice de cout          \n"+
+                               "[3]-Matrice de cout optimisée\n"+
+                               "Veuillez chosir entre 1 et 3 : "); 
+
+            selectionFormat = Clavier.lire_int();
+
+            switch (selectionFormat) {
+                case 1:
+        
+                    controleur.sortieFichierTexteMatriceAdjacente();
+                    break;
+
+                case 2:
+                    
+                    controleur.sortieFichierTexteMatriceCout();
+                    break;
+
+                case 3:
+                    
+
+                    break;
+            
+                default:
+                    break;
+            }
+
+            System.out.println(selectionFormat < 1 || selectionFormat > 3);
+            
+        } while (selectionFormat < 1 || selectionFormat > 3);
+
+        
     }
 
 }
