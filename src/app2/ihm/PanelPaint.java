@@ -66,7 +66,7 @@ public class PanelPaint extends JPanel
 
             g.setColor( Color.BLACK );
             g.drawLine( xDepart, yDepart, xFin, yFin );
-        }               
+        }     
     }
 
     private Color degrade ( int contenu, int capa)

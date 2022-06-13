@@ -27,10 +27,13 @@ public class FrameReseau extends JFrame
         
         this.setLayout  ( new BorderLayout() );
         this.setSize    ( width/2, height/2 );
-        this.setLocation( height/2 - this.HEIGHT, width/2 - this.WIDTH );
+        this.setLocationRelativeTo( null );
 
         this.panelMenu      = new PanelMenu ( this.ctrl );
         this.panelPrincipal = new PanelPaint( this.ctrl );
+        this.panelPrincipal.setPreferredSize( new Dimension (width/2, height/2) );
+
+        System.out.println( width + "/" + height);
 
         this.add( this.panelMenu     , BorderLayout.NORTH  );
         this.add( this.panelPrincipal, BorderLayout.CENTER );
@@ -45,5 +48,5 @@ public class FrameReseau extends JFrame
         panelPrincipal.repaint();
     }
 
-    public Dimension getDim() { return this.panelPrincipal.getSize(); }
+    public Dimension getDim() { return new Dimension(this.panelPrincipal.getWidth(), this.panelPrincipal.getHeight()); }
 }

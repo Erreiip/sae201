@@ -71,32 +71,42 @@ public class ControleurApp2
 
         int       heightUnique;
         int       widthUnique;
-        int       ancienneHeight;
+        int       ancienneWidth, ancienneHeight;
 
         {
             Dimension temp   = this.frame.getDim();
             int       height = temp.height;
             int       width  = temp.width;
 
-            heightUnique     = height/tabCuves.length;
-            widthUnique      = width / tabCuves.length / 2;
+            heightUnique     = height  / (int) Math.ceil(tabCuves.length  / (double)2);
+            widthUnique      = width   / 4;
+
+            //widthUnique  -= widthUnique  / 2;
+            //heightUnique -= heightUnique / 2;
+
         }
 
+        ancienneWidth  = widthUnique;
         ancienneHeight = heightUnique;
-
-        for ( int cpt = 0; cpt < tabCuves.length; cpt++)
+        
+        int i= 1;
+        for ( int cpt = 1; cpt <= tabCuves.length; cpt++)
         {
-            tabCuves[cpt].setX(heightUnique);
-            tabCuves[cpt].setY(widthUnique);
+            tabCuves[cpt - 1].setX(widthUnique);
+            tabCuves[cpt - 1].setY(heightUnique);
 
-            if ( cpt % 2 == 0 ) 
+            if ( ( cpt % 2 ) == 0 ) 
             {
-                widthUnique += widthUnique; 
-                heightUnique = ancienneHeight;
+                if ( (i % 2) == 0) widthUnique  =  ancienneWidth * 2; 
+                else               widthUnique  =  ancienneWidth; 
+                
+                heightUnique += ancienneHeight;
+                
+                i++;
             }
             else
             {
-                heightUnique += heightUnique;
+                widthUnique += widthUnique * 2;
             }
         }
 
