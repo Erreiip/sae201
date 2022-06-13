@@ -71,7 +71,7 @@ public class ControleurApp2
 
         int       heightUnique;
         int       widthUnique;
-        int       ancienne;
+        int       ancienneHeight;
 
         {
             Dimension temp   = this.frame.getDim();
@@ -79,8 +79,10 @@ public class ControleurApp2
             int       width  = temp.width;
 
             heightUnique     = height/tabCuves.length;
-            widthUnique      = width /tabCuves.length / 2;
+            widthUnique      = width / tabCuves.length / 2;
         }
+
+        ancienneHeight = heightUnique;
 
         for ( int cpt = 0; cpt < tabCuves.length; cpt++)
         {
@@ -90,7 +92,7 @@ public class ControleurApp2
             if ( cpt % 2 == 0 ) 
             {
                 widthUnique += widthUnique; 
-                heightUnique = ;
+                heightUnique = ancienneHeight;
             }
             else
             {
@@ -141,7 +143,7 @@ public class ControleurApp2
                 String str = sc.nextLine();
                 continuer  = !str.equals("---");
 
-                String[] strSplit = str.split(" ");
+                String[] strSplit = str.split(" +");
 
                 for ( int col = 0; col < strSplit.length && continuer; col++ )
                 {
@@ -259,7 +261,7 @@ public class ControleurApp2
                 String str = sc.nextLine();
                 continuer = !str.equals("---");
                 
-                col = str.split(" ").length;
+                col = str.split(" +").length;
 
                 if ( col > maxCol )
                     maxCol = col;
