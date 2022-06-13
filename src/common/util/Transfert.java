@@ -28,7 +28,7 @@ public class Transfert implements Comparable<Transfert>
 
     public void setCuveDepart(Cuve c)  { this.cuveDepart = c; }
     public void setCuveArrivee(Cuve c) { this.cuveArrivee = c; }
-    public void setQuantite(int q)     { this.quantite = q; }
+    public void setQuantite(double q)     { this.quantite = q; }
 
     
     public int compareTo( Transfert autreTransfert )
