@@ -138,7 +138,7 @@ public class Reseau
 
     public String toStringMatriceCout()
     {
-		String sRet = "";
+		String sRet = "Matrice de couts\n";
         int [][] matrice;
         matrice = this.getMatriceCout();
         int nbCuves = this.getMatriceCout().length;
@@ -152,6 +152,11 @@ public class Reseau
             }
             sRet += "\n";
         }
+        sRet += "---\n";
+        for (Cuve c : this.cuves)
+            sRet += c.getCapacite() + "\n";
+
+            
         return sRet;           
     }
 
