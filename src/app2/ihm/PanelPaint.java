@@ -7,6 +7,7 @@ import src.common.Tuyau;
 import src.app2.ControleurApp2;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Color;
 
 import java.awt.geom.Ellipse2D;
@@ -23,21 +24,37 @@ public class PanelPaint extends JPanel
         this.tabPoints = new Ellipse2D[this.ctrl.getMetier().getCuves().size()];
     }
 
-    public void paintComponent (Graphics g)
+    public void initPaint()
     {
-        super.paintComponent(g); 
+        this.tabPoints = new Ellipse2D[this.ctrl.getMetier().getCuves().size()];
 
         int i = 0;
         for ( Cuve c : this.ctrl.getMetier().getCuves() )
         {
-            int taille = c.getCapacite() / 100;
+            int taille = c.getCapacite();
 
             int x = c.getX() + taille;
             int y = c.getY() - taille;
             
-            g.setColor( this.degrade((int) c.getContenu(), c.getCapacite()) );
+            
             tabPoints[i++] = new Ellipse2D.Double(x, y, taille, taille);
+        }       
+    }
+
+
+    public void paintComponent (Graphics g)
+    {
+        super.paintComponent(g); 
+
+        Graphics2D g2d = (Graphics2D) g;
+
+        int i = 0;
+        for ( Cuve c : this.ctrl.getMetier().getCuves() )
+        {
+            g.setColor( this.degrade((int) c.getContenu(), c.getCapacite()) );
+            g2d.fill  ( tabPoints[i] );
         }
+
 
         for ( Tuyau t : this.ctrl.getMetier().getTuyaux() )
         {
@@ -49,16 +66,14 @@ public class PanelPaint extends JPanel
 
             g.setColor( Color.BLACK );
             g.drawLine( xDepart, yDepart, xFin, yFin );
-        }
-
-               
+        }               
     }
 
     private Color degrade ( int contenu, int capa)
     {
         Color c = Color.RED ;
 
-        int nombreIte = (int) Math.ceil(contenu/ (double) capa) * 100;
+        int nombreIte = (int) Math.ceil( contenu / (double) capa ) * 100;
 
         if ( nombreIte == 50 )
         {
@@ -71,7 +86,7 @@ public class PanelPaint extends JPanel
             }
         }
 
-        return c;
+        return Color.RED;
     }
 
 }

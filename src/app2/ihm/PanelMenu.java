@@ -8,7 +8,7 @@ import java.io.File;
 
 import src.app2.ControleurApp2;
 
-public class PanelMenu extends JFrame implements ActionListener
+public class PanelMenu extends JPanel implements ActionListener
 {
     private ControleurApp2 ctrl;
 
@@ -53,7 +53,6 @@ public class PanelMenu extends JFrame implements ActionListener
 		this.menuiFichierQuitter.addActionListener(this);
 
 
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible( true );
     }
 
@@ -75,7 +74,7 @@ public class PanelMenu extends JFrame implements ActionListener
 			}
 
 			// Fermeture de l'application
-			if ( ((JMenuItem) e.getSource()).getText() == "Quitter" ) {this.dispose();}
+			if ( ((JMenuItem) e.getSource()).getText() == "Quitter" ) {this.ctrl.fermer();}
 
 		}
 	}

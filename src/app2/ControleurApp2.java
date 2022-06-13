@@ -1,6 +1,9 @@
 package src.app2;
 
 import java.util.HashMap;
+import java.util.Map;
+
+import java.awt.Dimension;
 
 import java.io.FileReader;
 import java.util.Scanner;
@@ -15,28 +18,28 @@ public class ControleurApp2
 {
     private FrameReseau frame;
     private Reseau      metier;
-
 	private String      pathMatrice;
 
 
     public ControleurApp2()
     {
-        this.frame       = new FrameReseau( this );
         this.metier      = new Reseau();
-
+        this.frame       = new FrameReseau( this );
         this.pathMatrice = null; 
     }
 
 
-    public void optiCuve()
+    public void placementCuves()
     {
-        HashMap<String,Integer> voisinPref = new HashMap<>();
+        Cuve[] tabCuves = new Cuve[this.metier.getCuves().size()];
+        
+        Map<String,Integer> voisinPref = new HashMap<String,Integer>();
 
         for ( Cuve c : this.metier.getCuves() )
         {
             String str = "";
 
-            for ( Tuyau t : this.metier.getTuyaux())
+            for ( Tuyau t : this.metier.getTuyaux())    
             {
                 if ( t.getCuve1() != c && t.getCuve2() == c )
                     str += t.getCuve1().getIdentifiant();
@@ -48,17 +51,65 @@ public class ControleurApp2
             voisinPref.put(c.getIdentifiant() + "",  str.length());
         }
 
-        //completer
+
+        int taille = voisinPref.size();
+        for ( int cpt = 0; cpt < taille; cpt++)
+        {
+            Map.Entry<String, Integer> maxEntry = null;
+
+            for (Map.Entry<String, Integer> entry : voisinPref.entrySet()) {
+                if (maxEntry == null || entry.getValue() > maxEntry.getValue()) {
+                    maxEntry = entry;
+                }
+            }
+
+            tabCuves[cpt] = this.metier.getCuve(maxEntry.getKey().charAt(0));
+            
+            voisinPref.remove( maxEntry.getKey() );
+        }
+
+
+        int       heightUnique;
+        int       widthUnique;
+        int       ancienne;
+
+        {
+            Dimension temp   = this.frame.getDim();
+            int       height = temp.height;
+            int       width  = temp.width;
+
+            heightUnique     = height/tabCuves.length;
+            widthUnique      = width /tabCuves.length / 2;
+        }
+
+        for ( int cpt = 0; cpt < tabCuves.length; cpt++)
+        {
+            tabCuves[cpt].setX(heightUnique);
+            tabCuves[cpt].setY(widthUnique);
+
+            if ( cpt % 2 == 0 ) 
+            {
+                widthUnique += widthUnique; 
+                heightUnique = ;
+            }
+            else
+            {
+                heightUnique += heightUnique;
+            }
+        }
+
     }
 
 
     public void setPath ( String path ) 
     { 
         this.pathMatrice = path;
-        this.creerReseau(); 
+        if ( this.creerReseau() ) 
+            this.frame.dessiner();
     }
 
-    public Reseau getMetier() { return this.metier; }
+    public Reseau getMetier() { return this.metier;   }
+    public void   fermer()    { this.frame.dispose(); }
 
 
     public boolean creerReseau()
@@ -82,7 +133,7 @@ public class ControleurApp2
         try
         {
 
-            Scanner sc = new Scanner( new FileReader( "./source3.data" ) );              
+            Scanner sc = new Scanner( new FileReader( this.pathMatrice ) );              
             sc.nextLine();
 
             for ( int lig = 0; sc.hasNextLine() && continuer; lig++ )
@@ -128,7 +179,7 @@ public class ControleurApp2
             {
                 String str = sc.nextLine();
                 continuer  = !str.equals("---");
-                
+
                 if ( continuer )
                     tabCuves[cpt] = this.metier.creerCuve(Integer.parseInt(str)); 
                 
@@ -137,20 +188,24 @@ public class ControleurApp2
 
 
             //Création du réseau pour la matrice des couts (opti et non)//
-            if ( type.equals("Matrice des couts")  )
+            if ( type.equals("Matrice de couts") || type.equals("Matrice de couts opti") )
             { 
                 for ( int lig = 0; lig < matrice.length; lig++ )
                 {
                     for ( int col = 0; col < matrice[lig].length; col++ )
                     {
-                        if ( matrice[lig][col] != null ) 
+                        try {
                             this.metier.creerTuyau( Integer.parseInt((String)matrice[lig][col]), tabCuves[lig], tabCuves[col]);
+                        }catch(Exception e){}
                     }
                 }
             }
 
 
+            this.placementCuves();
+
             /* test pour voir la matrice */
+            /*
             for ( int lig = 0; lig < matrice.length; lig++ )
             {
                 for ( int col = 0; col < matrice[lig].length; col++ )
@@ -159,6 +214,7 @@ public class ControleurApp2
                 }
                 System.out.println();
             }
+            */
             
         } catch (Exception e) { e.printStackTrace(); return false; }
 
@@ -194,7 +250,7 @@ public class ControleurApp2
 
         try 
         {
-            Scanner sc = new Scanner( new FileReader( "./source3.data" ) );
+            Scanner sc = new Scanner( new FileReader( this.pathMatrice ) );
 
             sc.nextLine();
 
@@ -227,7 +283,7 @@ public class ControleurApp2
     {
         try  
         {
-            Scanner sc = new Scanner( new FileReader( "./source3.data" ) );
+            Scanner sc = new Scanner( new FileReader( this.pathMatrice ) );
 
             String temp = sc.nextLine(); 
 
