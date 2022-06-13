@@ -12,8 +12,9 @@ public class FrameReseau extends JFrame
 
     private ControleurApp2 ctrl;
 
-    private PanelPaint panelPrincipal;
-    private PanelMenu  panelMenu;
+    private PanelPaint  panelPrincipal;
+    private PanelMenu   panelMenu;
+    private PanelAction panelAction;
 
     public FrameReseau ( ControleurApp2 controleurApp2)
     {
@@ -29,14 +30,14 @@ public class FrameReseau extends JFrame
         this.setSize    ( width/2, height/2 );
         this.setLocationRelativeTo( null );
 
-        this.panelMenu      = new PanelMenu ( this.ctrl );
-        this.panelPrincipal = new PanelPaint( this.ctrl );
-        this.panelPrincipal.setPreferredSize( new Dimension (width/2, height/2) );
-
-        System.out.println( width + "/" + height);
+        this.panelMenu      = new PanelMenu  ( this.ctrl );
+        this.panelPrincipal = new PanelPaint ( this.ctrl );
+        this.panelAction    = new PanelAction( this.ctrl );
+        
 
         this.add( this.panelMenu     , BorderLayout.NORTH  );
         this.add( this.panelPrincipal, BorderLayout.CENTER );
+        this.add( this.panelAction   , BorderLayout.EAST   );
 
         this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
         this.setVisible( true );

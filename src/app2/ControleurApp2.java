@@ -29,6 +29,8 @@ public class ControleurApp2
         this.pathMatrice = null; 
     }
 
+    public void dessiner() { this.frame.dessiner(); }
+
 
     public void placementCuves()
     {
