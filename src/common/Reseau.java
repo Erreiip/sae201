@@ -180,6 +180,12 @@ public class Reseau
 
             iteTrans.setQuantite(tMax);
         }
+
+        for( Transfert t : ensTransfert )
+        {
+            t.getCuveDepart ().retirerContenu(t.getQuantite());
+            t.getCuveArrivee().ajouterContenu(t.getQuantite());
+        }
     }
 
 
