@@ -91,7 +91,7 @@ public class PanelPaint extends JPanel
             int x = (int) tabPoints[i].getX();
             int y = (int) tabPoints[i].getY();
 
-            if ( c.getPositionInfos() == PositionInfos.HAUT   )  g.drawString( c.getInfos(), x             , y              );
+            if ( c.getPositionInfos() == PositionInfos.HAUT   )  g.drawString( c.getInfos(), x             , y - 10         );
             if ( c.getPositionInfos() == PositionInfos.BAS    )  g.drawString( c.getInfos(), x             , y + taille + 10);
             if ( c.getPositionInfos() == PositionInfos.GAUCHE )  g.drawString( c.getInfos(), x - 60        , y + taille /  2);
             if ( c.getPositionInfos() == PositionInfos.DROITE )  g.drawString( c.getInfos(), x + taille +10, y + taille/2   );
@@ -99,6 +99,7 @@ public class PanelPaint extends JPanel
             i++;
         }    
     }
+
 
     private Color degrade ( Double contenu, int capa)
     {
@@ -117,11 +118,11 @@ public class PanelPaint extends JPanel
         return c;
     }
 
+
     private class EllispseDrag extends MouseMotionAdapter
     {
         public void mouseDragged(MouseEvent e) 
         {
-            
             if ( PanelPaint.this.ellipseSelectionnee != null) {
                 for ( Ellipse2D ellipse : PanelPaint.this.tabPoints )
                 {
@@ -138,6 +139,7 @@ public class PanelPaint extends JPanel
         }
     }
 
+
     private class EllipseTake extends MouseAdapter
     {
         public void mousePressed(MouseEvent e) 
@@ -150,6 +152,11 @@ public class PanelPaint extends JPanel
                     return;
                 }
             }
+        }
+
+        public void mouseReleased(MouseEvent e) 
+        {       
+            PanelPaint.this.ellipseSelectionnee = null;
         }
     }
 
