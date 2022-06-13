@@ -2,12 +2,12 @@ package src.common.reseau.format;
 
 public enum ReseauFormatType
 {
-	BINAIRE     ("binaire",      new ReseauFormatMatrice(true,  false)),
-	BINAIRE_OPTI("binaire_opti", new ReseauFormatMatrice(true,  true )),
-	COUTS       ("couts",        new ReseauFormatMatrice(false, false)),
-	COUTS_OPTI  ("couts_opti",   new ReseauFormatMatrice(false, true ));
+	BINAIRE     ("Binaire",            new ReseauFormatMatrice(true,  false)),
+	BINAIRE_OPTI("Binaire (Optimisé)", new ReseauFormatMatrice(true,  true )),
+	COUTS       ("Coûts",              new ReseauFormatMatrice(false, false)),
+	COUTS_OPTI  ("Coûts (Optimisé)",   new ReseauFormatMatrice(false, true ));
 
-	private final String          nom;
+	private final String        nom;
 	private final ReseauFormat<?> format;
 
 	ReseauFormatType(String nom, ReseauFormat<?> format)

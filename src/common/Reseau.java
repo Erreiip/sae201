@@ -9,7 +9,7 @@ import src.common.util.Transfert;
  * Un réseau représente un espace dans lequel se trouvent des {@link Cuve}s et des {@link Tuyau}.<br>
  * La création d'éléments doit se faire par l'utilisation de cette classe.
  */
-public class Reseau 
+public class Reseau
 {
     private final ArrayList<Tuyau> tuyaux;
     private final ArrayList<Cuve> cuves;
@@ -119,7 +119,7 @@ public class Reseau
         ArrayList<Integer>   ensSommeSectionSor = new ArrayList<>();
         ArrayList<Integer>   ensNbSectionEnt    = new ArrayList<>();
         ArrayList<Integer>   ensSommeSectionEnt = new ArrayList<>();
-        
+
         for( Tuyau ty : this.tuyaux )
         {
             Transfert iteTrans = ty.transverser();
@@ -169,12 +169,12 @@ public class Reseau
 
             if ( tMax > ensSommeSectionSor.get(cpt) )
                 tMax = contenuCuveDep - contenuCuveArr / ensNbSectionSor.get(cpt);
-            
+
             if ( tMax > ensSommeSectionEnt.get(cpt) )
                 tMax = contenuCuveDep - contenuCuveArr / ensNbSectionEnt.get(cpt);
 
             if ( tMax > contenuCuveDep ) tMax = contenuCuveDep;
-            
+
             if ( contenuCuveArr + tMax > iteTrans.getCuveArrivee().getCapacite() )
                 tMax = iteTrans.getCuveArrivee().getCapacite() - contenuCuveArr;
 
@@ -227,8 +227,8 @@ public class Reseau
         for (Cuve c : this.cuves)
             sRet += c.getCapacite() + "\n";
 
-            
-        return sRet;           
+
+        return sRet;
     }
 
 
@@ -253,13 +253,13 @@ public class Reseau
 
         for (Tuyau t :this.tuyaux)
             sRet += t.getSection() + "\n";
-       
+
         sRet += "---\n";
         for (Cuve c : this.cuves)
-            sRet += c.getCapacite() + "\n";            
-        return sRet;  
+            sRet += c.getCapacite() + "\n";
+        return sRet;
     }
-    
+
     @Override
     public String toString() {
         return "Reseau{" +

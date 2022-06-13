@@ -6,7 +6,6 @@ import src.common.Reseau;
 import src.common.Tuyau;
 
 import java.util.Arrays;
-import java.util.HashMap;
 
 class ReseauFormatMatrice implements ReseauFormat<int[][]>
 {

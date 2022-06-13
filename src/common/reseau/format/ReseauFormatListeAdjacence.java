@@ -4,20 +4,24 @@ import src.common.Reseau;
 
 public class ReseauFormatListeAdjacence implements ReseauFormat<char[][]>
 {
-
-	@Override
-	public void ajouterLiens(char[][] objet, Reseau reseau) {
+	public void ajouterLiens(char[][] objet, Reseau reseau)
+	{
 
 	}
 
-	@Override
-	public char[][] fromReseau(Reseau r) {
+	public char[][] fromReseau(Reseau r)
+	{
 		return new char[0][];
 	}
 
-	@Override
-	public char[][] fromString(String s) {
-		return new char[0][];
+	public char[][] fromString(String s)
+	{
+		String[] lignes = s.split("\n");
+
+		for(int lig = 0; lig < lignes.length; lig++)
+		{
+
+		}
 	}
 
 	public String toString(char[][] tab)
