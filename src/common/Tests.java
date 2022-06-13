@@ -74,7 +74,7 @@ public class Tests
 
 		System.out.println(reseau);
 
-		ReseauFormatType.COUTS.getFormat().ajouterLiens(
+		ReseauFormatType.COUTS.getFormat().ajouterTuyaux(
 				"X 2 6 X\n2 X 4 8\n6 4 X X\nX 8 X X",
 				reseau);
 

@@ -34,7 +34,7 @@ public class FichierReseau
 		}
 
 		ReseauFormatType formatType = ReseauFormatType.valueOf(contenu[0]);
-		formatType.getFormat().ajouterLiens(contenu[1], reseau);
+		formatType.getFormat().ajouterTuyaux(contenu[1], reseau);
 		return new FichierReseau(formatType, reseau);
 	}
 

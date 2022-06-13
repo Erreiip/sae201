@@ -21,7 +21,7 @@ class ReseauFormatMatrice implements ReseauFormat<int[][]>
 		this.optimise = optimise;
 	}
 
-	public void ajouterLiens(int[][] matrice, Reseau reseau)
+	public void ajouterTuyaux(int[][] matrice, Reseau reseau)
 	{
 		for(int lig = 0; lig < matrice.length; lig++)
 		{

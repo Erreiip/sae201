@@ -4,7 +4,7 @@ import src.common.Reseau;
 
 public class ReseauFormatListeAdjacence implements ReseauFormat<char[][]>
 {
-	public void ajouterLiens(char[][] objet, Reseau reseau)
+	public void ajouterTuyaux(char[][] objet, Reseau reseau)
 	{
 
 	}

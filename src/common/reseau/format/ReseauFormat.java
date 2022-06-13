@@ -13,14 +13,14 @@ public interface ReseauFormat<T>
 	 * @param objet l'objet du format
 	 * @param reseau le réseau à remplir
 	 */
-	void   ajouterLiens(T objet, Reseau reseau);
+	void   ajouterTuyaux(T objet, Reseau reseau);
 	T      fromReseau(Reseau r);
 	T      fromString(String s);
 	String toString(T objet);
 
-	default void ajouterLiens(String s, Reseau r)
+	default void ajouterTuyaux(String s, Reseau r)
 	{
-		this.ajouterLiens(this.fromString(s), r);
+		this.ajouterTuyaux(this.fromString(s), r);
 	}
 
 	default String toString(Reseau r)
