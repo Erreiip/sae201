@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class ReseauFormatListeAdjacence implements ReseauFormat<ReseauFormatListeAdjacence.ListeAdjacente>
 {
-	private static final String DELIMITEUR = "-".repeat(5) + "\n";
+	private static final String DELIMITEUR = "\n" + "-".repeat(5) + "\n";
 
 	public record ListeAdjacente(char[][] cuveIds, int[] sections) {};
 
@@ -79,6 +79,7 @@ public class ReseauFormatListeAdjacence implements ReseauFormat<ReseauFormatList
 	{
 		StringBuilder sb = new StringBuilder();
 		for(char[] lig : liste.cuveIds()) sb.append(lig[0]).append(lig[1]).append("\n");
+		sb.setLength(sb.length() - 1); // retirer le dernier \n
 		sb.append(ReseauFormatListeAdjacence.DELIMITEUR);
 		for(int i : liste.sections()) sb.append(i).append("\n");
 		sb.setLength(sb.length() - 1); // retirer le dernier \n

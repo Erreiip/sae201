@@ -7,35 +7,23 @@ public class Tests
 {
 	public static void main(String[] args)
 	{
+		Tests.lancerTests();
+	}
+
+	private static void lancerTests()
+	{
 		try {
-		  	Tests.testerCuves();
+			Tests.testerCuves();
 			Thread.sleep(1000);
 
-			Reseau reseau = new Reseau();
-
-			Cuve cuveA = reseau.creerCuve(1000);
-			Cuve cuveB = reseau.creerCuve(900);
-			Cuve cuveC = reseau.creerCuve(200);
-			Cuve cuveD = reseau.creerCuve(700);
-
-			cuveA.ajouterContenu(500);
-			cuveB.ajouterContenu(190);
-
-			System.out.println("Réseau avec cuves, mais sans tuyaux :");
+			Reseau reseau = Tests.creerReseauSujet();
 			System.out.println(reseau);
-
-			Tests.testerFormatsReseauInput(reseau);
 			Thread.sleep(1000);
 
-			reseau.creerTuyau(2, cuveA, cuveB);
-			reseau.creerTuyau(6, cuveA, cuveC);
-			reseau.creerTuyau(4, cuveB, cuveC);
-			reseau.creerTuyau(8, cuveB, cuveD);
-
-			Tests.testerFormatsReseauOutput(reseau);
+			Tests.fichierReseauInput();
 			Thread.sleep(1000);
 
-			Tests.testerFichierReseau(reseau);
+			Tests.fichierReseauOutput(reseau);
 			Thread.sleep(1000);
 		}
 		catch(InterruptedException e)
@@ -44,7 +32,7 @@ public class Tests
 		}
 	}
 
-	public static void testerCuves()
+	private static void testerCuves()
 	{
 		Reseau reseau = new Reseau();
 
@@ -92,25 +80,44 @@ public class Tests
 		}
 	}
 
-
-	public static void testerFormatsReseauInput(Reseau reseau)
+	private static Reseau creerReseauSujet()
 	{
-		ReseauFormatType.COUTS.getFormat().ajouterTuyaux(
-				"X 2 6 X\n2 X 4 8\n6 4 X X\nX 8 X X",
-				reseau);
-		System.out.println(reseau);
-		reseau.getTuyaux().removeAll(reseau.getTuyaux());
+		Reseau reseau = new Reseau();
+
+		Cuve cuveA = reseau.creerCuve(1000);
+		Cuve cuveB = reseau.creerCuve(900);
+		Cuve cuveC = reseau.creerCuve(200);
+		Cuve cuveD = reseau.creerCuve(700);
+
+		cuveA.ajouterContenu(500);
+		cuveB.ajouterContenu(190);
+
+		reseau.creerTuyau(2, cuveA, cuveB);
+		reseau.creerTuyau(6, cuveA, cuveC);
+		reseau.creerTuyau(4, cuveB, cuveC);
+		reseau.creerTuyau(8, cuveB, cuveD);
+
+		return reseau;
 	}
 
-	public static void testerFormatsReseauOutput(Reseau reseau)
+	private static void fichierReseauInput()
 	{
-		for(ReseauFormatType format : ReseauFormatType.values())
-		{
-			System.out.println(format.getNom() + " :\n" + format.getFormat().toString(reseau));
-		}
+		FichierReseau fichierReseau = FichierReseau.fromString("""
+						couts
+						===============
+						X 2 6 X
+						2 X 4 8
+						6 4 X X
+						X 8 X X
+						===============
+						1000
+						900
+						200
+						700""");
+		System.out.println(fichierReseau.getReseau());
 	}
 
-	public static void testerFichierReseau(Reseau reseau)
+	private static void fichierReseauOutput(Reseau reseau)
 	{
 		for(ReseauFormatType format : ReseauFormatType.values())
 		{

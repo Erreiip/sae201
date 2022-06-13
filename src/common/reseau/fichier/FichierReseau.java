@@ -6,7 +6,7 @@ import src.common.reseau.format.ReseauFormatType;
 
 public class FichierReseau
 {
-	private static final String DELIMITEUR_CONTENU = "=".repeat(15) + "\n";
+	private static final String DELIMITEUR_CONTENU = "\n" + "=".repeat(15) + "\n";
 
 	private final ReseauFormatType typeFormat;
 	private final Reseau           reseau;
@@ -35,7 +35,7 @@ public class FichierReseau
 			}
 		}
 
-		ReseauFormatType formatType = ReseauFormatType.fromId(contenu[0].toLowerCase());
+		ReseauFormatType formatType = ReseauFormatType.fromId(contenu[0]);
 		formatType.getFormat().ajouterTuyaux(contenu[1], reseau);
 		return new FichierReseau(formatType, reseau);
 	}
@@ -45,9 +45,9 @@ public class FichierReseau
 		StringBuilder sb = new StringBuilder();
 		sb
 				.append(this.typeFormat.getId())
-				.append("\n").append(FichierReseau.DELIMITEUR_CONTENU)
+				.append(FichierReseau.DELIMITEUR_CONTENU)
 				.append(this.typeFormat.getFormat().toString(this.reseau))
-				.append("\n").append(FichierReseau.DELIMITEUR_CONTENU);
+				.append(FichierReseau.DELIMITEUR_CONTENU);
 		for(Cuve cuve : this.reseau.getCuves())
 		{
 			sb.append(cuve.getCapacite()).append("\n");
