@@ -101,7 +101,7 @@ public class ControleurApp1
 
     public void sortieFichierTexteMatriceAdjacente()
     {
-        String sRet = this.reseau.toStringListAdjac();
+        String sRet = ReseauFormatType.LISTE_ADJA.getFormat().toString(this.reseau);
         try
 		{
 			PrintWriter pw = new PrintWriter( new FileOutputStream("sortie.txt") );
