@@ -114,9 +114,11 @@ public class Reseau
 
     public void transverser()
     {
-        ArrayList<Transfert> ensTransfert    = new ArrayList<>();
-        ArrayList<Integer>   ensNbSectionSor = new ArrayList<>();
-        ArrayList<Integer>   ensSommeSection = new ArrayList<>();
+        ArrayList<Transfert> ensTransfert       = new ArrayList<>();
+        ArrayList<Integer>   ensNbSectionSor    = new ArrayList<>();
+        ArrayList<Integer>   ensSommeSectionSor = new ArrayList<>();
+        ArrayList<Integer>   ensNbSectionEnt    = new ArrayList<>();
+        ArrayList<Integer>   ensSommeSectionEnt = new ArrayList<>();
         
         for( Tuyau ty : this.tuyaux )
         {
@@ -129,13 +131,29 @@ public class Reseau
 
         for( Cuve c : this.cuves )
         {
-            int sommeSection = 0;
+            int nbSectionEnt    = 0;
+            int sommeSectionEnt = 0;
+
+            int nbSectionSor    = 0;
+            int sommeSectionSor = 0;
+
             for( Transfert tr : ensTransfert )
             {
                 if ( tr.getCuveDepart() == c )
-                    sommeSection += tr.getQuantite();
+                {
+                    sommeSectionSor += tr.getQuantite();
+                    nbSectionSor++;
+                }
+                if ( tr.getCuveArrivee() == c )
+                {
+                    sommeSectionEnt += tr.getQuantite();
+                    nbSectionEnt++;
+                }
             }
-            ensSommeSection.add(sommeSection);
+            ensNbSectionEnt   .add(nbSectionEnt);
+            ensSommeSectionEnt.add(sommeSectionEnt);
+            ensNbSectionSor   .add(nbSectionSor);
+            ensSommeSectionSor.add(sommeSectionSor);
         }
 
         for( int cpt=0 ; cpt < ensTransfert.size() ; cpt++ )
@@ -149,15 +167,18 @@ public class Reseau
             if ( contenuCuveDep - tMax < contenuCuveArr + tMax )
                 tMax = contenuCuveDep - contenuCuveDep;
 
-            if ( tMax < ensSommeSection.get(cpt) )
+            if ( tMax > ensSommeSectionSor.get(cpt) )
                 tMax = contenuCuveDep - contenuCuveArr / ensNbSectionSor.get(cpt);
             
-            
+            if ( tMax > ensSommeSectionEnt.get(cpt) )
+                tMax = contenuCuveDep - contenuCuveArr / ensNbSectionEnt.get(cpt);
 
             if ( tMax > contenuCuveDep ) tMax = contenuCuveDep;
             
-            if ( contenuCuveDep + tMax > iteTrans.getCuveDepart().getCapacite() )
-                tMax = iteTrans.getCuveDepart().getCapacite() - contenuCuveDep;
+            if ( contenuCuveArr + tMax > iteTrans.getCuveArrivee().getCapacite() )
+                tMax = iteTrans.getCuveArrivee().getCapacite() - contenuCuveArr;
+
+            iteTrans.setQuantite(tMax);
         }
     }
 
