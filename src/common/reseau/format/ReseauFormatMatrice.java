@@ -62,6 +62,7 @@ class ReseauFormatMatrice implements ReseauFormat<int[][]>
 		matrice = new int[nbCuves][nbCuves];
 		for(int[] ligne : matrice) Arrays.fill(ligne, ReseauFormatMatrice.SANS_CONNECTION_INT);
 
+		// TODO : la version optimisée
 		for(Tuyau tuyau : r.getTuyaux())
 		{
 			int lig, col;
@@ -86,7 +87,7 @@ class ReseauFormatMatrice implements ReseauFormat<int[][]>
 
 			if(this.optimise)
 			{
-				if(lig < valeurs.length)
+				if(lig > valeurs.length)
 				{
 					throw new IllegalArgumentException("La matrice n'est pas optimisée." +
 							                           "La ligne " + lig + " est trop longue");
