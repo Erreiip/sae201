@@ -37,22 +37,24 @@ public abstract class APanelNouvelElement extends JPanel implements ActionListen
     }
 
     protected abstract void initComposants(JPanel panelNord);
+
     protected abstract void valider();
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        if(this.btnValider == e.getSource())
-            this.valider();
+    public void actionPerformed(ActionEvent e)
+    {
+        if (this.btnValider == e.getSource()) this.valider();
 
-        if(this.btnAnnuler == e.getSource())
-            this.close();
+        if (this.btnAnnuler == e.getSource()) this.close();
     }
 
-    protected void close() {
+    protected void close()
+    {
         SwingUtilities.getRoot(this).setVisible(false);
     }
 
-    public APanelTable getPanelTable() {
+    public APanelTable getPanelTable()
+    {
         return panelTable;
     }
 }

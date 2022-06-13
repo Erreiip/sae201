@@ -5,21 +5,27 @@ import src.app1.ihm.composants.APanelTable;
 import src.app1.ihm.FrameNouvelElement;
 import src.app1.ihm.cuves.CuvesGrilleDonneesModel;
 
-public class PanelTuyaux extends APanelTable {
+public class PanelTuyaux extends APanelTable
+{
 
     private FrameNouvelElement frameNouvelElement;
-    public PanelTuyaux(ControleurApp1 ctrl) {
+
+    public PanelTuyaux(ControleurApp1 ctrl)
+    {
         super(ctrl, new TuyauxGrilleDonneesModel(ctrl));
     }
 
     @Override
-    protected String getLabel() {
+    protected String getLabel()
+    {
         return "Tuyau";
     }
 
     @Override
-    public void ajouterElement() {
-        if(frameNouvelElement == null) {
+    public void ajouterElement()
+    {
+        if (frameNouvelElement == null)
+        {
             frameNouvelElement = new FrameNouvelElement(new PanelNouveauTuyau(this));
         }
 
@@ -27,11 +33,13 @@ public class PanelTuyaux extends APanelTable {
     }
 
     @Override
-    public void supprimerElement() {
+    public void supprimerElement()
+    {
 
     }
 
-    public void majListe() {
+    public void majListe()
+    {
         super.majListe(new TuyauxGrilleDonneesModel(this.getCtrl()));
     }
 
