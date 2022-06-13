@@ -42,4 +42,7 @@ public abstract class AGrilleDonneesModel<T extends IReseauElement> extends Abst
     public Object getValueAt    (int row, int col) { return this.tabDonnees[row][col];        }
 
     public boolean isCellEditable(int rowIndex, int columnIndex)  { return false; }
+
+
+
 }

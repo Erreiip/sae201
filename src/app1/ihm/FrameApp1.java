@@ -10,6 +10,8 @@ import java.awt.*;
 public class FrameApp1 extends JFrame
 {
 
+    private final PanelCuves panelCuves;
+
     public FrameApp1(ControleurApp1 ctrl)
     {
         this.setTitle  ( "Créateur de cuves et tuyaux"  );
@@ -20,7 +22,7 @@ public class FrameApp1 extends JFrame
         /*-------------------------------*/
         /* Création des composants       */
         /*-------------------------------*/
-        JPanel panelCuves  = new PanelCuves(ctrl);
+        this.panelCuves  = new PanelCuves(ctrl);
         JPanel panelTuyaux = new PanelTuyaux(ctrl);
 
 
@@ -32,5 +34,9 @@ public class FrameApp1 extends JFrame
 
         this.setVisible ( true );
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public void majListeCuves() {
+        this.panelCuves.majListe();
     }
 }

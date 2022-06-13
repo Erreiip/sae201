@@ -19,12 +19,12 @@ public class PanelTuyaux extends APanelTable {
     }
 
     @Override
-    protected void ajouterElement() {
+    public void ajouterElement() {
 
     }
 
     @Override
-    protected void supprimerElement() {
+    public void supprimerElement() {
 
     }
 }
