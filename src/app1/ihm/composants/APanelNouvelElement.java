@@ -1,6 +1,4 @@
-package src.app1.ihm.cuves.popup;
-
-import src.app1.ihm.APanelTable;
+package src.app1.ihm.composants;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,7 +19,6 @@ public abstract class APanelNouvelElement extends JPanel implements ActionListen
         this.setLayout(new BorderLayout());
 
         JPanel panelNord = new JPanel();
-        panelNord.setLayout(new GridLayout(2, 1));
 
         this.initComposants(panelNord);
 
