@@ -2,6 +2,8 @@ package src.common;
 
 import java.util.ArrayList;
 
+import src.common.util.Transfert;
+
 /**
  * Un réseau représente un espace dans lequel se trouvent des {@link Cuve}s et des {@link Tuyau}.<br>
  * La création d'éléments doit se faire par l'utilisation de cette classe.
@@ -86,6 +88,16 @@ public class Reseau
     public boolean sontRelies(Cuve cuve1, Cuve cuve2)
     {
         return getTuyau(cuve1, cuve2) != null;
+    }
+
+    public void transverser()
+    {
+        for ( Tuyau t : this.tuyaux )
+        {
+            Transfert iteTrans = t.transverser();
+            iteTrans.getCuveDepart ().retirerContenu( iteTrans.getQuantite() );
+            iteTrans.getCuveArrivee().ajouterContenu( iteTrans.getQuantite() );
+        }
     }
 
 
