@@ -32,7 +32,11 @@ public class Tuyau implements IReseauElement
     {
         Objects.requireNonNull(cuve1, "la première cuve ne doit pas être nulle");
         Objects.requireNonNull(cuve2, "la deuxième cuve ne doit pas être nulle");
-        if (section < Tuyau.SECTION_MIN || section > Tuyau.SECTION_MAX)
+        if(cuve1 == cuve2)
+        {
+            throw new IllegalArgumentException("les deux cuves doivent être différentes");
+        }
+        if(section < Tuyau.SECTION_MIN || section > Tuyau.SECTION_MAX)
         {
             throw new IllegalArgumentException("la section (ici " + section + ") doit être comprise entre "
                     + Tuyau.SECTION_MIN + " et "
