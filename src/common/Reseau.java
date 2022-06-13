@@ -95,8 +95,11 @@ public class Reseau
         for ( Tuyau t : this.tuyaux )
         {
             Transfert iteTrans = t.transverser();
-            iteTrans.getCuveDepart ().retirerContenu( iteTrans.getQuantite() );
-            iteTrans.getCuveArrivee().ajouterContenu( iteTrans.getQuantite() );
+            if ( iteTrans != null )
+            {
+                iteTrans.getCuveDepart ().retirerContenu( iteTrans.getQuantite() );
+                iteTrans.getCuveArrivee().ajouterContenu( iteTrans.getQuantite() );
+            }
         }
     }
 
@@ -142,7 +145,7 @@ public class Reseau
     {
         String sRet = "List d'adjacence:\n";
         for (Tuyau t :this.tuyaux)
-            sRet += t.getCuve1().getIdentifiant() + t.getCuve2().getIdentifiant() + "\n";
+            sRet += Character.toString(t.getCuve1().getIdentifiant()) + Character.toString(t.getCuve2().getIdentifiant()) + "\n";
         
         return sRet;
     }
@@ -160,9 +163,10 @@ public class Reseau
             {
                 sRet += String.format("%3d",matrice[lig][col]);
                 /*default value of integer array is 0*/
-                etage ++;
             }
             sRet += "\n";
+            etage ++;
+
         }
         return sRet; 
     }

@@ -207,8 +207,10 @@ public class ControleurApp1
                                "[1]-Liste d'adjacence        \n"+
                                "[2]-Matrice de cout          \n"+
                                "[3]-Matrice de cout optimisée\n"+
+                               "[4]-Quitter l'application    \n"+
                                "Veuillez chosir entre 1 et 3 : "); 
-
+            do
+            {
             selectionFormat = Clavier.lire_int();
 
             switch (selectionFormat) {
@@ -230,8 +232,7 @@ public class ControleurApp1
                 default:
                     break;
             }
-
-            System.out.println(selectionFormat < 1 || selectionFormat > 3);
+            } while (selectionFormat != 4);
             
         } while (selectionFormat < 1 || selectionFormat > 3);
 
