@@ -31,10 +31,10 @@ public class PanelPaint extends JPanel
         int i = 0;
         for ( Cuve c : this.ctrl.getMetier().getCuves() )
         {
-            int taille = c.getCapacite();
+            int taille = c.getCapacite()/10;
 
-            int x = c.getX();
-            int y = c.getY();
+            int x = c.getX() - taille/2;
+            int y = c.getY() - taille/2;
 
             System.out.println(x + "/" + y);
             
@@ -55,6 +55,7 @@ public class PanelPaint extends JPanel
         {
             g.setColor( this.degrade((int) c.getContenu(), c.getCapacite()) );
             g2d.fill  ( tabPoints[i] );
+            i++;
         }
 
 
