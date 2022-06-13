@@ -185,6 +185,7 @@ public class Reseau
         {
             t.getCuveDepart ().retirerContenu(t.getQuantite());
             t.getCuveArrivee().ajouterContenu(t.getQuantite());
+            System.out.println( t.getQuantite() );
         }
     }
 
