@@ -8,7 +8,7 @@ public class Transfert
     private Cuve   cuveArrivee;
     private double quantite;
 
-    public Transfert creer(Cuve cuveDepart, Cuve cuveArrivee, double quantite)
+    public static Transfert creer(Cuve cuveDepart, Cuve cuveArrivee, double quantite)
     {
         if ( cuveDepart == null || cuveArrivee == null || cuveDepart == cuveArrivee ) return null;
         if ( quantite   <= 0                                                        ) return null;

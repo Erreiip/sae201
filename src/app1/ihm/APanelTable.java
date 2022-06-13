@@ -61,6 +61,10 @@ public abstract class APanelTable extends JPanel implements ActionListener {
         return ctrl;
     }
 
+    public JTable getTblGrilleDonnees() {
+        return tblGrilleDonnees;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == this.btnCreerElement) ajouterElement();

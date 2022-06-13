@@ -82,6 +82,17 @@ public class Reseau
         return this.creerTuyau(section, this.getCuve(idCuve1), this.getCuve(idCuve2));
     }
 
+    public boolean supprimerCuve(int ligne) {
+        if(ligne >= this.cuves.size())
+            return false;
+
+        Cuve cuve = this.cuves.get(ligne);
+        this.tuyaux.removeIf(t -> t.estRelie(cuve));
+        this.cuves.remove(ligne);
+
+        return true;
+    }
+
     /**
      * Retourne vrai si les deux listCuves sont reliées par un tuyau dans ce réseau.
      */
