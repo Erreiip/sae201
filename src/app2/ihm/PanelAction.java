@@ -84,7 +84,7 @@ public class PanelAction extends JPanel implements ActionListener
                 this.lblInfo.setText("Erreur"); 
             }
         }
-    }
-
-    
+    }    
 }
+
+

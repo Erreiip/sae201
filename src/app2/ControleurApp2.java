@@ -109,7 +109,8 @@ public class ControleurApp2
             if ( ( cpt % 2 ) == 0 ) 
             {
                 if ( (i % 2) == 0) widthUnique  =  ancienneWidth * 2;  
-                else               widthUnique  =  ancienneWidth; 
+                else               widthUnique  =  ancienneWidth;
+                 
                 heightUnique += ancienneHeight;
 
                 i++;
