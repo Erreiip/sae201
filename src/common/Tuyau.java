@@ -73,7 +73,7 @@ public class Tuyau implements IReseauElement
         if ( this.cuve1.getContenu() > this.getSection() ) quantite = this.getSection();
         else                                               quantite = (int) cuveDepart.getContenu();
 
-        return Transfert.creer (cuveDepart, cuveArrivee, quantite);
+        return Transfert.creer(cuveDepart, cuveArrivee, quantite);
     }
 
     public boolean estRelie(Cuve cuve)

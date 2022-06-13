@@ -2,7 +2,7 @@ package src.common.util;
 
 import src.common.Cuve;
 
-public class Transfert implements Comparable<Transfert>
+public class Transfert 
 {
     private Cuve   cuveDepart;
     private Cuve   cuveArrivee;
@@ -30,9 +30,4 @@ public class Transfert implements Comparable<Transfert>
     public void setCuveArrivee(Cuve c) { this.cuveArrivee = c; }
     public void setQuantite(int q)     { this.quantite = q; }
 
-
-    public int compareTo( Transfert autreTransfert )
-    {
-        return (int) this.cuveDepart.getContenu() - (int) autreTransfert.cuveDepart.getContenu();
-    }
 }
