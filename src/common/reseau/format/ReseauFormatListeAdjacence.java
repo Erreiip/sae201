@@ -5,61 +5,83 @@ import src.common.Tuyau;
 
 import java.util.ArrayList;
 
-public class ReseauFormatListeAdjacence implements ReseauFormat<char[][]>
+public class ReseauFormatListeAdjacence implements ReseauFormat<ReseauFormatListeAdjacence.ListeAdjacente>
 {
-	public void ajouterTuyaux(char[][] objet, Reseau reseau)
+	private static final String DELIMITEUR = "-".repeat(5) + "\n";
+
+	public record ListeAdjacente(char[][] cuveIds, int[] sections) {};
+
+	public void ajouterTuyaux(ListeAdjacente liste, Reseau reseau)
 	{
-		for(char[] chars : objet)
-			reseau.creerTuyau(1, (char) ('A' + chars[0]), (char) ('A' + chars[1]));
+		for(int i = 0; i < liste.cuveIds().length; i++)
+		{
+			reseau.creerTuyau(
+					liste.sections()[i],
+					(char) ('A' + liste.cuveIds()[i][0]),
+					(char) ('A' + liste.cuveIds()[i][1])
+			);
+		}
 	}
 
-	public char[][] fromReseau(Reseau r)
+	public ListeAdjacente fromReseau(Reseau r)
 	{
 		ArrayList<Tuyau> tuyaux = r.getTuyaux();
-		char[][] tab = new char[tuyaux.size()][2];
+		char[][] cuveIds = new char[tuyaux.size()][2];
+		int[] sections   = new int[tuyaux.size()];
+
 		for(int i = 0; i < tuyaux.size(); i++)
 		{
-			tab[i][0] = tuyaux.get(i).getCuve1().getIdentifiant();
-			tab[i][1] = tuyaux.get(i).getCuve2().getIdentifiant();
+			cuveIds[i][0] = tuyaux.get(i).getCuve1().getIdentifiant();
+			cuveIds[i][1] = tuyaux.get(i).getCuve2().getIdentifiant();
+			sections[i]   = tuyaux.get(i).getSection();
 		}
-		return tab;
+
+		return new ListeAdjacente(cuveIds, sections);
 	}
 
-	public char[][] fromString(String s)
+	public ListeAdjacente fromString(String s)
 	{
-		String[] lignes = s.split("\n");
-		char[][] tab = new char[lignes.length][2];
+		String[] parties = s.split(ReseauFormatListeAdjacence.DELIMITEUR);
+		if(parties.length != 2)
+			throw new IllegalArgumentException(
+					"le format de la liste d'adjacence n'est pas correct : " +
+					parties.length + " parties trouvées");
+		String[] lignesCuveIds  = parties[0].split("\n");
+		String[] lignesSections = parties[1].split("\n");
 
-		for(int lig = 0; lig < tab.length; lig++)
+		char[][] cuveIds = new char[lignesCuveIds.length][2];
+		int[] sections   = new int[lignesSections.length];
+
+		for(int i = 0; i < lignesCuveIds.length; i++)
 		{
-			String[] colonnes = lignes[lig].split("");
-			if(colonnes.length != 2)
+			String lig = lignesCuveIds[i];
+			if(!lig.matches("[A-Z]{2}"))
 			{
-				throw new IllegalArgumentException("La ligne " + lig + " n'est pas valide.");
+				throw new IllegalArgumentException("la ligne \"" + lig + "\" n'est pas valide");
 			}
 			else
 			{
-				for(int col = 0; col < colonnes.length; col++)
-				{
-					if(colonnes[col].length() != 1)
-					{
-						throw new IllegalArgumentException(colonnes[col] + " n'est pas valide. (on attend 2 caractères de cuves)");
-					}
-					else
-					{
-						tab[lig][0] = colonnes[col].charAt(0);
-						tab[lig][1] = colonnes[col].charAt(0);
-					}
-				}
+				cuveIds[i][0] = lig.charAt(0);
+				cuveIds[i][1] = lig.charAt(1);
 			}
 		}
-		return tab;
+
+		for(int i = 0; i < lignesSections.length; i++)
+		{
+			String lig = lignesSections[i];
+			sections[i] = Integer.parseInt(lig);
+		}
+
+		return new ListeAdjacente(cuveIds, sections);
 	}
 
-	public String toString(char[][] tab)
+	public String toString(ListeAdjacente liste)
 	{
 		StringBuilder sb = new StringBuilder();
-		for(char[] lig :tab) sb.append(lig[0]).append(lig[1]).append("\n");
+		for(char[] lig : liste.cuveIds()) sb.append(lig[0]).append(lig[1]).append("\n");
+		sb.append(ReseauFormatListeAdjacence.DELIMITEUR);
+		for(int i : liste.sections()) sb.append(i).append("\n");
+		sb.setLength(sb.length() - 1); // retirer le dernier \n
 		return sb.toString();
 	}
 }
