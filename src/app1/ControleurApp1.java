@@ -78,6 +78,23 @@ public class ControleurApp1
         System.out.println(sRet);
     }
 
+    public void sortieFichierTexteMatriceCoutOpti()
+    {
+        String sRet = this.reseau.toStringMatriceCoutOptimise();
+        try
+		{
+			PrintWriter pw = new PrintWriter( new FileOutputStream("sortie.txt") );
+
+            pw.println (sRet);
+
+			pw.close();
+		}
+		catch (Exception e){ e.printStackTrace(); }
+        /*Test sur le console*/
+        
+        System.out.println(sRet);
+    }
+
     
 
     public static void main(String[] args) 
@@ -207,7 +224,7 @@ public class ControleurApp1
 
                 case 3:
                     
-
+                    controleur.sortieFichierTexteMatriceCoutOpti();
                     break;
             
                 default:
