@@ -2,10 +2,11 @@ package src.common.reseau.format;
 
 public enum ReseauFormatType
 {
-	BINAIRE     ("Binaire",            new ReseauFormatMatrice(true,  false)),
-	BINAIRE_OPTI("Binaire (Optimisé)", new ReseauFormatMatrice(true,  true )),
-	COUTS       ("Coûts",              new ReseauFormatMatrice(false, false)),
-	COUTS_OPTI  ("Coûts (Optimisé)",   new ReseauFormatMatrice(false, true ));
+	BINAIRE      ("Binaire",            new ReseauFormatMatrice(true,  false)),
+	BINAIRE_OPTI ("Binaire (Optimisé)", new ReseauFormatMatrice(true,  true )),
+	COUTS        ("Coûts",              new ReseauFormatMatrice(false, false)),
+	COUTS_OPTI   ("Coûts (Optimisé)",   new ReseauFormatMatrice(false, true )),
+	LISTE_ADJA   ("Liste d'adjacence",  new ReseauFormatListeAdjacence());
 
 	private final String        nom;
 	private final ReseauFormat<?> format;
@@ -14,6 +15,14 @@ public enum ReseauFormatType
 	{
 		this.nom    = nom;
 		this.format = format;
+	}
+
+	/**
+	 * @return le format de réseau correspondant à l'identifiant
+	 */
+	public static ReseauFormatType fromId(String id)
+	{
+		return ReseauFormatType.valueOf(id.toUpperCase());
 	}
 
 	/**

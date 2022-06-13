@@ -9,8 +9,8 @@ import java.util.Arrays;
 
 class ReseauFormatMatrice implements ReseauFormat<int[][]>
 {
-	public static final char SANS_CONNECTION_CHAR = 'X';
-	public static final int  SANS_CONNECTION_INT  = -1;
+	private static final char SANS_CONNECTION_CHAR = 'X';
+	private static final int  SANS_CONNECTION_INT  = -1;
 
 	private final boolean binaire;
 	private final boolean optimise;
@@ -139,6 +139,7 @@ class ReseauFormatMatrice implements ReseauFormat<int[][]>
 			}
 			sb.append("\n");
 		}
+		sb.setLength(sb.length() - 1); // retirer le dernier \n
 		return sb.toString();
 	}
 }

@@ -1,14 +1,47 @@
 package src.common;
 
+import src.common.reseau.fichier.FichierReseau;
 import src.common.reseau.format.ReseauFormatType;
 
 public class Tests
 {
 	public static void main(String[] args)
 	{
-		//Tests.testerCuves();
-		Tests.testerMatriceInput();
-		//Tests.testerMatriceOutput();
+		try {
+		  	Tests.testerCuves();
+			Thread.sleep(1000);
+
+			Reseau reseau = new Reseau();
+
+			Cuve cuveA = reseau.creerCuve(1000);
+			Cuve cuveB = reseau.creerCuve(900);
+			Cuve cuveC = reseau.creerCuve(200);
+			Cuve cuveD = reseau.creerCuve(700);
+
+			cuveA.ajouterContenu(500);
+			cuveB.ajouterContenu(190);
+
+			System.out.println("Réseau avec cuves, mais sans tuyaux :");
+			System.out.println(reseau);
+
+			Tests.testerFormatsReseauInput(reseau);
+			Thread.sleep(1000);
+
+			reseau.creerTuyau(2, cuveA, cuveB);
+			reseau.creerTuyau(6, cuveA, cuveC);
+			reseau.creerTuyau(4, cuveB, cuveC);
+			reseau.creerTuyau(8, cuveB, cuveD);
+
+			Tests.testerFormatsReseauOutput(reseau);
+			Thread.sleep(1000);
+
+			Tests.testerFichierReseau(reseau);
+			Thread.sleep(1000);
+		}
+		catch(InterruptedException e)
+		{
+			throw new RuntimeException(e);
+		}
 	}
 
 	public static void testerCuves()
@@ -57,49 +90,32 @@ public class Tests
 		{
 			System.out.println("Test OK : ajout trop important de contenu à une cuve (" + e.getMessage() + ")");
 		}
-
 	}
 
-	public static void testerMatriceInput()
+
+	public static void testerFormatsReseauInput(Reseau reseau)
 	{
-		Reseau reseau = new Reseau();
-
-		Cuve cuveA = reseau.creerCuve(1000);
-		Cuve cuveB = reseau.creerCuve(900);
-		Cuve cuveC = reseau.creerCuve(200);
-		Cuve cuveD = reseau.creerCuve(700);
-
-		cuveA.ajouterContenu(500);
-		cuveB.ajouterContenu(190);
-
-		System.out.println(reseau);
-
 		ReseauFormatType.COUTS.getFormat().ajouterTuyaux(
 				"X 2 6 X\n2 X 4 8\n6 4 X X\nX 8 X X",
 				reseau);
-
 		System.out.println(reseau);
+		reseau.getTuyaux().removeAll(reseau.getTuyaux());
 	}
 
-	public static void testerMatriceOutput()
+	public static void testerFormatsReseauOutput(Reseau reseau)
 	{
-		Reseau reseau = new Reseau();
+		for(ReseauFormatType format : ReseauFormatType.values())
+		{
+			System.out.println(format.getNom() + " :\n" + format.getFormat().toString(reseau));
+		}
+	}
 
-		Cuve cuveA = reseau.creerCuve(1000);
-		Cuve cuveB = reseau.creerCuve(900);
-		Cuve cuveC = reseau.creerCuve(200);
-		Cuve cuveD = reseau.creerCuve(700);
-
-		cuveA.ajouterContenu(500);
-		cuveB.ajouterContenu(190);
-
-		reseau.creerTuyau(2, cuveA, cuveB);
-		reseau.creerTuyau(6, cuveA, cuveC);
-		reseau.creerTuyau(4, cuveB, cuveC);
-		reseau.creerTuyau(8, cuveB, cuveD);
-
-		System.out.println(reseau);
-
-		System.out.println(ReseauFormatType.COUTS.getFormat().toString(reseau));
+	public static void testerFichierReseau(Reseau reseau)
+	{
+		for(ReseauFormatType format : ReseauFormatType.values())
+		{
+			FichierReseau fichier = new FichierReseau(format, reseau);
+			System.out.println(fichier);
+		}
 	}
 }

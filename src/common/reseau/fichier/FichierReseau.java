@@ -1,11 +1,12 @@
 package src.common.reseau.fichier;
 
+import src.common.Cuve;
 import src.common.Reseau;
 import src.common.reseau.format.ReseauFormatType;
 
 public class FichierReseau
 {
-	private static final String DELIMITEUR_CONTENU = "---\n";
+	private static final String DELIMITEUR_CONTENU = "=".repeat(15) + "\n";
 
 	private final ReseauFormatType typeFormat;
 	private final Reseau           reseau;
@@ -24,7 +25,8 @@ public class FichierReseau
 
 		for(String sCapacite : contenu[2].split("\n"))
 		{
-			try {
+			try
+			{
 				reseau.creerCuve(Integer.parseInt(sCapacite));
 			}
 			catch(Exception e)
@@ -33,7 +35,7 @@ public class FichierReseau
 			}
 		}
 
-		ReseauFormatType formatType = ReseauFormatType.valueOf(contenu[0]);
+		ReseauFormatType formatType = ReseauFormatType.fromId(contenu[0].toLowerCase());
 		formatType.getFormat().ajouterTuyaux(contenu[1], reseau);
 		return new FichierReseau(formatType, reseau);
 	}
@@ -42,11 +44,14 @@ public class FichierReseau
 	{
 		StringBuilder sb = new StringBuilder();
 		sb
-				.append(this.typeFormat.name())
+				.append(this.typeFormat.getId())
 				.append("\n").append(FichierReseau.DELIMITEUR_CONTENU)
 				.append(this.typeFormat.getFormat().toString(this.reseau))
-				.append("\n").append(FichierReseau.DELIMITEUR_CONTENU)
-				.append(this.reseau.toString());
+				.append("\n").append(FichierReseau.DELIMITEUR_CONTENU);
+		for(Cuve cuve : this.reseau.getCuves())
+		{
+			sb.append(cuve.getCapacite()).append("\n");
+		}
 		return sb.toString();
 	}
 
