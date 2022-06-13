@@ -1,6 +1,7 @@
 package src.common;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import src.common.util.Transfert;
 
@@ -113,18 +114,50 @@ public class Reseau
 
     public void transverser()
     {
-        ArrayList<Transfert> ensTransfert = new ArrayList<>();
+        ArrayList<Transfert> ensTransfert    = new ArrayList<>();
+        ArrayList<Integer>   ensNbSectionSor = new ArrayList<>();
+        ArrayList<Integer>   ensSommeSection = new ArrayList<>();
         
-        for ( Tuyau ty : this.tuyaux )
+        for( Tuyau ty : this.tuyaux )
         {
             Transfert iteTrans = ty.transverser();
-            if ( iteTrans != null ) ensTransfert.add(iteTrans);   
+            if ( iteTrans != null ) ensTransfert.add(iteTrans);
         }
 
-        for ( Transfert tr : ensTransfert )
+        Collections.sort(ensTransfert);
+
+
+        for( Cuve c : this.cuves )
         {
-            tr.getCuveDepart ().retirerContenu( tr.getQuantite() );
-            tr.getCuveArrivee().ajouterContenu( tr.getQuantite() );
+            int sommeSection = 0;
+            for( Transfert tr : ensTransfert )
+            {
+                if ( tr.getCuveDepart() == c )
+                    sommeSection += tr.getQuantite();
+            }
+            ensSommeSection.add(sommeSection);
+        }
+
+        for( int cpt=0 ; cpt < ensTransfert.size() ; cpt++ )
+        {
+            Transfert iteTrans       = ensTransfert.get(cpt);
+            double    contenuCuveDep = iteTrans.getCuveDepart ().getContenu();
+            double    contenuCuveArr = iteTrans.getCuveArrivee().getContenu();
+
+            double tMax = iteTrans.getQuantite();
+
+            if ( contenuCuveDep - tMax < contenuCuveArr + tMax )
+                tMax = contenuCuveDep - contenuCuveDep;
+
+            if ( tMax < ensSommeSection.get(cpt) )
+                tMax = contenuCuveDep - contenuCuveArr / ensNbSectionSor.get(cpt);
+            
+            
+
+            if ( tMax > contenuCuveDep ) tMax = contenuCuveDep;
+            
+            if ( contenuCuveDep + tMax > iteTrans.getCuveDepart().getCapacite() )
+                tMax = iteTrans.getCuveDepart().getCapacite() - contenuCuveDep;
         }
     }
 
@@ -157,7 +190,7 @@ public class Reseau
         {
             for (int col = 0; col < nbCuves; col ++)
             {
-                sRet += String.format("%3d",matrice[lig][col]);
+                sRet += String.format("%-3d",matrice[lig][col]);
                 /*default value of integer array is 0*/
             }
             sRet += "\n";
@@ -175,8 +208,23 @@ public class Reseau
     public String toStringListAdjac()
     {
         String sRet = "Liste d'adjacence\n";
+        for (Cuve c : this.cuves)
+        {
+            sRet += String.format("%-3s", Character.toString (c.getIdentifiant() ));
+            for (Tuyau t : this.tuyaux)
+            {
+                Cuve cuve1, cuve2;
+                cuve1 = t.getCuve1();
+                cuve2 = t.getCuve2();
+                if (c == cuve1) sRet += String.format("%-3s", cuve2.getIdentifiant() );
+                if (c == cuve2) sRet += String.format("%-3s", cuve1.getIdentifiant() );
+            }
+            sRet += "\n";
+        }
+        sRet += "---\n";
+
         for (Tuyau t :this.tuyaux)
-            sRet += Character.toString(t.getCuve1().getIdentifiant()) + Character.toString(t.getCuve2().getIdentifiant()) + "\n";
+            sRet += t.getSection() + "\n";
        
         sRet += "---\n";
         for (Cuve c : this.cuves)
