@@ -107,10 +107,10 @@ public class ControleurApp1
             
 
             if (!valideCuve) { System.out.println("Invalide"); continue ;}
-            idCuveEnCreation ++;
             } while (!valideCuve);
             
             System.out.println("La cuve " + idCuveEnCreation + " a été créée avec succès.");
+            idCuveEnCreation ++;
         }
 
 
