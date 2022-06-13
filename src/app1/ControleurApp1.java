@@ -8,6 +8,7 @@ import src.common.Tuyau;
 
 import java.util.List;
 import java.io.PrintWriter;
+import java.security.cert.CertPathValidatorException.Reason;
 import java.io.FileOutputStream;
 
 public class ControleurApp1
@@ -37,6 +38,27 @@ public class ControleurApp1
     public boolean creerCuve(int capacite )
     {
         return reseau.creerCuve(capacite) != null;
+    }
+
+    public String toStringReseau(){
+        return reseau.toString();
+    }
+
+    public void sortieFichierTexteMatriceAdjacente()
+    {
+        String sRet = this.reseau.toStringListAdjac();
+        try
+		{
+			PrintWriter pw = new PrintWriter( new FileOutputStream("sortie.txt") );
+
+            pw.println (sRet);
+
+			pw.close();
+		}
+		catch (Exception e){ e.printStackTrace(); }
+        /*Test sur le console*/
+        
+        System.out.println(sRet);
     }
 
     public void sortieFichierTexteMatriceCout ()
@@ -78,8 +100,8 @@ public class ControleurApp1
         do
         {
             nbCuves = Clavier.lire_int();
-            if (nbCuves >= 26) System.out.println("Le nombre de cuves maximum a été atteint.");
-        } while (nbCuves >= 26);
+            if (nbCuves > 26) System.out.println("Le nombre de cuves maximum a été atteint.");
+        } while (nbCuves > 26);
 
         /**Creations des cuves */
         /*---------------------*/
@@ -90,14 +112,29 @@ public class ControleurApp1
             do {
             System.out.print("Entrez la capacité maximale de la cuve "+ idCuveEnCreation + " (entre 200 et 2000) :");
             capaciteMaximal = Clavier.lire_int();
+            
+            valideCuve = false;
 
-            valideCuve = controleur.creerCuve(capaciteMaximal);
+            try {
+                valideCuve = controleur.creerCuve(capaciteMaximal);
+            } catch (Exception e) {
+                //TODO: handle exception
+            }
+
             
+
             if (!valideCuve) { System.out.println("Invalide"); continue ;}
-            idCuveEnCreation ++;
             } while (!valideCuve);
-            
+
             System.out.println("La cuve " + idCuveEnCreation + " a été créée avec succès.");
+            idCuveEnCreation ++;
+        }
+
+
+        if (debug){
+
+            System.out.println(controleur.toStringReseau());
+
         }
 
         /*Creation des tuyaux*/
@@ -105,9 +142,12 @@ public class ControleurApp1
         int   section;
         char  idCuve1, idCuve2;
         boolean valideTuyau;
+
+        System.out.println ("Voulez-vous creer un tuyau (O/N) ?");   
+
         do
         {
-            System.out.println ("Voulez-vous creer un tuyau (O/N) ?");    
+             
             resCreerTuyau = Clavier.lire_char();
             if (resCreerTuyau == 'O')
             {
@@ -121,7 +161,14 @@ public class ControleurApp1
                     System.out.print ("\nidCuve2 ? ");
                     idCuve2 = Clavier.lire_char();
                     
-                    valideTuyau = controleur.creerTuyau(section, idCuve1, idCuve2);
+                    valideTuyau = false;
+
+                    try {
+                        valideTuyau = controleur.creerTuyau(section, idCuve1, idCuve2);
+                    } catch (Exception e) {
+                        //TODO: handle exception
+                    }
+                    
                     if (!valideTuyau) System.out.println ("Invalide");
                     
                 } while (!valideTuyau);
@@ -131,8 +178,47 @@ public class ControleurApp1
             System.out.println ("Voulez-vous continuer de creer un tuyau (O/N) ?");    
             
         } while (resCreerTuyau == 'O');
-        System.out.println ("Finir de Creer le Reseau ");
-        controleur.sortieFichierTexteMatriceCout();
+        
+        /*Sélection de la Matrice voulu*/
+
+        int selectionFormat;
+
+        do
+        {
+             
+            System.out.println("Veuillez choisir le format de la structure de sortie :\n"+
+                               "[1]-Liste d'adjacence        \n"+
+                               "[2]-Matrice de cout          \n"+
+                               "[3]-Matrice de cout optimisée\n"+
+                               "Veuillez chosir entre 1 et 3 : "); 
+
+            selectionFormat = Clavier.lire_int();
+
+            switch (selectionFormat) {
+                case 1:
+        
+                    controleur.sortieFichierTexteMatriceAdjacente();
+                    break;
+
+                case 2:
+                    
+                    controleur.sortieFichierTexteMatriceCout();
+                    break;
+
+                case 3:
+                    
+
+                    break;
+            
+                default:
+                    break;
+            }
+
+            System.out.println(selectionFormat < 1 || selectionFormat > 3);
+            
+        } while (selectionFormat < 1 || selectionFormat > 3);
+
+        
     }
 
 }
