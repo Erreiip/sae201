@@ -50,15 +50,6 @@ public class PanelPaint extends JPanel
 
         Graphics2D g2d = (Graphics2D) g;
 
-        int i = 0;
-        for ( Cuve c : this.ctrl.getMetier().getCuves() )
-        {
-            g.setColor( this.degrade((int) c.getContenu(), c.getCapacite()) );
-            g2d.fill  ( tabPoints[i] );
-            i++;
-        }
-
-
         for ( Tuyau t : this.ctrl.getMetier().getTuyaux() )
         {
             int xDepart = t.getCuve1().getX();
@@ -69,7 +60,18 @@ public class PanelPaint extends JPanel
 
             g.setColor( Color.BLACK );
             g.drawLine( xDepart, yDepart, xFin, yFin );
-        }     
+        }
+         
+        int i = 0;
+        for ( Cuve c : this.ctrl.getMetier().getCuves() )
+        {
+            g.setColor( this.degrade((int) c.getContenu(), c.getCapacite()) );
+            g2d.fill  ( tabPoints[i] );
+            i++;
+        }
+
+
+    
     }
 
     private Color degrade ( int contenu, int capa)
