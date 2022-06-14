@@ -6,7 +6,7 @@ package src.common;
 public class Cuve implements IReseauElement, Comparable<Cuve>
 {
     public static final int MIN_CAPACITE = 200;
-    public static final int MAX_CAPACITE = 2000;
+    public static final int MAX_CAPACITE = 1000;
     public static final int NB_CUVES_MAX = 26;
 
     private final char id;
