@@ -2,8 +2,8 @@ package src.common;
 
 public enum PositionInfos
 {
-    HAUT   ,
-    BAS    ,
-    GAUCHE ,
-    DROITE ;
+    HAUT,
+    BAS,
+    GAUCHE,
+    DROITE;
 }

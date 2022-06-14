@@ -10,7 +10,7 @@ public class FrameNouvelElement extends JFrame
     public FrameNouvelElement(APanelNouvelElement APanelNouvelElement)
     {
         this.setTitle("Nouvelle cuve");
-        this.setSize(300, 200);
+        this.setSize(300, 150);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

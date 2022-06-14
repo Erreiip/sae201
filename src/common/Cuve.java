@@ -19,9 +19,9 @@ public class Cuve implements IReseauElement, Comparable<Cuve>
 
     private Cuve(char id, int capacite)
     {
-        this.id       = id;
+        this.id = id;
         this.capacite = capacite;
-        this.contenu  = 0;
+        this.contenu = 0;
     }
 
     /**
@@ -44,28 +44,63 @@ public class Cuve implements IReseauElement, Comparable<Cuve>
         return cuve;
     }
 
-    
 
-    public char          getIdentifiant()    { return this.id; }
-    public int           getX()              { return this.x; }
-    public int           getY()              { return this.y; }
-    public PositionInfos getPositionInfos()  { return this.positionInfos; }
-    public int           getCapacite()       { return this.capacite; }
-    public double        getContenu()        { return this.contenu; }
+    public char getIdentifiant()
+    {
+        return this.id;
+    }
 
-    public String        getInfos()          { return this.id + " \n" + String.format("%3.2f",this.contenu) + "/" + this.capacite; }
+    public int getX()
+    {
+        return this.x;
+    }
 
-    public void    setX(int x)                                   { this.x = x; }
-    public void    setY(int y)                                   { this.y = y; }
-    public void    setPositionInfos(PositionInfos positionInfos) { this.positionInfos = positionInfos; }
+    public int getY()
+    {
+        return this.y;
+    }
+
+    public PositionInfos getPositionInfos()
+    {
+        return this.positionInfos;
+    }
+
+    public int getCapacite()
+    {
+        return this.capacite;
+    }
+
+    public double getContenu()
+    {
+        return this.contenu;
+    }
+
+    public String getInfos()
+    {
+        return this.id + " \n" + String.format("%3.2f", this.contenu) + "/" + this.capacite;
+    }
+
+    public void setX(int x)
+    {
+        this.x = x;
+    }
+
+    public void setY(int y)
+    {
+        this.y = y;
+    }
+
+    public void setPositionInfos(PositionInfos positionInfos)
+    {
+        this.positionInfos = positionInfos;
+    }
 
     public void ajouterContenu(double ajout)
     {
         if (ajout < 0)
         {
             throw new IllegalArgumentException("le montant à ajouter doit être positif");
-        }
-        else if (this.contenu + ajout > capacite)
+        } else if (this.contenu + ajout > capacite)
         {
             throw new IllegalArgumentException("le montant à ajouter fait dépasser la capacité de la cuve");
         }
@@ -77,8 +112,7 @@ public class Cuve implements IReseauElement, Comparable<Cuve>
         if (retrait < 0)
         {
             throw new IllegalArgumentException("le retrait de contenu doit être positif");
-        }
-        else if (this.contenu < retrait)
+        } else if (this.contenu < retrait)
         {
             throw new IllegalArgumentException("le retrait de contenu est supérieur au contenu de la cuve");
         }
@@ -94,7 +128,7 @@ public class Cuve implements IReseauElement, Comparable<Cuve>
                 contenu + "/" + capacite + "}";
     }
 
-    public int compareTo( Cuve autreCuve)
+    public int compareTo(Cuve autreCuve)
     {
         return (int) Math.ceil(this.contenu) - (int) Math.ceil(autreCuve.contenu);
     }

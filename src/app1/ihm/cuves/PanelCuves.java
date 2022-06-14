@@ -24,9 +24,7 @@ public class PanelCuves extends APanelTable
     protected void ajouterElement()
     {
         if (frameNouvelElement == null)
-        {
             frameNouvelElement = new FrameNouvelElement(new PanelNouvelleCuve(this));
-        }
 
         frameNouvelElement.setVisible(true);
     }
