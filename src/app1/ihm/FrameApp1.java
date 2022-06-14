@@ -101,6 +101,8 @@ public class FrameApp1 extends JFrame implements ActionListener
         if (e.getSource() == this.menuiFichierOuvrir)
         {
             this.ouvrir();
+            this.majListeCuves();
+            this.majListeTuyaux();
         } else if (e.getSource() == this.menuiFichierEnregistrer)
         {
             this.sauvegarder();
