@@ -1,11 +1,9 @@
 package src.app1.ihm.cuves;
 
 import src.app1.ihm.composants.APanelNouvelElement;
-import src.app1.ihm.cuves.PanelCuves;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 
 public class PanelNouvelleCuve extends APanelNouvelElement
 {

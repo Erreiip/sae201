@@ -3,7 +3,6 @@ package src.app1.ihm.tuyaux;
 import src.app1.ControleurApp1;
 import src.app1.ihm.composants.APanelTable;
 import src.app1.ihm.FrameNouvelElement;
-import src.app1.ihm.cuves.CuvesGrilleDonneesModel;
 
 public class PanelTuyaux extends APanelTable
 {
