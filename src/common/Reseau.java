@@ -165,7 +165,7 @@ public class Reseau
             try{
                 t.getCuveArrivee().ajouterContenu(t.getQuantite());
                 t.getCuveDepart ().retirerContenu(t.getQuantite());
-            }catch(Exception e) { System.out.println(e); }
+            }catch(Exception e) {}
         }
 
     }
