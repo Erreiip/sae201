@@ -128,6 +128,18 @@ public class Tests
 				200
 				700""").getReseau());
 
+		System.out.println(FichierReseau.fromString("""
+				couts_opti
+				===============
+				2
+				6 4
+				X 8 X
+				===============
+				1000
+				900
+				200
+				700""").getReseau());
+
 
 		System.out.println(FichierReseau.fromString("""
 				liste_adja

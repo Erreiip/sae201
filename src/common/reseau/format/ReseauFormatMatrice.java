@@ -37,7 +37,7 @@ class ReseauFormatMatrice implements ReseauFormat
 		{
 			for(int col = 0; col < matrice[lig].length; col++)
 			{
-				Cuve cuve1 = reseau.getCuve(lig);
+				Cuve cuve1 = reseau.getCuve(this.optimise ? lig + 1 : lig);
 				Cuve cuve2 = reseau.getCuve(col);
 
 				int i = matrice[lig][col];
