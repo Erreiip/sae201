@@ -63,15 +63,35 @@ public class Tuyau implements IReseauElement
     public Cuve getCuve1  () { return cuve1;        }
     public Cuve getCuve2  () { return cuve2;        }
 
-    public Transfert transverser()
+    public Transfert transverser( Cuve c, int nbTuyaux)
     {
         double quantite;
         
-        Cuve cuveDepart  = this.cuve1.getCapacite() > this.cuve2.getCapacite() ? this.cuve1 : this.cuve2;
-        Cuve cuveArrivee = this.cuve1.getCapacite() > this.cuve2.getCapacite() ? this.cuve2 : this.cuve1;
+        Cuve cuveDepart  = this.cuve1.getContenu() > this.cuve2.getContenu() ? this.cuve1 : this.cuve2;
+        Cuve cuveArrivee = this.cuve1.getContenu() > this.cuve2.getContenu() ? this.cuve2 : this.cuve1;
 
-        if ( this.cuve1.getContenu() > this.getSection() ) quantite = this.getSection();
-        else                                               quantite = (int) cuveDepart.getContenu();
+        double maxQuant  = cuveDepart.getContenu() / nbTuyaux;
+
+        if ( cuveDepart != c ) return null;
+
+        if ( this.cuve1.getContenu() > this.getSection() ) 
+        {
+            quantite = (cuveDepart.getContenu() - cuveArrivee.getContenu()) / 2;
+            
+            if ( quantite > this.getSection() ) 
+                quantite = this.getSection();
+
+            if ( quantite > maxQuant )
+                quantite = maxQuant;
+        }
+        else        
+        {
+            quantite = cuveDepart.getContenu();
+        }
+
+        if ( cuveArrivee.getContenu() + quantite > cuveArrivee.getCapacite() )
+            quantite = cuveArrivee.getCapacite() - cuveArrivee.getContenu();
+
 
         return Transfert.creer(cuveDepart, cuveArrivee, quantite);
     }

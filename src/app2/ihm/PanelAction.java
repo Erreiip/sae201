@@ -90,6 +90,10 @@ public class PanelAction extends JPanel implements ActionListener
             } catch (Exception ex) { 
                 this.lblInfo.setText("Erreur"); 
             }
+
+            this.txtContenu.setText("");
+            this.txtCuve   .setText("");
+
         }
 
         if ( e.getSource() == this.btnInitAll )

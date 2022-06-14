@@ -123,9 +123,52 @@ public class Reseau
 
     public void transverser()
     {
-       Collections.sort(this.cuves);
+        int[] tabNbTuyaux = new int[this.cuves.size()];
 
-       
+        ArrayList<Transfert> tabTransferts = new ArrayList<Transfert>();
+        ArrayList<Cuve>      alCuve        = new ArrayList<Cuve>     ( this.cuves );
+
+        Collections.sort(alCuve);
+
+        int i = 0;
+        for ( Cuve c : alCuve )
+        {
+            int occu = 0;
+            for ( Tuyau t : this.tuyaux )
+            {
+                if ( (t.getCuve1() == c || t.getCuve2() == c) && t.getCuve1().getContenu() != t.getCuve2().getContenu() )
+                {
+                    tabNbTuyaux[i] = occu++;
+                }
+            }
+            i++;
+        }
+
+        i = 0;
+        for ( Cuve c : alCuve )
+        {
+            for ( Tuyau t : this.tuyaux )
+            {
+                if ( t.getCuve1() == c || t.getCuve2() == c )
+                {
+                    Transfert temp = t.transverser(c, tabNbTuyaux[i]);
+
+                    if (temp != null )
+                        tabTransferts.add(temp);
+                }
+            }
+            i++;
+        }
+
+        for ( Transfert t : tabTransferts )
+        {
+            System.out.println(t.getCuveDepart().getIdentifiant() + "/" + t.getQuantite() + "/" + t.getCuveArrivee().getIdentifiant());
+            try{
+                t.getCuveArrivee().ajouterContenu(t.getQuantite());
+                t.getCuveDepart ().retirerContenu(t.getQuantite());
+            }catch(Exception e) { System.out.println(e); }
+        }
+
     }
 
     @Override
