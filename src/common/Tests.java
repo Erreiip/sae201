@@ -103,19 +103,6 @@ public class Tests
 	private static void fichierReseauInput()
 	{
 		System.out.println(FichierReseau.fromString("""
-				binaire
-				===============
-				X 1 1 X
-				1 X 1 1
-				1 1 X X
-				X 1 X X
-				===============
-				1000
-				900
-				200
-				700""").getReseau());
-
-		System.out.println(FichierReseau.fromString("""
 				couts
 				===============
 				X 2 6 X
