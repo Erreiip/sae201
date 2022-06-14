@@ -5,10 +5,7 @@ import java.util.Map;
 
 import java.awt.Dimension;
 
-import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.util.Scanner;
 
 import src.app2.ihm.*;
 import src.common.Reseau;
@@ -24,14 +21,12 @@ public class ControleurApp2
 {
     private FrameReseau frame;
     private Reseau      metier;
-	private String      pathMatrice;
 
 
     public ControleurApp2()
     {
         this.metier      = new Reseau();
         this.frame       = new FrameReseau( this );
-        this.pathMatrice = null; 
     }
 
 
@@ -158,11 +153,6 @@ public class ControleurApp2
         return true;
     }
  
-
-
-
-    
-
     public static void main ( String args[] )
     {
         new ControleurApp2();
