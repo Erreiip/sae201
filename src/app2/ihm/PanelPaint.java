@@ -135,6 +135,9 @@ public class PanelPaint extends JPanel
                         double taille = ellipse.getWidth();
 
                         PanelPaint.this.ellipseSelectionnee.setFrame(e.getX() - taille/2, e.getY() - taille/2, ellipse.getWidth(), ellipse.getHeight());
+                        /*setFrame (): Sets the location and size of the outer bounds of this Rectangle2D to the specified rectangular values. */
+                        /*e.getX = location of the mouse */
+                        /*e.get(X) -taille/2 so that we can drag the center of the circle, if not, we drag the top-left */
                     }
                 }
 
