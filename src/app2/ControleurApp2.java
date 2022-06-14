@@ -6,14 +6,19 @@ import java.util.Map;
 import java.awt.Dimension;
 
 import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Scanner;
 
 import src.app2.ihm.*;
 import src.common.Reseau;
 import src.common.Tuyau;
+import src.common.reseau.fichier.FichierReseau;
 import src.common.Cuve;
 import src.common.PositionInfos;
 
+import java.nio.file.Path;
+import java.nio.file.Files;
 
 public class ControleurApp2
 {
@@ -134,7 +139,23 @@ public class ControleurApp2
     public void dessiner  () { this.frame.dessiner  (); }
     public void redessiner() { this.frame.redessiner(); }
 
-
+    public boolean creerReseau(String pathFichier)
+    {   
+        String contenuFichier ="";
+        FichierReseau fichierReseau = null;
+        try
+        {
+            contenuFichier = Files.readString(Path.of(pathFichier));
+            fichierReseau = FichierReseau.fromString(contenuFichier);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (fichierReseau == null) return false;
+        
+        this.metier = fichierReseau.getReseau();
+        return true;
+    }
     public boolean creerReseau()
     {
         this.metier = new Reseau();
