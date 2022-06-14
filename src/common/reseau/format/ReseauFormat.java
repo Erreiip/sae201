@@ -8,5 +8,5 @@ import src.common.Reseau;
 public interface ReseauFormat
 {
 	void ajouterTuyaux(String s, Reseau r);
-	String toString(Reseau r);
+	String toString(Reseau r); // TODO : renommer en "construireString"
 }
