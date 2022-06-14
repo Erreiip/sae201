@@ -117,11 +117,6 @@ public class ControleurApp1
         this.ihm = ihm;
     }
 
-    public String toStringReseau()
-    {
-        return reseau.toString();
-    }
-
     public static void main(String[] args)
     {
         ControleurApp1 controleur;
@@ -210,8 +205,8 @@ public class ControleurApp1
         do
         {
             System.out.println("Voulez-vous créer un tuyau ? (O/N)");
-            resCreerTuyau = Clavier.lire_char();
-            if (Character.toUpperCase(resCreerTuyau) == 'N')
+            resCreerTuyau = Character.toUpperCase(Clavier.lire_char());
+            if (resCreerTuyau == 'N')
                 break;
 
             valideTuyau = false;
