@@ -53,7 +53,7 @@ public class Cuve implements IReseauElement, Comparable<Cuve>
     public int           getCapacite()       { return this.capacite; }
     public double        getContenu()        { return this.contenu; }
 
-    public String        getInfos()          { return this.id + " \n" + this.contenu + "/" + this.capacite; }
+    public String        getInfos()          { return this.id + " \n" + String.format("%3.2f",this.contenu) + "/" + this.capacite; }
 
     public void    setX(int x)                                   { this.x = x; }
     public void    setY(int y)                                   { this.y = y; }

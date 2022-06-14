@@ -11,6 +11,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Color;
 import java.awt.event.*;
+import java.awt.BasicStroke;
+
 
 import java.awt.geom.Ellipse2D;
 
@@ -72,14 +74,28 @@ public class PanelPaint extends JPanel
             int yDepart = (int) temp1.getY() + taille1/2;
             int yFin    = (int) temp2.getY() + taille2/2;
 
+            int taille = t.getSection();
+
             g.setColor( Color.BLACK );
             
-            for ( int cpt = 0; cpt < t.getSection(); cpt++)
-                g.drawLine( (int) (xDepart + cpt / 1.5), (int) (yDepart - cpt / 1.5), (int) (xFin + cpt / 1.5), (int) (yFin - cpt / 1.5) );
+            g2d.setStroke(new BasicStroke(taille));
+            
+            g.drawLine( xDepart ,yDepart, xFin, yFin);
 
-            g.drawString(t.getSection() + "", (xDepart + xFin) / 2 + 10, (yDepart + yFin) / 2 - 10);
+            if ( yDepart - yFin < 0 )
+                if ( xDepart - xFin > 0 )
+                    g.drawString(t.getSection() + "", (xDepart + xFin) / 2 - 20, (yDepart + yFin) / 2 - 10);
+                else
+                    g.drawString(t.getSection() + "", (xDepart + xFin) / 2 + 20, (yDepart + yFin) / 2 - 10);
+            else
+                if ( xDepart - xFin < 0 )
+                    g.drawString(t.getSection() + "", (xDepart + xFin) / 2 - 20, (yDepart + yFin) / 2 - 10);
+                else
+                    g.drawString(t.getSection() + "", (xDepart + xFin) / 2 + 20, (yDepart + yFin) / 2 - 10);
         }
          
+        g2d.setStroke(new BasicStroke(1));
+
         int i = 0;
         for ( Cuve c : this.ctrl.getMetier().getCuves() )
         {
