@@ -230,7 +230,6 @@ public class ControleurApp1
                     ReseauFormatType reseauFormatType = ReseauFormatType.values()[selectionFormat - 1];
                     controleur.sauvegarderReseau(reseauFormatType, "reseau.data");
                     break;
-
                 default:
                     break;
             }
