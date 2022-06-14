@@ -25,9 +25,7 @@ public class PanelTuyaux extends APanelTable
     public void ajouterElement()
     {
         if (frameNouvelElement == null)
-        {
             frameNouvelElement = new FrameNouvelElement(new PanelNouveauTuyau(this));
-        }
 
         frameNouvelElement.setVisible(true);
     }
@@ -42,5 +40,4 @@ public class PanelTuyaux extends APanelTable
     {
         super.majListe(new TuyauxGrilleDonneesModel(this.getCtrl()));
     }
-
 }

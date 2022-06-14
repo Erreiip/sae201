@@ -20,10 +20,11 @@ public class PanelNouvelleCuve extends APanelNouvelElement
     @Override
     protected void initComposants(JPanel panelNord)
     {
-        panelNord.setLayout(new GridLayout(1, 2));
+        panelNord.setLayout(new GridLayout(2, 1));
 
         JLabel lblCapacite = new JLabel("Capacité:");
         this.txtCapacite = new JTextField();
+        this.txtCapacite.requestFocus();
 
         panelNord.add(lblCapacite);
         panelNord.add(txtCapacite);
@@ -46,11 +47,5 @@ public class PanelNouvelleCuve extends APanelNouvelElement
             JOptionPane.showMessageDialog(null, ex.getMessage(),
                     "Une erreur s'est produite !", JOptionPane.ERROR_MESSAGE);
         }
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e)
-    {
-        super.actionPerformed(e);
     }
 }

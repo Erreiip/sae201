@@ -57,8 +57,7 @@ public class PanelNouveauTuyau extends APanelNouvelElement
             JOptionPane.showMessageDialog(this, "La section doit être un nombre entier.", "Une erreur s'est produite !", JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex)
         {
-            JOptionPane.showMessageDialog(null, ex.getMessage(),
-                    "Une erreur s'est produite !", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Une erreur s'est produite !", JOptionPane.ERROR_MESSAGE);
         }
     }
 }
