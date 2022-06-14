@@ -69,17 +69,33 @@ class ReseauFormatMatrice implements ReseauFormat
 	{
 		int [][] matrice;
 		int nbCuves = r.getCuves().size();
-		matrice = new int[nbCuves][nbCuves];
-		for(int[] ligne : matrice) Arrays.fill(ligne, ReseauFormatMatrice.SANS_CONNECTION_INT);
-
-		// TODO : la version optimisée
-		for(Tuyau tuyau : r.getTuyaux())
+		matrice = new int[this.optimise ? nbCuves - 1 : nbCuves][];
+		for(int i = 0; i < matrice.length; i++)
 		{
-			int lig, col;
-			lig = tuyau.getCuve1().getIdentifiant() - 'A';
-			col = tuyau.getCuve2().getIdentifiant() - 'A';
-			matrice[lig][col] = this.binaire ? 1 : tuyau.getSection();
-			matrice[col][lig] = this.binaire ? 1 : tuyau.getSection();
+			matrice[i] = new int[this.optimise ? i + 1 : nbCuves];
+			Arrays.fill(matrice[i], ReseauFormatMatrice.SANS_CONNECTION_INT);
+		}
+
+		for(Cuve cuve1 : r.getCuves())
+		{
+			for(Cuve cuve2 : r.getCuves())
+			{
+				if(cuve1 == cuve2) break;
+				int lig = cuve1.getIdentifiant() - 'A';
+				int col = cuve2.getIdentifiant() - 'A';
+				if(this.optimise) lig--;
+				if(matrice[lig].length == 0) continue;
+				if(r.sontRelies(cuve1, cuve2))
+				{
+					Tuyau tuyau = r.getTuyau(cuve1, cuve2);
+					matrice[lig][col] = this.binaire ? 1 : tuyau.getSection();
+				}
+				else
+				{
+					matrice[lig][col] = ReseauFormatMatrice.SANS_CONNECTION_INT;
+				}
+				if(!this.optimise) matrice[col][lig] = matrice[lig][col];
+			}
 		}
 
 		return matrice;

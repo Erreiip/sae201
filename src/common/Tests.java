@@ -13,10 +13,11 @@ public class Tests
 	private static void lancerTests()
 	{
 		try {
+			Reseau reseau = Tests.creerReseauSujet();
+
 			Tests.testerCuves();
 			Thread.sleep(1000);
 
-			Reseau reseau = Tests.creerReseauSujet();
 			System.out.println(reseau);
 			Thread.sleep(1000);
 
@@ -24,7 +25,6 @@ public class Tests
 			Thread.sleep(1000);
 
 			Tests.fichierReseauOutput(reseau);
-			Thread.sleep(1000);
 		}
 		catch(InterruptedException e)
 		{
