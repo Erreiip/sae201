@@ -35,7 +35,7 @@ public class ControleurApp2
         Cuve[] tabCuves = new Cuve[this.metier.getCuves().size()];
         
         Map<String,Integer> voisinPref = new HashMap<String,Integer>();
-
+        /*Map idCuve to its Degree (Number of adjacence) */
         for ( Cuve c : this.metier.getCuves() )
         {
             String str = "";
