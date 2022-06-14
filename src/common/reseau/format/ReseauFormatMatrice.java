@@ -99,10 +99,17 @@ class ReseauFormatMatrice implements ReseauFormat<int[][]>
 				int i;
 				if(this.binaire)
 				{
-					i = Integer.parseInt(valeurs[col]);
-					if(i != 0 && i != 1)
+					if(valeurs[col].length() == 1 && valeurs[col].charAt(0) == ReseauFormatMatrice.SANS_CONNECTION_CHAR)
 					{
-						throw new IllegalArgumentException("La matrice n'est pas binaire");
+						i = ReseauFormatMatrice.SANS_CONNECTION_INT;
+					}
+					else
+					{
+						i = Integer.parseInt(valeurs[col]);
+						if(i != 1)
+						{
+							throw new IllegalArgumentException("la matrice doit contenir des valeurs entre comme 1 et " + ReseauFormatMatrice.SANS_CONNECTION_CHAR);
+						}
 					}
 				}
 				else

@@ -102,19 +102,50 @@ public class Tests
 
 	private static void fichierReseauInput()
 	{
-		FichierReseau fichierReseau = FichierReseau.fromString("""
-						couts
-						===============
-						X 2 6 X
-						2 X 4 8
-						6 4 X X
-						X 8 X X
-						===============
-						1000
-						900
-						200
-						700""");
-		System.out.println(fichierReseau.getReseau());
+		System.out.println(FichierReseau.fromString("""
+				binaire
+				===============
+				X 1 1 X
+				1 X 1 1
+				1 1 X X
+				X 1 X X
+				===============
+				1000
+				900
+				200
+				700""").getReseau());
+
+		System.out.println(FichierReseau.fromString("""
+				couts
+				===============
+				X 2 6 X
+				2 X 4 8
+				6 4 X X
+				X 8 X X
+				===============
+				1000
+				900
+				200
+				700""").getReseau());
+
+
+		System.out.println(FichierReseau.fromString("""
+				liste_adja
+				===============
+				AB
+				AC
+				BC
+				BD
+				-----
+				2
+				6
+				4
+				8
+				===============
+				1000
+				900
+				200
+				700""").getReseau());
 	}
 
 	private static void fichierReseauOutput(Reseau reseau)
