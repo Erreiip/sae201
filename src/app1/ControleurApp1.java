@@ -8,9 +8,8 @@ import src.common.Tuyau;
 import src.common.reseau.fichier.FichierReseau;
 import src.common.reseau.format.ReseauFormatType;
 
-import java.io.FileOutputStream;
+import javax.swing.*;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
@@ -21,9 +20,11 @@ public class ControleurApp1
 
     private Reseau    reseau;
     private FrameApp1 ihm;
+    private int       nbCuves;
 
-    public ControleurApp1()
+    public ControleurApp1(int nbCuves)
     {
+        this.nbCuves = nbCuves;
         this.reseau = new Reseau();
     }
 
@@ -35,6 +36,11 @@ public class ControleurApp1
     public List<Tuyau> getTuyaux()
     {
         return this.reseau.getTuyaux();
+    }
+
+    public int getNbCuves()
+    {
+        return nbCuves;
     }
 
     public boolean creerTuyau(int section, Cuve cuve1, Cuve cuve2)
@@ -118,9 +124,35 @@ public class ControleurApp1
 
     public static void main(String[] args)
     {
-        ControleurApp1 controleur = new ControleurApp1();
+        ControleurApp1 controleur;
         if (args.length > 0 && args[0].equalsIgnoreCase("gui"))
         {
+
+            int nbCuves = -1;
+            do
+            {
+                String s = JOptionPane.showInputDialog("Entrez le nombre maximal de cuves:");
+                if (s == null)
+                    return;
+
+                try
+                {
+                    nbCuves = Integer.parseInt(s);
+                    if (nbCuves < 2)
+                    {
+                        nbCuves = -1;
+                        throw new Exception("Le nombre de cuves doit être positif et supérieur ou égal à 2");
+                    }
+                } catch (NumberFormatException e)
+                {
+                    JOptionPane.showMessageDialog(null, "Vous devez rentrer un entier", "Erreur", JOptionPane.ERROR_MESSAGE);
+                } catch (Exception e)
+                {
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+                }
+            } while (nbCuves == -1);
+
+            controleur = new ControleurApp1(nbCuves);
             FrameApp1 ihm = new FrameApp1(controleur);
             controleur.setIhm(ihm);
             return;
@@ -138,6 +170,8 @@ public class ControleurApp1
             System.out.print("Veuillez entrez le nombre de cuves entre 1 et 26: ");
             nbCuves = Clavier.lire_int();
         } while (nbCuves > 26);
+
+        controleur = new ControleurApp1(nbCuves);
 
         /**Creations des cuves */
         /*---------------------*/
@@ -158,7 +192,6 @@ public class ControleurApp1
                     valideCuve = controleur.creerCuve(capaciteMaximal);
                 } catch (Exception e)
                 {
-                    //TODO: handle exception
                     System.err.println("Erreur: " + e.getMessage());
                 }
 
@@ -178,7 +211,7 @@ public class ControleurApp1
         {
             System.out.println("Voulez-vous créer un tuyau ? (O/N)");
             resCreerTuyau = Clavier.lire_char();
-            if(Character.toUpperCase(resCreerTuyau) == 'N')
+            if (Character.toUpperCase(resCreerTuyau) == 'N')
                 break;
 
             valideTuyau = false;
@@ -229,6 +262,7 @@ public class ControleurApp1
                 case 3:
                     ReseauFormatType reseauFormatType = ReseauFormatType.values()[selectionFormat - 1];
                     controleur.sauvegarderReseau(reseauFormatType, "reseau.data");
+                    System.out.println("Le fichier a été enregistré dans reseau.data avec le type: " + reseauFormatType.getNom());
                     break;
                 default:
                     break;
