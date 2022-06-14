@@ -5,11 +5,21 @@ import src.common.Tuyau;
 
 import java.util.ArrayList;
 
-public class ReseauFormatListeAdjacence implements ReseauFormat<ReseauFormatListeAdjacence.ListeAdjacente>
+public class ReseauFormatListeAdjacence implements ReseauFormat
 {
 	private static final String DELIMITEUR = "\n" + "-".repeat(5) + "\n";
 
 	public record ListeAdjacente(char[][] cuveIds, int[] sections) {};
+
+	public void ajouterTuyaux(String s, Reseau r)
+	{
+		this.ajouterTuyaux(this.fromString(s), r);
+	}
+
+	public String toString(Reseau r)
+	{
+		return this.toString(this.fromReseau(r));
+	}
 
 	public void ajouterTuyaux(ListeAdjacente liste, Reseau reseau)
 	{
@@ -17,8 +27,8 @@ public class ReseauFormatListeAdjacence implements ReseauFormat<ReseauFormatList
 		{
 			reseau.creerTuyau(
 					liste.sections()[i],
-					(char) ('A' + liste.cuveIds()[i][0]),
-					(char) ('A' + liste.cuveIds()[i][1])
+					liste.cuveIds()[i][0],
+					liste.cuveIds()[i][1]
 			);
 		}
 	}

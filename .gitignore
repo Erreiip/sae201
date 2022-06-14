@@ -10,7 +10,7 @@
 *.tar.gz
 *.rar
 *.txt
-
+*.data
 # IntelliJ Idea
 /.idea/
 /out/

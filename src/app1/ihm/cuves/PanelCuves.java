@@ -39,6 +39,7 @@ public class PanelCuves extends APanelTable
 
     public void majListe()
     {
+        this.getBtnCreerElement().setEnabled(this.getCtrl().getCuves().size() < this.getCtrl().getNbCuves());
         super.majListe(new CuvesGrilleDonneesModel(this.getCtrl()));
     }
 

@@ -55,13 +55,6 @@ public class FichierReseau
 		return sb.toString();
 	}
 
-	public Reseau getReseau()
-	{
-		return reseau;
-	}
-
-	public ReseauFormatType getTypeFormat()
-	{
-		return typeFormat;
-	}
+	public Reseau           getReseau()     { return reseau; }
+	public ReseauFormatType getTypeFormat() { return typeFormat;}
 }

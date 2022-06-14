@@ -6,14 +6,19 @@ import java.util.Map;
 import java.awt.Dimension;
 
 import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Scanner;
 
 import src.app2.ihm.*;
 import src.common.Reseau;
 import src.common.Tuyau;
+import src.common.reseau.fichier.FichierReseau;
 import src.common.Cuve;
 import src.common.PositionInfos;
 
+import java.nio.file.Path;
+import java.nio.file.Files;
 
 public class ControleurApp2
 {
@@ -119,189 +124,43 @@ public class ControleurApp2
             }
         }
     }
-
-
-    public void setPath ( String path ) 
-    { 
-        this.pathMatrice = path;
-        if ( this.creerReseau() ) 
-            this.frame.dessiner();
-    }
+ 
 
     public Reseau getMetier() { return this.metier;   }
     public void   fermer()    { this.frame.dispose(); }
 
     public void dessiner  () { this.frame.dessiner  (); }
     public void redessiner() { this.frame.redessiner(); }
-    
+
     public void tranverser()
     {
         this.metier.transverser();
         this.frame.redessiner();
     }
 
-    public boolean creerReseau()
-    {
-        this.metier = new Reseau();
-
-        boolean continuer = true;
-        String   type      = this.getType(); 
-
-        Cuve[]     tabCuves;
-        Object[][] matrice;
-
-        {
-            String temp = this.initScan(type);
-            int lig     = Integer.parseInt(temp.charAt(0) + ""); 
-            int col     = Integer.parseInt(temp.charAt(1) + ""); 
-
-            matrice   = new Object[lig][col];
-            tabCuves  = new Cuve  [col];
-        }
-
-
+    public boolean creerReseau(String pathFichier)
+    {   
+        String contenuFichier ="";
+        FichierReseau fichierReseau = null;
         try
         {
+            contenuFichier = Files.readString(Path.of(pathFichier));
+            fichierReseau = FichierReseau.fromString(contenuFichier);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (fichierReseau == null) return false;
 
-            Scanner sc = new Scanner( new FileReader( this.pathMatrice ) );              
-            sc.nextLine();
-
-            for ( int lig = 0; sc.hasNextLine() && continuer; lig++ )
-            {
-                String str = sc.nextLine();
-                continuer  = !str.equals("---");
-
-                String[] strSplit = str.split(" +");
-
-                for ( int col = 0; col < strSplit.length && continuer; col++ )
-                {
-                    matrice[lig][col] = strSplit[col];
-                }
-                
-            }
-
-                
-            if ( type.equals("Liste d'adjacence"))
-            {
-                System.out.println(type);
-                int lig = 0;
-                continuer = true;
-                while( sc.hasNextLine() && continuer )
-                {
-                    String str = sc.nextLine();
-                    continuer  = !str.equals("---");
-                    
-
-                    if ( continuer )
-                        matrice[lig][matrice[lig].length-1] = str;
-                    
-                    lig++;
-                }
-            } 
-            
-            int cpt = 0;
-            continuer = true;
-            while( sc.hasNextLine() && continuer )
-            {
-                String str = sc.nextLine();
-                continuer  = !str.equals("---");
-
-                if ( continuer )
-                    tabCuves[cpt] = this.metier.creerCuve(Integer.parseInt(str)); 
-                
-                cpt++;
-            }
-
-
-            //Création du réseau pour la matrice des couts (opti et non)//
-            if ( type.equals("Matrice de couts") || type.equals("Matrice de couts opti") )
-            { 
-                for ( int lig = 0; lig < matrice.length; lig++ )
-                {
-                    for ( int col = 0; col < matrice[lig].length; col++ )
-                    {
-                        try {
-                            this.metier.creerTuyau( Integer.parseInt((String)matrice[lig][col]), tabCuves[lig], tabCuves[col]);
-                        }catch(Exception e){}
-                    }
-                }
-            }
-
-
-            this.placementCuves();
-
-            /* test pour voir la matrice */
-            /*
-            for ( int lig = 0; lig < matrice.length; lig++ )
-            {
-                for ( int col = 0; col < matrice[lig].length; col++ )
-                {
-                    System.out.print((matrice[lig][col] != null?matrice[lig][col]:" ") + "|");
-                }
-                System.out.println();
-            }
-            */
-            
-        } catch (Exception e) { e.printStackTrace(); return false; }
-
-
+        this.metier = fichierReseau.getReseau();
+        this.placementCuves();
+        this.frame.dessiner();
         return true;
     }
+ 
 
 
-    private String initScan( String type ) 
-    {  
-        int     lig = 0;
-        int     col = 0;
-        int maxCol  = 0;
 
-        boolean continuer = true;
-
-        try 
-        {
-            Scanner sc = new Scanner( new FileReader( this.pathMatrice ) );
-
-            sc.nextLine();
-
-            for ( lig = 0; sc.hasNextLine() && continuer; lig++ ) 
-            { 
-                String str = sc.nextLine();
-                continuer = !str.equals("---");
-                
-                col = str.split(" +").length;
-
-                if ( col > maxCol )
-                    maxCol = col;
-            }
-    
-            sc.close();
-
-
-            //paassage en coordonnées réels de lig//
-            lig--;
-
-            if ( type.equals("Liste d'adjacence"))  maxCol++;
-
-            return lig + "" + maxCol;
-            
-        } catch (Exception e) { System.out.println(e); return null;}   
-    }
-
-    
-    private String getType()
-    {
-        try  
-        {
-            Scanner sc = new Scanner( new FileReader( this.pathMatrice ) );
-
-            String temp = sc.nextLine(); 
-
-            sc.close();
-
-            return temp;    
-        } 
-        catch ( Exception e ) { return null; }
-    }
     
 
     public static void main ( String args[] )
