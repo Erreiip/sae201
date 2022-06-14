@@ -1,3 +1,5 @@
 package src.common;
 
-public interface IReseauElement {}
+public interface IReseauElement
+{
+}
