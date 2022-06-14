@@ -153,6 +153,9 @@ public class ControleurApp1
             return;
         }
 
+
+        /*---------MODE CUI----------- */
+        /*---------------------------- */
         int     nbCuves;
         int     capaciteMaximal;
         boolean valideCuve;
@@ -177,7 +180,7 @@ public class ControleurApp1
             /* Renseigner capacite de cuve en creation */
             do
             {
-                System.out.print("Entrez la capacité maximale de la cuve " + idCuveEnCreation + " (entre 200 et 2000) : ");
+                System.out.print("Entrez la capacité maximale de la cuve " + idCuveEnCreation + " (entre 200 et 1000) : ");
                 capaciteMaximal = Clavier.lire_int();
 
                 valideCuve = false;
