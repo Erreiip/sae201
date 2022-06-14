@@ -83,7 +83,7 @@ public class PanelPaint extends JPanel
         int i = 0;
         for ( Cuve c : this.ctrl.getMetier().getCuves() )
         {
-            g.setColor( this.degrade( c.getContenu(), c.getCapacite()) );
+            g.setColor( this.degrade( c.getContenu() ) );
             g2d.fill  ( tabPoints[i] );
 
 
@@ -105,20 +105,23 @@ public class PanelPaint extends JPanel
     }
 
 
-    private Color degrade ( Double contenu, int capa)
+    private Color degrade ( Double contenu)
     {
-        int nbIte = 0;
+        double red,green,blue;
+        red = green =blue = 0;
 
-        if ( contenu != 0)
-            nbIte = (int) ((capa / contenu) / (double) capa) * 255;
+        if (contenu >=0 && contenu <= 500)
+        {
+            red = 255;
+            green = blue = -255/500f * contenu + 255f;
+        }
+        if (contenu >500 && contenu <= 1000)
+        {
+            green = blue = 0;
+            red   = -51/100f * contenu + 510f;
+        }
+        Color c = new Color((int)red,(int)green,(int)blue);
 
-        Color c = new Color( 255 , 0,0 );
-
-        if ( nbIte > 127 )
-            for ( int cpt = 0; cpt < nbIte; cpt++) { c.brighter(); }
-        else
-            for ( int cpt = 255; cpt > nbIte; cpt--) { c.darker(); }
-        
         return c;
     }
 
