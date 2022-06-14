@@ -99,56 +99,7 @@ public class ControleurApp1
         return reseau.toString();
     }
 
-    public void sortieFichierTexteMatriceAdjacente()
-    {
-        String sRet = ReseauFormatType.LISTE_ADJA.getFormat().toString(this.reseau);
-        try
-		{
-			PrintWriter pw = new PrintWriter( new FileOutputStream("sortie.txt") );
-
-            pw.println (sRet);
-
-			pw.close();
-		}
-		catch (Exception e){ e.printStackTrace(); }
-        /*Test sur le console*/
-
-        System.out.println(sRet);
-    }
-
-    public void sortieFichierTexteMatriceCout ()
-    {
-        String sRet = ReseauFormatType.COUTS.getFormat().toString(this.reseau);
-        try
-		{
-			PrintWriter pw = new PrintWriter( new FileOutputStream("sortie.txt") );
-
-            pw.println (sRet);
-
-			pw.close();
-		}
-		catch (Exception e){ e.printStackTrace(); }
-        /*Test sur le console*/
-
-        System.out.println(sRet);
-    }
-
-    public void sortieFichierTexteMatriceCoutOpti()
-    {
-        String sRet = ReseauFormatType.COUTS_OPTI.getFormat().toString(this.reseau);
-        try
-		{
-			PrintWriter pw = new PrintWriter( new FileOutputStream("sortie.txt") );
-
-            pw.println (sRet);
-
-			pw.close();
-		}
-		catch (Exception e){ e.printStackTrace(); }
-        /*Test sur le console*/
-
-        System.out.println(sRet);
-    }
+ 
 
 
 
@@ -269,19 +220,18 @@ public class ControleurApp1
             switch (selectionFormat) {
                 case 1:
 
-                    controleur.sortieFichierTexteMatriceAdjacente();
+                    controleur.sauvegarderReseau(ReseauFormatType.LISTE_ADJA,"sortie.txt");
                     break;
 
                 case 2:
 
-                    controleur.sortieFichierTexteMatriceCout();
+                    controleur.sauvegarderReseau(ReseauFormatType.COUTS,"sortie.txt");
                     break;
 
                 case 3:
 
-                    controleur.sortieFichierTexteMatriceCoutOpti();
+                    controleur.sauvegarderReseau(ReseauFormatType.COUTS_OPTI,"sortie.txt");                    
                     break;
-
                 default:
                     break;
             }
