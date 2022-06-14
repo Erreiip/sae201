@@ -27,8 +27,8 @@ public class ReseauFormatListeAdjacence implements ReseauFormat
 		{
 			reseau.creerTuyau(
 					liste.sections()[i],
-					(char) ('A' + liste.cuveIds()[i][0]),
-					(char) ('A' + liste.cuveIds()[i][1])
+					liste.cuveIds()[i][0],
+					liste.cuveIds()[i][1]
 			);
 		}
 	}
