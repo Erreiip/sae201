@@ -125,12 +125,14 @@ public class PanelPaint extends JPanel
     {
         double red,green,blue;
         red = green =blue = 0;
-
+        /*On trouve l'equation green = A x contenu + B */
         if (contenu >=0 && contenu <= 500)
         {
             red = 255;
             green = blue = -255/500f * contenu + 255f;
         }
+
+        /*On trouve l'equation red = A x contenu + B */
         if (contenu >500 && contenu <= 1000)
         {
             green = blue = 0;
