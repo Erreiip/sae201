@@ -133,7 +133,12 @@ public class ControleurApp2
 
     public void dessiner  () { this.frame.dessiner  (); }
     public void redessiner() { this.frame.redessiner(); }
-
+    
+    public void tranverser()
+    {
+        this.metier.transverser();
+        this.frame.redessiner();
+    }
 
     public boolean creerReseau()
     {

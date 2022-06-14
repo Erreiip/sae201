@@ -97,6 +97,11 @@ public class PanelAction extends JPanel implements ActionListener
             this.ctrl.getMetier().setAllCuve();
             this.ctrl.redessiner();
         }
+
+        if ( e.getSource() == this.btnIte )
+        {
+            this.ctrl.tranverser();
+        }
     }    
 }
 

@@ -33,6 +33,7 @@ public class PanelPaint extends JPanel
     {
         this.tabPoints = new Ellipse2D[this.ctrl.getMetier().getCuves().size()];
 
+        
         int i = 0;
         for ( Cuve c : this.ctrl.getMetier().getCuves() )
         {
@@ -72,7 +73,11 @@ public class PanelPaint extends JPanel
             int yFin    = (int) temp2.getY() + taille2/2;
 
             g.setColor( Color.BLACK );
-            g.drawLine( xDepart, yDepart, xFin, yFin );
+            
+            for ( int cpt = 0; cpt < t.getSection(); cpt++)
+                g.drawLine( (int) (xDepart + cpt / 1.5), (int) (yDepart - cpt / 1.5), (int) (xFin + cpt / 1.5), (int) (yFin - cpt / 1.5) );
+
+            g.drawString(t.getSection() + "", (xDepart + xFin) / 2 + 10, (yDepart + yFin) / 2 - 10);
         }
          
         int i = 0;
