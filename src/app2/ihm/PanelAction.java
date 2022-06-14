@@ -14,19 +14,19 @@ import java.awt.event.*;
 
 public class PanelAction extends JPanel implements ActionListener
 {
-    private ControleurApp2 ctrl;
+    private final ControleurApp2 ctrl;
 
-    private JTextField txtCuve;
-    private JTextField txtContenu;
-    private JButton    btnAction;
-    private JButton    btnInitAll;
+    private final JTextField txtCuve;
+    private final JTextField txtContenu;
+    private final JButton    btnAction;
+    private final JButton    btnInitAll;
 
-    private JButton btnIte;
-    private JButton btnContinue;
+    private final JButton btnIte;
+    private final JButton btnContinue;
 
-    private JLabel lblInfo;
+    private final JLabel lblInfo;
 
-    private JLabel lblIteration;
+    private final JLabel lblIteration;
 
     private int nbIteration;
 

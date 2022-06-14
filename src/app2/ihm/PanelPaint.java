@@ -18,18 +18,16 @@ import java.awt.geom.Ellipse2D;
 
 public class PanelPaint extends JPanel
 {
-    private ControleurApp2 ctrl;
+    private final ControleurApp2 ctrl;
 
     private Ellipse2D[] tabPoints;
-
-    private Ellipse2D ellipseSelectionnee;
+    private Ellipse2D   ellipseSelectionnee;
 
     public PanelPaint(ControleurApp2 ctrl)
     {
         this.ctrl = ctrl;
         this.tabPoints = new Ellipse2D[this.ctrl.getMetier().getCuves().size()];
     }
-
 
     public void initPaint()
     {
@@ -82,15 +80,12 @@ public class PanelPaint extends JPanel
 
             g.drawLine(xDepart, yDepart, xFin, yFin);
 
-            if (yDepart - yFin < 0)
-                if (xDepart - xFin > 0)
-                    g.drawString(t.getSection() + "", (xDepart + xFin) / 2 - 20, (yDepart + yFin) / 2 - 10);
-                else
-                    g.drawString(t.getSection() + "", (xDepart + xFin) / 2 + 20, (yDepart + yFin) / 2 - 10);
+            if (yDepart - yFin < 0) if (xDepart - xFin > 0)
+                g.drawString(t.getSection() + "", (xDepart + xFin) / 2 - 20, (yDepart + yFin) / 2 - 10);
+            else g.drawString(t.getSection() + "", (xDepart + xFin) / 2 + 20, (yDepart + yFin) / 2 - 10);
             else if (xDepart - xFin < 0)
                 g.drawString(t.getSection() + "", (xDepart + xFin) / 2 - 20, (yDepart + yFin) / 2 - 10);
-            else
-                g.drawString(t.getSection() + "", (xDepart + xFin) / 2 + 20, (yDepart + yFin) / 2 - 10);
+            else g.drawString(t.getSection() + "", (xDepart + xFin) / 2 + 20, (yDepart + yFin) / 2 - 10);
         }
 
         g2d.setStroke(new BasicStroke(1));
@@ -125,14 +120,14 @@ public class PanelPaint extends JPanel
     {
         double red, green, blue;
         red = green = blue = 0;
-        /*On trouve l'equation green = A x contenu + B */
+        // On trouve l'equation green = A x contenu + B
         if (contenu >= 0 && contenu <= 500)
         {
             red = 255;
             green = blue = -255 / 500f * contenu + 255f;
         }
 
-        /*On trouve l'equation red = A x contenu + B */
+        // On trouve l'équation red = A x contenu + B
         if (contenu > 500 && contenu <= 1000)
         {
             green = blue = 0;

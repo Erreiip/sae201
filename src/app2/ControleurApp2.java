@@ -130,11 +130,6 @@ public class ControleurApp2
         this.frame.dispose();
     }
 
-    public void dessiner()
-    {
-        this.frame.dessiner();
-    }
-
     public void redessiner()
     {
         this.frame.redessiner();

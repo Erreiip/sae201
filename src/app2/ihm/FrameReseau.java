@@ -10,11 +10,11 @@ import java.awt.BorderLayout;
 public class FrameReseau extends JFrame
 {
 
-    private ControleurApp2 ctrl;
+    private final ControleurApp2 ctrl;
 
-    private PanelPaint  panelPrincipal;
-    private PanelMenu   panelMenu;
-    private PanelAction panelAction;
+    private final PanelPaint  panelPrincipal;
+    private final PanelMenu   panelMenu;
+    private final PanelAction panelAction;
 
     public FrameReseau(ControleurApp2 controleurApp2)
     {

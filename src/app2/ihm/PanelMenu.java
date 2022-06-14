@@ -10,11 +10,10 @@ import src.app2.ControleurApp2;
 
 public class PanelMenu extends JPanel implements ActionListener
 {
-    private ControleurApp2 ctrl;
+    private final ControleurApp2 ctrl;
 
-    private JMenuItem menuiFichierOuvrir;
-    private JMenuItem menuiFichierQuitter;
-
+    private final JMenuItem menuiFichierOuvrir;
+    private final JMenuItem menuiFichierQuitter;
 
     public PanelMenu(ControleurApp2 ctrl)
     {
@@ -60,12 +59,9 @@ public class PanelMenu extends JPanel implements ActionListener
     {
 
         JFileChooser fileChooser = new JFileChooser("" + new File("../") + "");
-
-        // Création et ouverture d'un JFileChooser pour affecter
-
         if (e.getSource() instanceof JMenuItem)
         {
-            if (((JMenuItem) e.getSource()).getText() == "Ouvrir")
+            if (e.getSource() == menuiFichierOuvrir)
             {
 
                 int tmp = fileChooser.showOpenDialog(this);
@@ -74,7 +70,7 @@ public class PanelMenu extends JPanel implements ActionListener
             }
 
             // Fermeture de l'application
-            if (((JMenuItem) e.getSource()).getText() == "Quitter")
+            if (e.getSource() == menuiFichierQuitter)
             {
                 this.ctrl.fermer();
             }
