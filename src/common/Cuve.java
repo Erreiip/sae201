@@ -3,7 +3,7 @@ package src.common;
 /**
  * Une cuve représente un compartiment de stockage dans laquelle se stocke une unité de capacité.
  */
-public class Cuve implements IReseauElement
+public class Cuve implements IReseauElement, Comparable<Cuve>
 {
     public static final int MIN_CAPACITE = 200;
     public static final int MAX_CAPACITE = 2000;
@@ -92,5 +92,10 @@ public class Cuve implements IReseauElement
                 ":" + y +
                 "] " +
                 contenu + "/" + capacite + "}";
+    }
+
+    public int compareTo( Cuve autreCuve)
+    {
+        return (int) Math.ceil(this.contenu) - (int) Math.ceil(autreCuve.contenu);
     }
 }

@@ -54,6 +54,14 @@ public class Reseau
         return null;
     }
 
+    public void setAllCuve() 
+    {
+        for ( Cuve c : this.cuves )
+        {
+            c.ajouterContenu( Math.round(Math.random() * (c.getCapacite() - c.getContenu())) );
+        }
+    }
+
     // Fabriques
 
     /**
@@ -103,6 +111,7 @@ public class Reseau
         }
         return c;
     }
+    
 
     /**
      * Retourne vrai si les deux listCuves sont reliées par un tuyau dans ce réseau.
@@ -114,79 +123,9 @@ public class Reseau
 
     public void transverser()
     {
-        ArrayList<Transfert> ensTransfert       = new ArrayList<>();
-        ArrayList<Integer>   ensNbSectionSor    = new ArrayList<>();
-        ArrayList<Integer>   ensSommeSectionSor = new ArrayList<>();
-        ArrayList<Integer>   ensNbSectionEnt    = new ArrayList<>();
-        ArrayList<Integer>   ensSommeSectionEnt = new ArrayList<>();
+       Collections.sort(this.cuves);
 
-        for( Tuyau ty : this.tuyaux )
-        {
-            Transfert iteTrans = ty.transverser();
-            if ( iteTrans != null ) ensTransfert.add(iteTrans);
-        }
-
-        Collections.sort(ensTransfert);
-
-
-        for( Cuve c : this.cuves )
-        {
-            int nbSectionEnt    = 0;
-            int sommeSectionEnt = 0;
-
-            int nbSectionSor    = 0;
-            int sommeSectionSor = 0;
-
-            for( Transfert tr : ensTransfert )
-            {
-                if ( tr.getCuveDepart() == c )
-                {
-                    sommeSectionSor += tr.getQuantite();
-                    nbSectionSor++;
-                }
-                if ( tr.getCuveArrivee() == c )
-                {
-                    sommeSectionEnt += tr.getQuantite();
-                    nbSectionEnt++;
-                }
-            }
-            ensNbSectionEnt   .add(nbSectionEnt);
-            ensSommeSectionEnt.add(sommeSectionEnt);
-            ensNbSectionSor   .add(nbSectionSor);
-            ensSommeSectionSor.add(sommeSectionSor);
-        }
-
-        for( int cpt=0 ; cpt < ensTransfert.size() ; cpt++ )
-        {
-            Transfert iteTrans       = ensTransfert.get(cpt);
-            double    contenuCuveDep = iteTrans.getCuveDepart ().getContenu();
-            double    contenuCuveArr = iteTrans.getCuveArrivee().getContenu();
-
-            double tMax = iteTrans.getQuantite();
-
-            if ( contenuCuveDep - tMax < contenuCuveArr + tMax )
-                tMax = contenuCuveDep - contenuCuveDep;
-
-            if ( tMax > ensSommeSectionSor.get(cpt) )
-                tMax = contenuCuveDep - contenuCuveArr / ensNbSectionSor.get(cpt);
-
-            if ( tMax > ensSommeSectionEnt.get(cpt) )
-                tMax = contenuCuveDep - contenuCuveArr / ensNbSectionEnt.get(cpt);
-
-            if ( tMax > contenuCuveDep ) tMax = contenuCuveDep;
-
-            if ( contenuCuveArr + tMax > iteTrans.getCuveArrivee().getCapacite() )
-                tMax = iteTrans.getCuveArrivee().getCapacite() - contenuCuveArr;
-
-            iteTrans.setQuantite(tMax);
-        }
-
-        for( Transfert t : ensTransfert )
-        {
-            t.getCuveDepart ().retirerContenu(t.getQuantite());
-            t.getCuveArrivee().ajouterContenu(t.getQuantite());
-            System.out.println( t.getQuantite() );
-        }
+       
     }
 
     @Override

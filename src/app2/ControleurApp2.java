@@ -29,8 +29,6 @@ public class ControleurApp2
         this.pathMatrice = null; 
     }
 
-    public void dessiner() { this.frame.dessiner(); }
-
 
     public void placementCuves()
     {
@@ -132,6 +130,9 @@ public class ControleurApp2
 
     public Reseau getMetier() { return this.metier;   }
     public void   fermer()    { this.frame.dispose(); }
+
+    public void dessiner  () { this.frame.dessiner  (); }
+    public void redessiner() { this.frame.redessiner(); }
 
 
     public boolean creerReseau()

@@ -16,6 +16,7 @@ public class PanelAction extends JPanel implements ActionListener
     private JTextField txtCuve;
     private JTextField txtContenu;
     private JButton    btnAction;
+    private JButton    btnInitAll;
 
     private JButton    btnIte;
     private JButton    btnContinue;
@@ -32,6 +33,7 @@ public class PanelAction extends JPanel implements ActionListener
 
         JPanel panelContenu = new JPanel( new BorderLayout(3,3) );
         JPanel panelText    = new JPanel( new GridLayout( 2, 2) );
+        JPanel panelBtn     = new JPanel( new GridLayout( 2, 1) );
 
         JLabel lblCuve     = new JLabel( "Identifiant Cuve : ", JLabel.RIGHT );
         JLabel lblContenu  = new JLabel( "Contenu : "         , JLabel.RIGHT );
@@ -39,6 +41,7 @@ public class PanelAction extends JPanel implements ActionListener
         this.txtCuve    = new JTextField();
         this.txtContenu = new JTextField();
         this.btnAction  = new JButton( "Valider");
+        this.btnInitAll = new JButton( "Tout ajouter du contenu" );
 
         JPanel panelIteration = new JPanel(new GridLayout(2,1));
 
@@ -56,15 +59,19 @@ public class PanelAction extends JPanel implements ActionListener
         panelText   .add  ( lblContenu       );
         panelText   .add  ( this.txtContenu  );
 
-        panelContenu.add  ( panelText       , BorderLayout.NORTH  );
-        panelContenu.add  ( this.btnAction  , BorderLayout.CENTER );
-        panelContenu.add  ( this.lblInfo    , BorderLayout.SOUTH  );
+        panelBtn    .add  ( this.btnAction   );
+        panelBtn    .add  ( this.btnInitAll  );
+
+        panelContenu.add  ( panelText     , BorderLayout.NORTH  );
+        panelContenu.add  ( panelBtn      , BorderLayout.CENTER );
+        panelContenu.add  ( this.lblInfo  , BorderLayout.SOUTH  );
 
 
         this.add( panelContenu  , BorderLayout.NORTH);
         this.add( panelIteration, BorderLayout.SOUTH);
 
         this.btnAction  .addActionListener( this );
+        this.btnInitAll .addActionListener( this );
         this.btnContinue.addActionListener( this );
         this.btnIte     .addActionListener( this );
 
@@ -79,10 +86,16 @@ public class PanelAction extends JPanel implements ActionListener
             { 
                 this.ctrl.getMetier().getCuve(this.txtCuve.getText().charAt(0)).ajouterContenu(Integer.parseInt(this.txtContenu.getText())); 
                 this.lblInfo.setText( "Contenu changé" );
-                this.ctrl.dessiner();
+                this.ctrl.redessiner();
             } catch (Exception ex) { 
                 this.lblInfo.setText("Erreur"); 
             }
+        }
+
+        if ( e.getSource() == this.btnInitAll )
+        {
+            this.ctrl.getMetier().setAllCuve();
+            this.ctrl.redessiner();
         }
     }    
 }
