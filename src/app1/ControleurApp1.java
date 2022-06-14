@@ -133,11 +133,10 @@ public class ControleurApp1
         /*----------------------------*/
         /**Demander le nombre de cuves*/
         /*----------------------------*/
-        System.out.println("Veuillez entrez le nombre de cuves :");
         do
         {
+            System.out.print("Veuillez entrez le nombre de cuves entre 1 et 26: ");
             nbCuves = Clavier.lire_int();
-            if (nbCuves > 26) System.out.println("Le nombre de cuves maximum a été atteint.");
         } while (nbCuves > 26);
 
         /**Creations des cuves */
@@ -149,7 +148,7 @@ public class ControleurApp1
             /* Renseigner capacite de cuve en creation */
             do
             {
-                System.out.print("Entrez la capacité maximale de la cuve " + idCuveEnCreation + " (entre 200 et 2000) :");
+                System.out.print("Entrez la capacité maximale de la cuve " + idCuveEnCreation + " (entre 200 et 2000) : ");
                 capaciteMaximal = Clavier.lire_int();
 
                 valideCuve = false;
