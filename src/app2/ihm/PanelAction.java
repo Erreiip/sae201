@@ -7,29 +7,39 @@ import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
+import java.awt.Color;
+
 import java.awt.event.*;
+
 
 public class PanelAction extends JPanel implements ActionListener
 {
     private ControleurApp2 ctrl;
 
-    private JTextField txtCuve;
-    private JTextField txtContenu;
-    private JButton    btnAction;
-    private JButton    btnInitAll;
+    private JTextField       txtCuve;
+    private JTextField       txtContenu;
+    private JButton          btnAction;
+    private JButton          btnInitAll;
 
-    private JButton    btnIte;
-    private JButton    btnContinue;
+    private JButton          btnIte;
+    private JButton          btnContinue;
 
-    private JLabel     lblInfo;
+    private JLabel           lblInfo;
 
-    private JLabel     lblIteration;
+    private JLabel           lblIteration;
 
-    private int        nbIteration;
+    private int              nbIteration;
+
+    private ThreadIterations thIterations;
+    private boolean          thStart;
 
     public PanelAction( ControleurApp2 ctrl )
     {
-        this.ctrl = ctrl;
+        this.ctrl         = ctrl;
+
+        this.thIterations = null;
+        this.thStart      = false;
+
 
         this.setLayout( new BorderLayout() );
 
@@ -117,7 +127,43 @@ public class PanelAction extends JPanel implements ActionListener
             this.nbIteration++;
             this.lblIteration.setText( "Nombre d'itérations : " + this.nbIteration);
         }
-    }    
+
+        if ( e.getSource() == this.btnContinue )
+        {
+
+            if ( !this.thStart )
+            {    
+                this.thStart = true;
+                this.thIterations = new ThreadIterations();
+                this.thIterations.start();
+                this.btnContinue.setBackground( Color.GREEN);
+            }
+            else
+            {
+                this.thStart = false;
+                this.thIterations.stop();
+                this.thIterations = null;
+                this.btnContinue.setBackground( null );
+            }
+        }
+    }   
+    
+    private class ThreadIterations extends Thread
+    {
+        public void run()
+        {
+            while ( PanelAction.this.thStart )
+            {
+                try{                    
+                    Thread.sleep(1000);
+                    PanelAction.this.ctrl.tranverser();
+                    PanelAction.this.nbIteration++;
+                    PanelAction.this.lblIteration.setText( "Nombre d'itérations : " + PanelAction.this.nbIteration);
+                } catch (Exception e) {  }
+                
+            }
+        }
+    }
 }
 
 
