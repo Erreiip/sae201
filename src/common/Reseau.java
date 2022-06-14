@@ -162,7 +162,6 @@ public class Reseau
 
         for ( Transfert t : tabTransferts )
         {
-            System.out.println(t.getCuveDepart().getIdentifiant() + "/" + t.getQuantite() + "/" + t.getCuveArrivee().getIdentifiant());
             try{
                 t.getCuveArrivee().ajouterContenu(t.getQuantite());
                 t.getCuveDepart ().retirerContenu(t.getQuantite());

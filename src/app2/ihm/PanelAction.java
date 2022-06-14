@@ -23,6 +23,9 @@ public class PanelAction extends JPanel implements ActionListener
 
     private JLabel     lblInfo;
 
+    private JLabel     lblIteration;
+
+    private int        nbIteration;
 
     public PanelAction( ControleurApp2 ctrl )
     {
@@ -43,12 +46,17 @@ public class PanelAction extends JPanel implements ActionListener
         this.btnAction  = new JButton( "Valider");
         this.btnInitAll = new JButton( "Tout ajouter du contenu" );
 
+
         JPanel panelIteration = new JPanel(new GridLayout(2,1));
 
-        this.btnContinue = new JButton("Itération Continue");
-        this.btnIte      = new JButton("Itération suivante");
+        this.btnContinue  = new JButton("Itération Continue");
+        this.btnIte       = new JButton("Itération suivante");
 
-        this.lblInfo     = new JLabel("", JLabel.CENTER);
+        this.lblInfo      = new JLabel("", JLabel.CENTER);
+
+
+        this.nbIteration  = 0;
+        this.lblIteration = new JLabel("Nombres d'itérations : " + this.nbIteration, JLabel.CENTER);
 
 
         panelIteration.add( this.btnIte      );
@@ -67,8 +75,9 @@ public class PanelAction extends JPanel implements ActionListener
         panelContenu.add  ( this.lblInfo  , BorderLayout.SOUTH  );
 
 
-        this.add( panelContenu  , BorderLayout.NORTH);
-        this.add( panelIteration, BorderLayout.SOUTH);
+        this.add( panelContenu     , BorderLayout.NORTH );
+        this.add( this.lblIteration, BorderLayout.CENTER);
+        this.add( panelIteration   , BorderLayout.SOUTH );
 
         this.btnAction  .addActionListener( this );
         this.btnInitAll .addActionListener( this );
@@ -105,6 +114,8 @@ public class PanelAction extends JPanel implements ActionListener
         if ( e.getSource() == this.btnIte )
         {
             this.ctrl.tranverser();
+            this.nbIteration++;
+            this.lblIteration.setText( "Nombre d'itérations : " + this.nbIteration);
         }
     }    
 }
