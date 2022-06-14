@@ -33,7 +33,7 @@ public class FrameReseau extends JFrame
         this.panelMenu      = new PanelMenu  ( this.ctrl );
         this.panelPrincipal = new PanelPaint ( this.ctrl );
         this.panelAction    = new PanelAction( this.ctrl );
-        
+
 
         this.add( this.panelMenu     , BorderLayout.NORTH  );
         this.add( this.panelPrincipal, BorderLayout.CENTER );
@@ -46,6 +46,11 @@ public class FrameReseau extends JFrame
     public void dessiner()
     {
         panelPrincipal.initPaint();
+        panelPrincipal.repaint();
+    }
+
+    public void redessiner()
+    {
         panelPrincipal.repaint();
     }
 
