@@ -152,8 +152,10 @@ public class ControleurApp2
             e.printStackTrace();
         }
         if (fichierReseau == null) return false;
-        
+
         this.metier = fichierReseau.getReseau();
+        this.placementCuves();
+        this.frame.dessiner();
         return true;
     }
     public boolean creerReseau()

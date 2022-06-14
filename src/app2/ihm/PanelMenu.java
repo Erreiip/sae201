@@ -70,7 +70,7 @@ public class PanelMenu extends JPanel implements ActionListener
 				
 				int tmp = fileChooser.showOpenDialog(this);
 				if(tmp == JFileChooser.APPROVE_OPTION)
-					this.ctrl.setPath ( fileChooser.getSelectedFile().getPath() );
+					this.ctrl.creerReseau ( fileChooser.getSelectedFile().getPath() );
 			}
 
 			// Fermeture de l'application
