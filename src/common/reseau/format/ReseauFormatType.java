@@ -8,10 +8,10 @@ public enum ReseauFormatType
 	COUTS_OPTI   ("Coûts (Optimisé)",   new ReseauFormatMatrice(false, true )),
 	LISTE_ADJA   ("Liste d'adjacence",  new ReseauFormatListeAdjacence());
 
-	private final String        nom;
-	private final ReseauFormat<?> format;
+	private final String       nom;
+	private final ReseauFormat format;
 
-	ReseauFormatType(String nom, ReseauFormat<?> format)
+	ReseauFormatType(String nom, ReseauFormat format)
 	{
 		this.nom    = nom;
 		this.format = format;
@@ -44,7 +44,7 @@ public enum ReseauFormatType
 	/**
 	 * @return le format de réseau
 	 */
-	public ReseauFormat<?> getFormat()
+	public ReseauFormat getFormat()
 	{
 		return format;
 	}

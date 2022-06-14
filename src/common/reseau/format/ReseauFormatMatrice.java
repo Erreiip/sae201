@@ -7,7 +7,7 @@ import src.common.Tuyau;
 
 import java.util.Arrays;
 
-class ReseauFormatMatrice implements ReseauFormat<int[][]>
+class ReseauFormatMatrice implements ReseauFormat
 {
 	private static final char SANS_CONNECTION_CHAR = 'X';
 	private static final int  SANS_CONNECTION_INT  = -1;
@@ -19,6 +19,16 @@ class ReseauFormatMatrice implements ReseauFormat<int[][]>
 	{
 		this.binaire = binaire;
 		this.optimise = optimise;
+	}
+
+	public void ajouterTuyaux(String s, Reseau r)
+	{
+		this.ajouterTuyaux(this.fromString(s), r);
+	}
+
+	public String toString(Reseau r)
+	{
+		return this.toString(this.fromReseau(r));
 	}
 
 	public void ajouterTuyaux(int[][] matrice, Reseau reseau)
