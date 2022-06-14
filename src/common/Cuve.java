@@ -32,11 +32,11 @@ public class Cuve implements IReseauElement, Comparable<Cuve>
     {
         if (capacite < Cuve.MIN_CAPACITE || capacite > Cuve.MAX_CAPACITE)
         {
-            throw new IllegalArgumentException("La capacité doit être comprise entre 200 et 2000");
+            throw new IllegalArgumentException("la capacité doit être comprise entre " + Cuve.MIN_CAPACITE + " et " + Cuve.MAX_CAPACITE);
         }
         if (reseau.getCuves().size() >= Cuve.NB_CUVES_MAX)
         {
-            throw new IllegalArgumentException("Le nombre de cuves est trop élevé (maximum " + Cuve.NB_CUVES_MAX + ")");
+            throw new IllegalArgumentException("le nombre de cuves est trop élevé (maximum " + Cuve.NB_CUVES_MAX + ")");
         }
 
         Cuve cuve = new Cuve(reseau.getNextCuveId(), capacite);
