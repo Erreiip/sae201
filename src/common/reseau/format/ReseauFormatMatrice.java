@@ -12,12 +12,10 @@ class ReseauFormatMatrice implements ReseauFormat
 	private static final char SANS_CONNECTION_CHAR = 'X';
 	private static final int  SANS_CONNECTION_INT  = -1;
 
-	private final boolean binaire;
 	private final boolean optimise;
 
-	public ReseauFormatMatrice(boolean binaire, boolean optimise)
+	public ReseauFormatMatrice(boolean optimise)
 	{
-		this.binaire = binaire;
 		this.optimise = optimise;
 	}
 
@@ -41,26 +39,15 @@ class ReseauFormatMatrice implements ReseauFormat
 				Cuve cuve2 = reseau.getCuve(col);
 
 				int i = matrice[lig][col];
-
-				if(this.binaire && i == 1 && !reseau.sontRelies(cuve1, cuve2))
+				if(i >= Tuyau.SECTION_MIN && i <= Tuyau.SECTION_MAX)
 				{
-					System.out.print("Rentrez la section du tuyau reliant " + cuve1 + " et " + cuve2 + " : ");
-					while(true)
+					if(!reseau.sontRelies(cuve1, cuve2))
 					{
-						try
-						{
-							reseau.creerTuyau(Clavier.lire_int(), cuve1, cuve2);
-							break;
-						} catch(Exception e)
-						{
-							System.out.println("Erreur de saisie : " + e.getMessage() + "\nVeuillez recommencer.");
-						}
+						// on inverse le sens uniquement pour la consistance
+						if(this.optimise) reseau.creerTuyau(i, cuve2, cuve1);
+						else              reseau.creerTuyau(i, cuve1, cuve2);
 					}
 				}
-				else
-					if(i >= Tuyau.SECTION_MIN && i <= Tuyau.SECTION_MAX)
-						if(!reseau.sontRelies(cuve1, cuve2))
-							reseau.creerTuyau(i, cuve1, cuve2);
 			}
 		}
 	}
@@ -88,7 +75,7 @@ class ReseauFormatMatrice implements ReseauFormat
 				if(r.sontRelies(cuve1, cuve2))
 				{
 					Tuyau tuyau = r.getTuyau(cuve1, cuve2);
-					matrice[lig][col] = this.binaire ? 1 : tuyau.getSection();
+					matrice[lig][col] = tuyau.getSection();
 				}
 				else
 				{
@@ -123,35 +110,19 @@ class ReseauFormatMatrice implements ReseauFormat
 			for(int col = 0; col < valeurs.length; col++)
 			{
 				int i;
-				if(this.binaire)
+				if(valeurs[col].length() == 1 && valeurs[col].charAt(0) == ReseauFormatMatrice.SANS_CONNECTION_CHAR)
 				{
-					if(valeurs[col].length() == 1 && valeurs[col].charAt(0) == ReseauFormatMatrice.SANS_CONNECTION_CHAR)
-					{
-						i = ReseauFormatMatrice.SANS_CONNECTION_INT;
-					}
-					else
-					{
-						i = Integer.parseInt(valeurs[col]);
-						if(i != 1)
-						{
-							throw new IllegalArgumentException("la matrice doit contenir des valeurs entre comme 1 et " + ReseauFormatMatrice.SANS_CONNECTION_CHAR);
-						}
-					}
+					i = ReseauFormatMatrice.SANS_CONNECTION_INT;
 				}
 				else
 				{
-					if(valeurs[col].length() == 1 && valeurs[col].charAt(0) == ReseauFormatMatrice.SANS_CONNECTION_CHAR)
+					i = Integer.parseInt(valeurs[col]);
+					if(i < Tuyau.SECTION_MIN || i > Tuyau.SECTION_MAX)
 					{
-						i = ReseauFormatMatrice.SANS_CONNECTION_INT;
-					}
-					else
-					{
-						i = Integer.parseInt(valeurs[col]);
-						if(i < Tuyau.SECTION_MIN || i > Tuyau.SECTION_MAX)
-						{
-							throw new IllegalArgumentException("La matrice doit contenir des valeurs entre "
-									+ Tuyau.SECTION_MIN + " et " + Tuyau.SECTION_MAX + ". Valeur " + i + " non autorisée.");
-						}
+						throw new IllegalArgumentException(
+								"La matrice doit contenir des valeurs entre "
+								+ Tuyau.SECTION_MIN + " et " + Tuyau.SECTION_MAX +
+								". Valeur " + i + " non autorisée.");
 					}
 				}
 				matrice[lig][col] = i;
@@ -163,8 +134,10 @@ class ReseauFormatMatrice implements ReseauFormat
 	public String toString(int[][] matrice)
 	{
 		StringBuilder sb = new StringBuilder();
-		for(int[] lig : matrice) {
-			for(int col : lig) {
+		for(int[] lig : matrice)
+		{
+			for(int col : lig)
+			{
 				if(col == ReseauFormatMatrice.SANS_CONNECTION_INT)
 					sb.append(ReseauFormatMatrice.SANS_CONNECTION_CHAR);
 				else
