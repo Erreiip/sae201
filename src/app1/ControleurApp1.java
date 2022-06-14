@@ -175,11 +175,12 @@ public class ControleurApp1
         char    idCuve1, idCuve2;
         boolean valideTuyau;
 
-
         do
         {
             System.out.println("Voulez-vous créer un tuyau ? (O/N)");
             resCreerTuyau = Clavier.lire_char();
+            if(Character.toUpperCase(resCreerTuyau) == 'N')
+                break;
 
             valideTuyau = false;
             do
@@ -216,6 +217,7 @@ public class ControleurApp1
             {
                 question += "[" + (value.ordinal() + 1) + "] " + value.getNom() + "\n";
             }
+            question += "[" + ReseauFormatType.values().length + "] Quitter\n";
             question += "Veuillez choisir entre 1 et " + (ReseauFormatType.values().length + 1) + " :";
 
             System.out.print(question);
@@ -233,6 +235,6 @@ public class ControleurApp1
                 default:
                     break;
             }
-        } while (selectionFormat >= 1 && selectionFormat <= ReseauFormatType.values().length + 1);
+        } while (selectionFormat < 1 || selectionFormat > ReseauFormatType.values().length + 1);
     }
 }
