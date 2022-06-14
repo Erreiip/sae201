@@ -154,59 +154,7 @@ public class ControleurApp2
  
 
 
-    private String initScan( String type ) 
-    {  
-        int     lig = 0;
-        int     col = 0;
-        int maxCol  = 0;
 
-        boolean continuer = true;
-
-        try 
-        {
-            Scanner sc = new Scanner( new FileReader( this.pathMatrice ) );
-
-            sc.nextLine();
-
-            for ( lig = 0; sc.hasNextLine() && continuer; lig++ ) 
-            { 
-                String str = sc.nextLine();
-                continuer = !str.equals("---");
-                
-                col = str.split(" +").length;
-
-                if ( col > maxCol )
-                    maxCol = col;
-            }
-    
-            sc.close();
-
-
-            //paassage en coordonnées réels de lig//
-            lig--;
-
-            if ( type.equals("Liste d'adjacence"))  maxCol++;
-
-            return lig + "" + maxCol;
-            
-        } catch (Exception e) { System.out.println(e); return null;}   
-    }
-
-    
-    private String getType()
-    {
-        try  
-        {
-            Scanner sc = new Scanner( new FileReader( this.pathMatrice ) );
-
-            String temp = sc.nextLine(); 
-
-            sc.close();
-
-            return temp;    
-        } 
-        catch ( Exception e ) { return null; }
-    }
     
 
     public static void main ( String args[] )
