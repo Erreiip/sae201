@@ -10,72 +10,71 @@ import src.app2.ControleurApp2;
 
 public class PanelMenu extends JPanel implements ActionListener
 {
-    private ControleurApp2 ctrl;
+    private final ControleurApp2 ctrl;
 
-	private JMenuItem     menuiFichierOuvrir;
-	private JMenuItem     menuiFichierQuitter;
+    private final JMenuItem menuiFichierOuvrir;
+    private final JMenuItem menuiFichierQuitter;
 
-
-    public PanelMenu( ControleurApp2 ctrl )
+    public PanelMenu(ControleurApp2 ctrl)
     {
         this.ctrl = ctrl;
-        
-        this.setLayout( new BorderLayout() );
+
+        this.setLayout(new BorderLayout());
 
 
         /*-------------------------*/
-		/* Création des composants */
-		/*-------------------------*/
+        /* Création des composants */
+        /*-------------------------*/
 
-        JMenuBar menubMaBarre    = new JMenuBar();
+        JMenuBar menubMaBarre = new JMenuBar();
 
-		JMenu menuFicher         = new JMenu("Fichier");
+        JMenu menuFicher = new JMenu("Fichier");
 
-		this.menuiFichierOuvrir  = new JMenuItem("Ouvrir");
-		this.menuiFichierQuitter = new JMenuItem("Quitter");
-
-        /*-------------------------------*/
-		/* positionnement des composants */
-		/*-------------------------------*/
-
-		menuFicher  .add(this.menuiFichierOuvrir);
-		menuFicher  .add(this.menuiFichierQuitter);
-
-		menubMaBarre.add(menuFicher);
-
-        this.add( menubMaBarre, BorderLayout.CENTER );
+        this.menuiFichierOuvrir = new JMenuItem("Ouvrir");
+        this.menuiFichierQuitter = new JMenuItem("Quitter");
 
         /*-------------------------------*/
-		/* Activation des composants     */
-		/*-------------------------------*/
+        /* positionnement des composants */
+        /*-------------------------------*/
+
+        menuFicher.add(this.menuiFichierOuvrir);
+        menuFicher.add(this.menuiFichierQuitter);
+
+        menubMaBarre.add(menuFicher);
+
+        this.add(menubMaBarre, BorderLayout.CENTER);
+
+        /*-------------------------------*/
+        /* Activation des composants     */
+        /*-------------------------------*/
 
         this.menuiFichierOuvrir.addActionListener(this);
-		this.menuiFichierQuitter.addActionListener(this);
+        this.menuiFichierQuitter.addActionListener(this);
 
 
-		this.setVisible( true );
+        this.setVisible(true);
     }
 
-    public void actionPerformed ( ActionEvent e )
-	{
+    public void actionPerformed(ActionEvent e)
+    {
 
-		JFileChooser fileChooser = new JFileChooser("" + new File("../") + "");
+        JFileChooser fileChooser = new JFileChooser("" + new File("../") + "");
+        if (e.getSource() instanceof JMenuItem)
+        {
+            if (e.getSource() == menuiFichierOuvrir)
+            {
 
-		// Création et ouverture d'un JFileChooser pour affecter
+                int tmp = fileChooser.showOpenDialog(this);
+                if (tmp == JFileChooser.APPROVE_OPTION)
+                    this.ctrl.creerReseau(fileChooser.getSelectedFile().getPath());
+            }
 
-		if (e.getSource() instanceof JMenuItem )
-		{
-			if ( ((JMenuItem) e.getSource()).getText() == "Ouvrir" )
-			{
-				
-				int tmp = fileChooser.showOpenDialog(this);
-				if(tmp == JFileChooser.APPROVE_OPTION)
-					this.ctrl.creerReseau ( fileChooser.getSelectedFile().getPath() );
-			}
+            // Fermeture de l'application
+            if (e.getSource() == menuiFichierQuitter)
+            {
+                this.ctrl.fermer();
+            }
 
-			// Fermeture de l'application
-			if ( ((JMenuItem) e.getSource()).getText() == "Quitter" ) {this.ctrl.fermer();}
-
-		}
-	}
+        }
+    }
 }

@@ -18,9 +18,9 @@ public class ControleurApp1
 {
     private static final boolean debug = false;
 
-    private Reseau    reseau;
-    private FrameApp1 ihm;
-    private int       nbCuves;
+    private       Reseau    reseau;
+    private       FrameApp1 ihm;
+    private final int       nbCuves;
 
     public ControleurApp1(int nbCuves)
     {
@@ -41,11 +41,6 @@ public class ControleurApp1
     public int getNbCuves()
     {
         return nbCuves;
-    }
-
-    public boolean creerTuyau(int section, Cuve cuve1, Cuve cuve2)
-    {
-        return reseau.creerTuyau(section, cuve1, cuve2) != null;
     }
 
     public boolean creerTuyau(int section, char idCuve1, char idCuve2)

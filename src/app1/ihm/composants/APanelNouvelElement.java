@@ -29,7 +29,7 @@ public abstract class APanelNouvelElement extends JPanel implements ActionListen
         panelSud.add(btnValider);
         panelSud.add(btnAnnuler);
 
-        this.add(panelNord, BorderLayout.CENTER);
+        this.add(panelNord, BorderLayout.NORTH);
         this.add(panelSud, BorderLayout.SOUTH);
 
         btnValider.addActionListener(this);
