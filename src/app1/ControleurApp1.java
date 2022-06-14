@@ -120,7 +120,7 @@ public class ControleurApp1
     public static void main(String[] args)
     {
         ControleurApp1 controleur;
-        if (args.length > 0 && args[0].equalsIgnoreCase("gui"))
+        if (args.length > 0 && args[0].equalsIgnoreCase("gui")||true)
         {
 
             int nbCuves = -1;

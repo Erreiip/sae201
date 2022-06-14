@@ -1,7 +1,9 @@
 package src.common;
 
+import src.app2.ControleurApp2;
 import src.common.util.Transfert;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -63,7 +65,7 @@ public class Tuyau implements IReseauElement
     public Cuve getCuve1  () { return cuve1;        }
     public Cuve getCuve2  () { return cuve2;        }
 
-    public Transfert transverser( Cuve c, int nbTuyaux)
+    public Transfert transverser( Reseau res,Cuve c, int nbTuyaux)
     {
         double quantite;
         
@@ -89,9 +91,24 @@ public class Tuyau implements IReseauElement
             quantite = cuveDepart.getContenu();
         }
 
+        ArrayList<Tuyau> tArrivee = res.getTuyaux(cuveArrivee);
+        int somme = 0;
+
+        for ( Tuyau t : tArrivee)
+        {
+            somme += t.getSection();
+        }
+
+        double max = (this.section / (double) somme) * (cuveArrivee.getCapacite() - cuveArrivee.getContenu());
+
+
         if ( cuveArrivee.getContenu() + quantite > cuveArrivee.getCapacite() )
             quantite = cuveArrivee.getCapacite() - cuveArrivee.getContenu();
+            
+        if ( quantite > max )
+            quantite = max;
 
+        System.out.println(c + "/" + quantite+ "/" + max + "/" + cuveArrivee);
 
         return Transfert.creer(cuveDepart, cuveArrivee, quantite);
     }

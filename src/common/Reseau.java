@@ -111,6 +111,22 @@ public class Reseau
         }
         return c;
     }
+
+    public ArrayList<Tuyau> getTuyaux(Cuve c)
+    {
+        ArrayList<Tuyau> lstTuyaux = new ArrayList<Tuyau>();
+
+        for ( Tuyau t : this.tuyaux)
+        {
+            if ( t.getCuve1() == c || t.getCuve2() == c)
+            {
+                lstTuyaux.add(t);
+            }
+        }
+        
+        return lstTuyaux;
+    }
+
     
 
     /**
@@ -151,7 +167,7 @@ public class Reseau
             {
                 if ( t.getCuve1() == c || t.getCuve2() == c )
                 {
-                    Transfert temp = t.transverser(c, tabNbTuyaux[i]);
+                    Transfert temp = t.transverser(this, c, tabNbTuyaux[i]);
 
                     if (temp != null )
                         tabTransferts.add(temp);

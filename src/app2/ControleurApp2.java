@@ -120,7 +120,6 @@ public class ControleurApp2
         }
     }
  
-
     public Reseau getMetier() { return this.metier;   }
     public void   fermer()    { this.frame.dispose(); }
 
@@ -132,6 +131,7 @@ public class ControleurApp2
         this.metier.transverser();
         this.frame.redessiner();
     }
+
 
     public boolean creerReseau(String pathFichier)
     {   
