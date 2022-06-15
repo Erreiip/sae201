@@ -121,19 +121,16 @@ public class Tests
         Reseau reseau = new Reseau();
 
         Cuve cuveA = reseau.creerCuve(1000);
-        Cuve cuveB = reseau.creerCuve(900);
+        Cuve cuveB = reseau.creerCuve(500);
         Cuve cuveC = reseau.creerCuve(200);
-        Cuve cuveD = reseau.creerCuve(700);
 
-        cuveA.ajouterContenu(800);
-        cuveB.ajouterContenu(800);
+        cuveA.ajouterContenu(1000);
+        cuveB.ajouterContenu(500);
         cuveC.ajouterContenu(195);
-        cuveD.ajouterContenu(700);
 
         reseau.creerTuyau(2, cuveA, cuveB);
         reseau.creerTuyau(6, cuveA, cuveC);
         reseau.creerTuyau(4, cuveB, cuveC);
-        reseau.creerTuyau(8, cuveB, cuveD);
 
         return reseau;
     }
