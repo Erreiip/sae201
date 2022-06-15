@@ -1,5 +1,7 @@
 package src.common;
 
+import src.app1.ControleurApp1;
+import src.app2.ControleurApp2;
 import src.common.reseau.fichier.FichierReseau;
 import src.common.reseau.format.ReseauFormatType;
 
@@ -11,42 +13,33 @@ public class Tests
     }
 
     private static void lancerTests()
-    {/* 
+    {
         try
         {
-            Reseau reseau = Tests.creerReseauSujet();
-
             Tests.testerCuves();
             Thread.sleep(1000);
 
-            System.out.println(reseau);
-            Thread.sleep(1000);
-
             Tests.fichierReseauInput();
             Thread.sleep(1000);
 
-            Tests.fichierReseauOutput(reseau);
-        } catch (InterruptedException e)
-        {
-            throw new RuntimeException(e);
+            Reseau reseauSujet = Tests.creerReseauSujet();
+            Reseau reseauEdc1  = Tests.creerReseauEdc(true);
+            Reseau reseauEdc2  = Tests.creerReseauEdc(false);
+
+            System.out.println("Réseau du sujet :\n" + reseauSujet);
+            Thread.sleep(1000);
+            Tests.fichierReseauOutput(reseauSujet);
+            Thread.sleep(1000);
+
+            System.out.println("Réseau des cas d'études 1");
+            Thread.sleep(1000);
+            Tests.fichierReseauOutput(reseauEdc1);
+            ControleurApp2 app21 = new ControleurApp2();
+            app21.ouvrirReseauIHM(reseauEdc1);
+            ControleurApp2 app22 = new ControleurApp2();
+            app22.ouvrirReseauIHM(reseauEdc2);
         }
-*/
-        try
-        {
-            Reseau reseau = Tests.creerReseauEtude();
-
-            //Tests.testerCuves();
-            //Thread.sleep(1000);
-/*
-            System.out.println(reseau);
-            Thread.sleep(1000);
-*/
-            Tests.fichierReseauInput();
-            Thread.sleep(1000);
-
-            Tests.fichierReseauOutput(reseau);
-
-        } catch (InterruptedException e)
+        catch (InterruptedException e)
         {
             throw new RuntimeException(e);
         }
@@ -116,7 +109,10 @@ public class Tests
         return reseau;
     }
 
-    private static Reseau creerReseauEtude()
+    /**
+     * @return un réseau qui doit se compléter normalement en une seule itération.
+     */
+    private static Reseau creerReseauEx1()
     {
         Reseau reseau = new Reseau();
 
@@ -131,6 +127,32 @@ public class Tests
         reseau.creerTuyau(2, cuveA, cuveB);
         reseau.creerTuyau(6, cuveA, cuveC);
         reseau.creerTuyau(4, cuveB, cuveC);
+
+        return reseau;
+    }
+
+    /**
+     * @param vrai si c'est le premier cas
+     * @return le réseau d'étude de cas
+     */
+    private static Reseau creerReseauEdc(boolean premierCas)
+    {
+        Reseau reseau = new Reseau();
+
+        Cuve cuveA = reseau.creerCuve(1000);
+        Cuve cuveB = reseau.creerCuve(900);
+        Cuve cuveC = reseau.creerCuve(200);
+        Cuve cuveD = reseau.creerCuve(700);
+
+        cuveA.ajouterContenu(800);
+        cuveB.ajouterContenu(800);
+        cuveC.ajouterContenu(premierCas ? 195 : 197);
+        cuveD.ajouterContenu(700);
+
+        reseau.creerTuyau(2, cuveA, cuveB);
+        reseau.creerTuyau(6, cuveA, cuveC);
+        reseau.creerTuyau(4, cuveB, cuveC);
+        reseau.creerTuyau(8, cuveB, cuveD);
 
         return reseau;
     }
