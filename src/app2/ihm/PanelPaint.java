@@ -86,12 +86,15 @@ public class PanelPaint extends JPanel
 
             g.drawLine(xDepart, yDepart, xFin, yFin);
 
-            if (yDepart - yFin < 0) if (xDepart - xFin > 0)
-                g.drawString(t.getSection() + "", (xDepart + xFin) / 2 - 20, (yDepart + yFin) / 2 - 10);
-            else g.drawString(t.getSection() + "", (xDepart + xFin) / 2 + 20, (yDepart + yFin) / 2 - 10);
+            if (yDepart - yFin < 0)
+                if (xDepart - xFin > 0)
+                    g.drawString(t.getSection() + "", (xDepart + xFin) / 2 - 20, (yDepart + yFin) / 2 - 10);
+                else
+                    g.drawString(t.getSection() + "", (xDepart + xFin) / 2 + 20, (yDepart + yFin) / 2 - 10);
             else if (xDepart - xFin < 0)
                 g.drawString(t.getSection() + "", (xDepart + xFin) / 2 - 20, (yDepart + yFin) / 2 - 10);
-            else g.drawString(t.getSection() + "", (xDepart + xFin) / 2 + 20, (yDepart + yFin) / 2 - 10);
+            else
+                g.drawString(t.getSection() + "", (xDepart + xFin) / 2 + 20, (yDepart + yFin) / 2 - 10);
         }
 
         g2d.setStroke(new BasicStroke(1));
