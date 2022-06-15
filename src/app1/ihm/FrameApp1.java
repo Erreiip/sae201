@@ -105,7 +105,7 @@ public class FrameApp1 extends JFrame implements ActionListener
         JFileChooser jFileChooser = new JFileChooser(".");
         jFileChooser.setDialogTitle("Sauvegarder votre fichier");
 
-        if (jFileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
+        if (jFileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION)
         {
             String[] types           = Arrays.stream(ReseauFormatType.values()).map(ReseauFormatType::getNom).toArray(String[]::new);
             String   typeSelectionne = (String) JOptionPane.showInputDialog(null, "Sélectionnez le format de sortie :", "Enregistrez", JOptionPane.QUESTION_MESSAGE, null, types, types[0]);
