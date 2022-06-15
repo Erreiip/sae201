@@ -2,9 +2,9 @@ package src.app1;
 
 import iut.algo.Clavier;
 import src.app1.ihm.FrameApp1;
-import src.common.Cuve;
-import src.common.Reseau;
-import src.common.Tuyau;
+import src.common.reseau.element.Cuve;
+import src.common.reseau.Reseau;
+import src.common.reseau.element.Tuyau;
 import src.common.reseau.fichier.FichierReseau;
 import src.common.reseau.format.ReseauFormatType;
 
@@ -14,116 +14,31 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
+/**
+ * Classe principale de l'application.
+ */
 public class ControleurApp1
 {
-    private static final boolean debug = false;
-
     private       Reseau    reseau;
     private       FrameApp1 ihm;
-    private final int       nbCuves;
+    private final int nbCuvesMax;
 
-    public ControleurApp1(int nbCuves)
+    public ControleurApp1(int nbCuvesMax)
     {
-        this.nbCuves = nbCuves;
-        this.reseau = new Reseau();
-    }
-
-    public List<Cuve> getCuves()
-    {
-        return this.reseau.getCuves();
-    }
-
-    public List<Tuyau> getTuyaux()
-    {
-        return this.reseau.getTuyaux();
-    }
-
-    public int getNbCuves()
-    {
-        return nbCuves;
-    }
-
-    public boolean creerTuyau(int section, char idCuve1, char idCuve2)
-    {
-        Tuyau tuyau = reseau.creerTuyau(section, idCuve1, idCuve2);
-        if (tuyau == null) return false;
-
-        if (this.ihm != null) this.ihm.majListeTuyaux();
-
-        return true;
-    }
-
-    public boolean creerCuve(int capacite)
-    {
-        Cuve cuve = reseau.creerCuve(capacite);
-        if (cuve == null) return false;
-
-        if (ihm != null) this.ihm.majListeCuves();
-
-        return true;
-    }
-
-    public boolean supprimerCuve()
-    {
-        if (this.ihm == null) return false;
-
-        int ligne = this.ihm.getCuveActive();
-
-        if (ligne == -1) return false;
-
-        if (!this.reseau.supprimerCuve(ligne)) return false;
-
-        this.ihm.majListeCuves();
-        this.ihm.majListeTuyaux();
-        return true;
-    }
-
-    public void setReseau(String absolutePath)
-    {
-        try
-        {
-            FichierReseau fichierReseau = FichierReseau.fromString(Files.readString(Path.of(absolutePath)));
-            this.reseau = fichierReseau.getReseau();
-        } catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    public void sauvegarderReseau(ReseauFormatType reseauFormatType, String path)
-    {
-        try
-        {
-            FichierReseau fichierReseau = new FichierReseau(reseauFormatType, this.reseau);
-            Files.writeString(Path.of(path), fichierReseau.toString());
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    public FrameApp1 getIhm()
-    {
-        return ihm;
-    }
-
-    public void setIhm(FrameApp1 ihm)
-    {
-        this.ihm = ihm;
+        this.reseau     = new Reseau();
+        this.nbCuvesMax = nbCuvesMax;
     }
 
     public static void main(String[] args)
     {
         ControleurApp1 controleur;
-        if (args.length > 0 && args[0].equalsIgnoreCase("gui")||true)
+        if(args.length > 0 && args[0].equalsIgnoreCase("gui"))
         {
-
             int nbCuves = -1;
             do
             {
                 String s = JOptionPane.showInputDialog("Entrez le nombre maximal de cuves:");
-                if (s == null)
-                    return;
+                if (s == null) return;
 
                 try
                 {
@@ -133,16 +48,19 @@ public class ControleurApp1
                         nbCuves = -1;
                         throw new Exception("Le nombre de cuves doit être positif et supérieur ou égal à 2");
                     }
-                } catch (NumberFormatException e)
+                }
+                catch (NumberFormatException e)
                 {
-                    JOptionPane.showMessageDialog(null, "Vous devez rentrer un entier", "Erreur", JOptionPane.ERROR_MESSAGE);
-                } catch (Exception e)
+                    JOptionPane.showMessageDialog(null, "Vous devez rentrer un entier correct", "Erreur", JOptionPane.ERROR_MESSAGE);
+                }
+                catch (Exception e)
                 {
                     JOptionPane.showMessageDialog(null, e.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
                 }
-            } while (nbCuves == -1);
+            }
+            while (nbCuves == -1);
 
-            controleur = new ControleurApp1(nbCuves);
+            controleur    = new ControleurApp1(nbCuves);
             FrameApp1 ihm = new FrameApp1(controleur);
             controleur.setIhm(ihm);
             return;
@@ -156,23 +74,25 @@ public class ControleurApp1
         boolean valideCuve;
 
         /*----------------------------*/
-        /**Demander le nombre de cuves*/
+        /* Demander le nombre de cuves*/
         /*----------------------------*/
         do
         {
             System.out.print("Veuillez entrez le nombre de cuves entre 1 et 26: ");
             nbCuves = Clavier.lire_int();
-        } while (nbCuves > 26);
+        }
+        while (nbCuves > 26);
 
         controleur = new ControleurApp1(nbCuves);
 
-        /**Creations des cuves */
+        /*---------------------*/
+        /* Creations des cuves */
         /*---------------------*/
         char idCuveEnCreation = 'A';
         for (int cpt = 0; cpt < nbCuves; cpt++)
         {
 
-            /* Renseigner capacite de cuve en creation */
+            /* Renseigner capacité de cuve en creation */
             do
             {
                 System.out.print("Entrez la capacité maximale de la cuve " + idCuveEnCreation + " (entre 200 et 1000) : ");
@@ -204,8 +124,7 @@ public class ControleurApp1
         {
             System.out.println("Voulez-vous créer un tuyau ? (O/N)");
             resCreerTuyau = Character.toUpperCase(Clavier.lire_char());
-            if (resCreerTuyau == 'N')
-                break;
+            if(resCreerTuyau == 'N') break;
 
             valideTuyau = false;
             do
@@ -231,7 +150,7 @@ public class ControleurApp1
 
         } while (resCreerTuyau == 'O');
 
-        /*Sélection de la Matrice voulu*/
+        /* Sélection de la Matrice voulue */
         int selectionFormat;
 
         do
@@ -248,18 +167,78 @@ public class ControleurApp1
             System.out.print(question);
             selectionFormat = Clavier.lire_int();
 
-            switch (selectionFormat)
+            switch(selectionFormat)
             {
-                case 1:
-                case 2:
-                case 3:
+                case 1, 2, 3 ->
+                {
                     ReseauFormatType reseauFormatType = ReseauFormatType.values()[selectionFormat - 1];
                     controleur.sauvegarderReseau(reseauFormatType, "reseau.data");
                     System.out.println("Le fichier a été enregistré dans reseau.data avec le type: " + reseauFormatType.getNom());
-                    break;
-                default:
-                    break;
+                }
+                default -> {}
             }
-        } while (selectionFormat < 1 || selectionFormat > ReseauFormatType.values().length + 1);
+        }
+        while (selectionFormat < 1 || selectionFormat > ReseauFormatType.values().length + 1);
+    }
+
+    public List<Cuve>  getCuves()      { return this.reseau.getCuves(); }
+    public List<Tuyau> getTuyaux()     { return this.reseau.getTuyaux(); }
+    public int         getNbCuvesMax() { return nbCuvesMax;}
+    public FrameApp1   getIhm()        { return ihm; }
+
+    public boolean creerTuyau(int section, char idCuve1, char idCuve2)
+    {
+        Tuyau tuyau = reseau.creerTuyau(section, idCuve1, idCuve2);
+        if(tuyau == null)    return false;
+        if(this.ihm != null) this.ihm.majListeTuyaux();
+        return true;
+    }
+
+    public boolean creerCuve(int capacite)
+    {
+        Cuve cuve = reseau.creerCuve(capacite);
+        if(cuve == null)     return false;
+        if(this.ihm != null) this.ihm.majListeCuves();
+        return true;
+    }
+
+    public boolean supprimerCuve()
+    {
+        if(this.ihm == null) return false;
+        int ligne = this.ihm.getCuveActive();
+
+        if(ligne == -1 || !this.reseau.supprimerCuve(ligne)) return false;
+
+        this.ihm.majListeCuves();
+        this.ihm.majListeTuyaux();
+        return true;
+    }
+
+    public void setReseau(String absolutePath)
+    {
+        try
+        {
+            FichierReseau fichierReseau = FichierReseau.fromString(Files.readString(Path.of(absolutePath)));
+            this.reseau                 = fichierReseau.getReseau();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void setIhm(FrameApp1 ihm) { this.ihm = ihm; }
+
+    public void sauvegarderReseau(ReseauFormatType reseauFormatType, String path)
+    {
+        try
+        {
+            FichierReseau fichierReseau = new FichierReseau(reseauFormatType, this.reseau);
+            Files.writeString(Path.of(path), fichierReseau.toString());
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }

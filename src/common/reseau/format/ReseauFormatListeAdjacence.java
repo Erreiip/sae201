@@ -1,7 +1,7 @@
 package src.common.reseau.format;
 
-import src.common.Reseau;
-import src.common.Tuyau;
+import src.common.reseau.Reseau;
+import src.common.reseau.element.Tuyau;
 
 import java.util.ArrayList;
 
@@ -18,7 +18,7 @@ public class ReseauFormatListeAdjacence implements ReseauFormat
         this.ajouterTuyaux(this.fromString(s), r);
     }
 
-    public String toString(Reseau r)
+    public String construireString(Reseau r)
     {
         return this.toString(this.fromReseau(r));
     }

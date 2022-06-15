@@ -1,10 +1,8 @@
-package src.common.util;
-
-import src.common.Cuve;
+package src.common.reseau.element;
 
 public class Transfert implements Comparable<Transfert>
 {
-    private Cuve   cuveDepart;
+    private Cuve cuveDepart;
     private Cuve   cuveArrivee;
     private double quantite;
 

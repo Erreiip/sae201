@@ -1,4 +1,4 @@
-package src.common;
+package src.common.reseau.element;
 
 public enum PositionInfos
 {

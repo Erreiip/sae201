@@ -1,11 +1,15 @@
-package src.app1.ihm.cuves;
+package src.app1.ihm.composants.cuves;
 
-import src.app1.ihm.composants.APanelNouvelElement;
+import src.app1.ihm.composants.PanelNouvelElement;
+import src.common.reseau.Reseau;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class PanelNouvelleCuve extends APanelNouvelElement
+/**
+ * {@link JPanel} permettant d'ajouter une cuve d'un {@link Reseau}.
+ */
+public class PanelNouvelleCuve extends PanelNouvelElement
 {
 
     private JTextField txtCapacite;

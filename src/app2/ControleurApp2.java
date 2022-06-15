@@ -8,11 +8,11 @@ import java.awt.Dimension;
 import java.io.IOException;
 
 import src.app2.ihm.*;
-import src.common.Reseau;
-import src.common.Tuyau;
+import src.common.reseau.Reseau;
+import src.common.reseau.element.Tuyau;
 import src.common.reseau.fichier.FichierReseau;
-import src.common.Cuve;
-import src.common.PositionInfos;
+import src.common.reseau.element.Cuve;
+import src.common.reseau.element.PositionInfos;
 
 import java.nio.file.Path;
 import java.nio.file.Files;

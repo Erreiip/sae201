@@ -1,4 +1,6 @@
-package src.common;
+package src.common.reseau.element;
+
+import src.common.reseau.Reseau;
 
 /**
  * Une cuve représente un compartiment de stockage dans laquelle se stocke une unité de capacité.
@@ -28,7 +30,7 @@ public class Cuve implements IReseauElement, Comparable<Cuve>
      * Fabrique une cuve.<br>
      * Si une des contraintes n'est pas respectée, alors cette méthode retourne {@code null}.
      */
-    protected static Cuve creer(Reseau reseau, int capacite)
+    public static Cuve creer(Reseau reseau, int capacite)
     {
         if (capacite < Cuve.MIN_CAPACITE || capacite > Cuve.MAX_CAPACITE)
         {

@@ -36,11 +36,9 @@ public class PanelAction extends JPanel implements ActionListener
 
     public PanelAction(ControleurApp2 ctrl)
     {
-        this.ctrl = ctrl;
-
+        this.ctrl         = ctrl;
         this.thIterations = null;
-        this.thStart = false;
-
+        this.thStart      = false;
 
         this.setLayout(new BorderLayout());
 
@@ -62,72 +60,68 @@ public class PanelAction extends JPanel implements ActionListener
         JPanel panelIteration = new JPanel(new GridLayout(2, 1));
 
         this.btnContinue = new JButton("Itération Continue");
-        this.btnIte = new JButton("Itération suivante");
+        this.btnIte      = new JButton("Itération suivante");
+        this.lblInfo     = new JLabel("", JLabel.CENTER);
 
-        this.lblInfo = new JLabel("", JLabel.CENTER);
-
-
-        this.nbIteration = 0;
+        this.nbIteration  = 0;
         this.lblIteration = new JLabel("Nombres d'itérations : " + this.nbIteration, JLabel.CENTER);
-
 
         panelIteration.add(this.btnIte);
         panelIteration.add(this.btnContinue);
 
-        panelText.add( lblCuve );
-        panelText.add( this.txtCuve );
-        panelText.add( lblContenu );
-        panelText.add( this.txtContenu );
+        panelText.add(lblCuve);
+        panelText.add(this.txtCuve);
+        panelText.add(lblContenu);
+        panelText.add(this.txtContenu);
 
         panelBtn.add(this.btnSupprimer);
         panelBtn.add(this.btnAction);
         panelBtn.add(this.btnInitAll);
 
-        panelContenu.add(panelText   , BorderLayout.NORTH);
-        panelContenu.add(panelBtn    , BorderLayout.CENTER);
-        panelContenu.add(this.lblInfo, BorderLayout.SOUTH);
+        panelContenu.add(panelText,         BorderLayout.NORTH);
+        panelContenu.add(panelBtn,          BorderLayout.CENTER);
+        panelContenu.add(this.lblInfo,      BorderLayout.SOUTH);
 
-
-        this        .add(panelContenu     , BorderLayout.NORTH);
-        this        .add(this.lblIteration, BorderLayout.CENTER);
-        this        .add(panelIteration   , BorderLayout.SOUTH);
+        this.add(panelContenu,      BorderLayout.NORTH);
+        this.add(this.lblIteration, BorderLayout.CENTER);
+        this.add(panelIteration,    BorderLayout.SOUTH);
 
         this.btnAction   .addActionListener(this);
         this.btnInitAll  .addActionListener(this);
         this.btnSupprimer.addActionListener(this);
         this.btnContinue .addActionListener(this);
         this.btnIte      .addActionListener(this);
-
-
     }
 
     public void actionPerformed(ActionEvent e)
     {
-        if (e.getSource() == this.btnAction)
+        if(e.getSource() == this.btnAction)
         {
             try
             {
                 this.ctrl.getMetier().getCuve(this.txtCuve.getText().charAt(0)).ajouterContenu(Integer.parseInt(this.txtContenu.getText()));
                 this.lblInfo.setText( this.txtContenu.getText() + " ajouté à " + this.txtCuve.getText() );
                 this.ctrl.redessiner();
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 this.lblInfo.setText("Erreur");
             }
 
             this.txtContenu.setText("");
-            this.txtCuve.setText("");
+            this.txtCuve   .setText("");
 
         }
 
-        if ( e.getSource() == this.btnSupprimer )
+        if(e.getSource() == this.btnSupprimer )
         {
             try
             {
                 this.ctrl.getMetier().getCuve(this.txtCuve.getText().charAt(0)).retirerContenu(Integer.parseInt(this.txtContenu.getText()));
                 this.lblInfo.setText( this.txtContenu.getText() + " retiré à " + this.txtCuve.getText() );
                 this.ctrl.redessiner();
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 this.lblInfo.setText("Erreur");
             }
@@ -136,20 +130,20 @@ public class PanelAction extends JPanel implements ActionListener
             this.txtCuve.setText("");
         }
 
-        if (e.getSource() == this.btnInitAll)
+        if(e.getSource() == this.btnInitAll)
         {
             this.ctrl.getMetier().setAllCuve();
             this.ctrl.redessiner();
         }
 
-        if (e.getSource() == this.btnIte)
+        if(e.getSource() == this.btnIte)
         {
             this.ctrl.tranverser();
             this.nbIteration++;
             this.lblIteration.setText("Nombre d'itérations : " + this.nbIteration);
         }
 
-        if (e.getSource() == this.btnContinue)
+        if(e.getSource() == this.btnContinue)
         {
 
             if (!this.thStart)

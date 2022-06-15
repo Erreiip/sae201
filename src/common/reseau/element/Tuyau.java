@@ -1,7 +1,6 @@
-package src.common;
+package src.common.reseau.element;
 
-import src.app2.ControleurApp2;
-import src.common.util.Transfert;
+import src.common.reseau.Reseau;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -15,9 +14,9 @@ public class Tuyau implements IReseauElement
     public static final int SECTION_MIN = 2;
     public static final int SECTION_MAX = 10;
 
-    private int  section;
-    private Cuve cuve1;
-    private Cuve cuve2;
+    private final int  section;
+    private final Cuve cuve1;
+    private final Cuve cuve2;
 
     private Tuyau(int section, Cuve cuve1, Cuve cuve2)
     {
@@ -30,7 +29,7 @@ public class Tuyau implements IReseauElement
      * Fabrique un tuyau.<br>
      * Si une des contraintes n'est pas respectée, alors cette méthode retourne {@code null}.
      */
-    protected static Tuyau creer(Reseau reseau, int section, Cuve cuve1, Cuve cuve2)
+    public static Tuyau creer(Reseau reseau, int section, Cuve cuve1, Cuve cuve2)
     {
         Objects.requireNonNull(cuve1, "la première cuve ne doit pas être nulle");
         Objects.requireNonNull(cuve2, "la deuxième cuve ne doit pas être nulle");
@@ -65,7 +64,7 @@ public class Tuyau implements IReseauElement
     public Cuve getCuve1  () { return cuve1;        }
     public Cuve getCuve2  () { return cuve2;        }
 
-    public Transfert transverser( Reseau res,Cuve c, int nbTuyaux)
+    public Transfert transverser(Reseau res, Cuve c, int nbTuyaux)
     {
         double quantite;
         

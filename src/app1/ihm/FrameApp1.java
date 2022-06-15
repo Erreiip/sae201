@@ -1,8 +1,8 @@
 package src.app1.ihm;
 
 import src.app1.ControleurApp1;
-import src.app1.ihm.cuves.PanelCuves;
-import src.app1.ihm.tuyaux.PanelTuyaux;
+import src.app1.ihm.composants.cuves.PanelCuves;
+import src.app1.ihm.composants.tuyaux.PanelTuyaux;
 import src.common.reseau.format.ReseauFormatType;
 
 import javax.swing.*;
@@ -14,6 +14,9 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.Arrays;
 
+/**
+ * {@link JFrame} principale de l'application.
+ */
 public class FrameApp1 extends JFrame implements ActionListener
 {
     private final ControleurApp1 ctrl;
@@ -80,36 +83,20 @@ public class FrameApp1 extends JFrame implements ActionListener
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void majListeCuves()
-    {
-        this.panelCuves.majListe();
-    }
+    public void majListeCuves()  { this.panelCuves.majListe(); }
+    public void majListeTuyaux() { this.panelTuyaux.majListe(); }
+    public int getCuveActive()   { return this.panelCuves.getTblGrilleDonnees().getSelectedRow(); }
 
-    public int getCuveActive()
-    {
-        return this.panelCuves.getTblGrilleDonnees().getSelectedRow();
-    }
-
-    public void majListeTuyaux()
-    {
-        this.panelTuyaux.majListe();
-    }
-
-    @Override
     public void actionPerformed(ActionEvent e)
     {
-        if (e.getSource() == this.menuiFichierOuvrir)
+        if(e.getSource() == this.menuiFichierOuvrir)
         {
             this.ouvrir();
             this.majListeCuves();
             this.majListeTuyaux();
-        } else if (e.getSource() == this.menuiFichierEnregistrer)
-        {
-            this.sauvegarder();
-        } else if (e.getSource() == this.menuiFichierQuitter)
-        {
-            this.dispose();
         }
+        else if(e.getSource() == this.menuiFichierEnregistrer) this.sauvegarder();
+        else if(e.getSource() == this.menuiFichierQuitter)     this.dispose();
     }
 
     private void sauvegarder()
@@ -119,9 +106,8 @@ public class FrameApp1 extends JFrame implements ActionListener
 
         if (jFileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
         {
-
             String[] types           = Arrays.stream(ReseauFormatType.values()).map(ReseauFormatType::getNom).toArray(String[]::new);
-            String   typeSelectionne = (String) JOptionPane.showInputDialog(null, "Sélectionnez le format de sortie:", "Enregistrez", JOptionPane.QUESTION_MESSAGE, null, types, types[0]);
+            String   typeSelectionne = (String) JOptionPane.showInputDialog(null, "Sélectionnez le format de sortie :", "Enregistrez", JOptionPane.QUESTION_MESSAGE, null, types, types[0]);
             if (typeSelectionne == null)
                 return;
 
@@ -134,13 +120,12 @@ public class FrameApp1 extends JFrame implements ActionListener
     private void ouvrir()
     {
         JFileChooser jFileChooser = new JFileChooser(".");
-        if (jFileChooser.showOpenDialog(this) != JFileChooser.APPROVE_OPTION)
-            return;
+        if(jFileChooser.showOpenDialog(this) != JFileChooser.APPROVE_OPTION) return;
 
         File selectedFile = jFileChooser.getSelectedFile();
-        if (!selectedFile.exists())
+        if(!selectedFile.exists())
         {
-            JOptionPane.showMessageDialog(null, "Le fichier selectionné n'existe pas !", "Une erreur s'est produite !", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Le fichier sélectionné n'existe pas !", "Une erreur s'est produite !", JOptionPane.ERROR_MESSAGE);
             return;
         }
 

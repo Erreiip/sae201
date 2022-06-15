@@ -1,9 +1,11 @@
-package src.common;
+package src.common.reseau;
+
+import src.common.reseau.element.Cuve;
+import src.common.reseau.element.Transfert;
+import src.common.reseau.element.Tuyau;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
-import src.common.util.Transfert;
 
 /**
  * Un réseau représente un espace dans lequel se trouvent des {@link Cuve}s et des {@link Tuyau}.<br>
@@ -114,7 +116,7 @@ public class Reseau
 
     public ArrayList<Tuyau> getTuyaux(Cuve c)
     {
-        ArrayList<Tuyau> lstTuyaux = new ArrayList<Tuyau>();
+        ArrayList<Tuyau> lstTuyaux = new ArrayList<>();
 
         for ( Tuyau t : this.tuyaux)
         {
@@ -141,8 +143,8 @@ public class Reseau
     {
         int[] tabNbTuyaux = new int[this.cuves.size()];
 
-        ArrayList<Transfert> tabTransferts = new ArrayList<Transfert>();
-        ArrayList<Cuve>      alCuve        = new ArrayList<Cuve>     ( this.cuves );
+        ArrayList<Transfert> transferts = new ArrayList<>();
+        ArrayList<Cuve>      alCuve     = new ArrayList<>(this.cuves);
 
         Collections.sort(alCuve);
 
@@ -170,18 +172,18 @@ public class Reseau
                     Transfert temp = t.transverser(this, c, tabNbTuyaux[i]);
 
                     if (temp != null )
-                        tabTransferts.add(temp);
+                        transferts.add(temp);
                 }
             }
             i++;
         }
 
-        for ( Transfert t : tabTransferts )
+        for ( Transfert t : transferts )
         {
             try{
                 t.getCuveArrivee().ajouterContenu(t.getQuantite());
                 t.getCuveDepart ().retirerContenu(t.getQuantite());
-            }catch(Exception e) {}
+            }catch(Exception ignored) {}
         }
 
     }

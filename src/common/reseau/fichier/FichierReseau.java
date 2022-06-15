@@ -1,7 +1,7 @@
 package src.common.reseau.fichier;
 
-import src.common.Cuve;
-import src.common.Reseau;
+import src.common.reseau.element.Cuve;
+import src.common.reseau.Reseau;
 import src.common.reseau.format.ReseauFormatType;
 
 public class FichierReseau
@@ -45,7 +45,7 @@ public class FichierReseau
         sb
                 .append(this.typeFormat.getId())
                 .append(FichierReseau.DELIMITEUR_CONTENU)
-                .append(this.typeFormat.getFormat().toString(this.reseau))
+                .append(this.typeFormat.getFormat().construireString(this.reseau))
                 .append(FichierReseau.DELIMITEUR_CONTENU);
         for (Cuve cuve : this.reseau.getCuves())
         {

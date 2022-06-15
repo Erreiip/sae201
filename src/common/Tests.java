@@ -1,7 +1,8 @@
 package src.common;
 
-import src.app1.ControleurApp1;
 import src.app2.ControleurApp2;
+import src.common.reseau.Reseau;
+import src.common.reseau.element.Cuve;
 import src.common.reseau.fichier.FichierReseau;
 import src.common.reseau.format.ReseauFormatType;
 

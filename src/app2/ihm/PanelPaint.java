@@ -2,9 +2,9 @@ package src.app2.ihm;
 
 import javax.swing.*;
 
-import src.common.Cuve;
-import src.common.PositionInfos;
-import src.common.Tuyau;
+import src.common.reseau.element.Cuve;
+import src.common.reseau.element.PositionInfos;
+import src.common.reseau.element.Tuyau;
 import src.app2.ControleurApp2;
 
 import java.awt.Graphics;

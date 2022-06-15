@@ -1,9 +1,8 @@
 package src.common.reseau.format;
 
-import iut.algo.Clavier;
-import src.common.Cuve;
-import src.common.Reseau;
-import src.common.Tuyau;
+import src.common.reseau.element.Cuve;
+import src.common.reseau.Reseau;
+import src.common.reseau.element.Tuyau;
 
 import java.util.Arrays;
 
@@ -24,7 +23,7 @@ class ReseauFormatMatrice implements ReseauFormat
         this.ajouterTuyaux(this.fromString(s), r);
     }
 
-    public String toString(Reseau r)
+    public String construireString(Reseau r)
     {
         return this.toString(this.fromReseau(r));
     }
