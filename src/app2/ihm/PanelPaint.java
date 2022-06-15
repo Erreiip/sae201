@@ -13,9 +13,11 @@ import java.awt.Color;
 import java.awt.event.*;
 import java.awt.BasicStroke;
 
-
 import java.awt.geom.Ellipse2D;
 
+/**
+ * {@link JPanel} qui permet de dessiner un réseau.
+ */
 public class PanelPaint extends JPanel
 {
     private final ControleurApp2 ctrl;

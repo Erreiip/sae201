@@ -17,6 +17,9 @@ import src.common.reseau.element.PositionInfos;
 import java.nio.file.Path;
 import java.nio.file.Files;
 
+/**
+ * Classe principale de l'application.
+ */
 public class ControleurApp2
 {
     private FrameReseau frame;
@@ -134,7 +137,7 @@ public class ControleurApp2
     }
 
      /**
-     * Méthode réservée aux test<br>
+     * Méthode réservée aux tests<br>
      * Permet d'ouvrir l'IHM directement avec un réseau.
      */
     public void ouvrirReseauIHM ( Reseau res) 
@@ -145,7 +148,7 @@ public class ControleurApp2
     }
 
     /**
-     * Creer un Réseau à partir d'un fichier<br>
+     * Crée un {@link Reseau} à partir d'un fichier<br>
      * Affecte au métier du controleur le réseau qui est cherché via cette méthode.
      */
     public boolean creerReseau(String pathFichier)

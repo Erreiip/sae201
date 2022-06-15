@@ -8,6 +8,9 @@ import java.io.File;
 
 import src.app2.ControleurApp2;
 
+/**
+ * {@link JPanel} qui permet de dessiner un réseau.
+ */
 public class PanelMenu extends JPanel implements ActionListener
 {
     private final ControleurApp2 ctrl;

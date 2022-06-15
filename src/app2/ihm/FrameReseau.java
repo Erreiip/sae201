@@ -5,6 +5,9 @@ import src.app2.ControleurApp2;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * {@link FrameReseau} permet de d'instancier tous les panels pour compléter l'ihm.
+ */
 public class FrameReseau extends JFrame
 {
     private final ControleurApp2 ctrl;
@@ -12,9 +15,6 @@ public class FrameReseau extends JFrame
     private final PanelMenu      panelMenu;
     private final PanelAction    panelAction;
 
-    /**
-     * {@link FrameReseau} permet de d'instancier tous les panels pour compléter l'ihm.
-     */
     public FrameReseau(ControleurApp2 controleurApp2)
     {
         Dimension d      = Toolkit.getDefaultToolkit().getScreenSize();

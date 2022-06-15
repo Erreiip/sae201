@@ -1,6 +1,7 @@
 package src.app2.ihm;
 
 import src.app2.ControleurApp2;
+import src.common.reseau.element.Cuve;
 
 import javax.swing.*;
 
