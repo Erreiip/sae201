@@ -133,6 +133,13 @@ public class ControleurApp2
         this.frame.redessiner();
     }
 
+    public void ouvrirReseauIHM ( Reseau res) 
+    { 
+        this.metier = res;
+        this.placementCuves();
+        this.frame.dessiner();
+    }
+
 
     public boolean creerReseau(String pathFichier)
     {
