@@ -85,7 +85,8 @@ public class FrameApp1 extends JFrame implements ActionListener
 
     public void majListeCuves()  { this.panelCuves.majListe(); }
     public void majListeTuyaux() { this.panelTuyaux.majListe(); }
-    public int getCuveActive()   { return this.panelCuves.getTblGrilleDonnees().getSelectedRow(); }
+    public int getCuveActive()   { return this.panelCuves.getTblGrilleDonnees().getSelectedRow();  }
+    public int getTuyauActif()   { return this.panelTuyaux.getTblGrilleDonnees().getSelectedRow(); }
 
     public void actionPerformed(ActionEvent e)
     {
