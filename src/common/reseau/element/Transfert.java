@@ -1,5 +1,8 @@
 package src.common.reseau.element;
 
+/**
+ * Représente
+ */
 public class Transfert implements Comparable<Transfert>
 {
     private Cuve   cuveDepart;
