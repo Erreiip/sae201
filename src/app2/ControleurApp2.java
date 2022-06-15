@@ -83,12 +83,12 @@ public class ControleurApp2
             int       width  = temp.width;
 
             heightUnique = height / (int) Math.ceil(tabCuves.length / (double) 2);
-            widthUnique = width / 4;
+            widthUnique  = width / 4;
 
             heightUnique -= heightUnique / Math.ceil(tabCuves.length / (double) 2);
             widthUnique -= widthUnique / 4;
 
-
+            if(tabCuves.length <= 2) heightUnique = height / 2;
         }
 
         ancienneWidth = widthUnique;
