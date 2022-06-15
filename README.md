@@ -1,7 +1,7 @@
 # Réseau de cuves - Projet de SAE 2.01/2.02
 
 ## Groupe N°1
-- B1 - Train Thai Duc DINH
+- B1 - Tran Thai Duc DINH
 - B2 - TAUVEL Nolan
 - A1 - GASCOIN Romain
 - D2 - LANDRIN Hugo
