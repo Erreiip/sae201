@@ -11,7 +11,10 @@ import java.awt.Color;
 
 import java.awt.event.*;
 
-
+/**
+ * Le Panel Action est un panel ou toutes les actions entre {@link FrameReseau} et les {@link Cuve}.<br>
+ * Elle implémente des méthodes permettant d'ajouter ou de supprimer des quantités dans les {@link Cuve}.
+ */
 public class PanelAction extends JPanel implements ActionListener
 {
     private final ControleurApp2 ctrl;
@@ -42,6 +45,9 @@ public class PanelAction extends JPanel implements ActionListener
 
         this.setLayout(new BorderLayout());
 
+        /*-----------------------------*/
+		/* Création des Controles      */
+		/*-----------------------------*/
 
         JPanel panelContenu = new JPanel(new BorderLayout(3, 3));
         JPanel panelText    = new JPanel(new GridLayout(2, 2));
@@ -66,6 +72,10 @@ public class PanelAction extends JPanel implements ActionListener
         this.nbIteration  = 0;
         this.lblIteration = new JLabel("Nombres d'itérations : " + this.nbIteration, JLabel.CENTER);
 
+        /*-----------------------------*/
+		/* Positionnement des Controles*/
+		/*-----------------------------*/
+
         panelIteration.add(this.btnIte);
         panelIteration.add(this.btnContinue);
 
@@ -85,6 +95,11 @@ public class PanelAction extends JPanel implements ActionListener
         this.add(panelContenu,      BorderLayout.NORTH);
         this.add(this.lblIteration, BorderLayout.CENTER);
         this.add(panelIteration,    BorderLayout.SOUTH);
+
+
+        /*-----------------------------*/
+		/* Activation des Controles    */
+		/*-----------------------------*/
 
         this.btnAction   .addActionListener(this);
         this.btnInitAll  .addActionListener(this);
@@ -162,6 +177,10 @@ public class PanelAction extends JPanel implements ActionListener
         }
     }
 
+    /**
+     * Cette classe est une classe qui hérite de {@link Thread}.<br>
+     * Elle permet de faire des itérations et de mettre à jour {@link PanelAction}.
+     */
     private class ThreadIterations extends Thread
     {
         public void run()

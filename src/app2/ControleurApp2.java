@@ -133,6 +133,10 @@ public class ControleurApp2
         this.frame.redessiner();
     }
 
+     /**
+     * Méthode réservée aux test<br>
+     * Permet d'ouvrir l'IHM directement avec un réseau.
+     */
     public void ouvrirReseauIHM ( Reseau res) 
     { 
         this.metier = res;
@@ -140,7 +144,10 @@ public class ControleurApp2
         this.frame.dessiner();
     }
 
-
+    /**
+     * Creer un Réseau à partir d'un fichier<br>
+     * Affecte au métier du controleur le réseau qui est cherché via cette méthode.
+     */
     public boolean creerReseau(String pathFichier)
     {
         String        contenuFichier = "";

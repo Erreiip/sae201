@@ -64,6 +64,11 @@ public class Tuyau implements IReseauElement
     public Cuve getCuve1  () { return cuve1;        }
     public Cuve getCuve2  () { return cuve2;        }
 
+
+    /**
+     * Creer un transfert<br>
+     * Retourne un transfert entre la cuve possédant le plus de contenue et celle qui en possède le moins.
+     */
     public Transfert transverser(Reseau res, Cuve c, int nbTuyaux)
     {
         double quantite;
@@ -112,6 +117,9 @@ public class Tuyau implements IReseauElement
         return Transfert.creer(cuveDepart, cuveArrivee, quantite);
     }
 
+    /**
+     * Retourne un booléen si la cuve passée en paramètre fait partie du tuyau.
+     */
     public boolean estRelie(Cuve cuve)
     {
         return this.cuve1 == cuve || this.cuve2 == cuve;

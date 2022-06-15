@@ -2,10 +2,14 @@ package src.common.reseau.element;
 
 public class Transfert implements Comparable<Transfert>
 {
-    private Cuve cuveDepart;
+    private Cuve   cuveDepart;
     private Cuve   cuveArrivee;
     private double quantite;
 
+    /**
+     * Un Transfert représente un échange de quantité entre deux {@link Cuve}.<br>
+     * Elle se définit par ses deux connections aux cuves, ainsi que de sa capacité de transfert, appelée "quantite".
+     */
     public static Transfert creer(Cuve cuveDepart, Cuve cuveArrivee, double quantite)
     {
         if (cuveDepart == null || cuveArrivee == null || cuveDepart == cuveArrivee) return null;

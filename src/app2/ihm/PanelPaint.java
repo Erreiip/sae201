@@ -29,6 +29,10 @@ public class PanelPaint extends JPanel
         this.tabPoints = new Ellipse2D[this.ctrl.getMetier().getCuves().size()];
     }
 
+
+     /**
+     * Permet d'initialiser le Panel en activant les contrôles et en créant les Ellipse correspondant aux cuves.
+     */
     public void initPaint()
     {
         this.tabPoints = new Ellipse2D[this.ctrl.getMetier().getCuves().size()];
@@ -46,7 +50,7 @@ public class PanelPaint extends JPanel
             this.tabPoints[i++] = new Ellipse2D.Double(x, y, taille, taille);
         }
 
-        this.addMouseListener(new EllipseTake());
+        this.addMouseListener      (new EllipseTake());
         this.addMouseMotionListener(new EllispseDrag());
     }
 
@@ -116,6 +120,10 @@ public class PanelPaint extends JPanel
     }
 
 
+     /**
+     * Retourne une couleur<br>
+     * Permet de faire le dégradé de couleur correspondant à l'application 2
+     */
     private Color degrade(Double contenu)
     {
         double red, green, blue;

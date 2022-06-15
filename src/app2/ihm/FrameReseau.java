@@ -12,6 +12,9 @@ public class FrameReseau extends JFrame
     private final PanelMenu      panelMenu;
     private final PanelAction    panelAction;
 
+    /**
+     * {@link FrameReseau} permet de d'instancier tous les panels pour compléter l'ihm.
+     */
     public FrameReseau(ControleurApp2 controleurApp2)
     {
         Dimension d      = Toolkit.getDefaultToolkit().getScreenSize();

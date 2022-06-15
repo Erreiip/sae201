@@ -186,6 +186,10 @@ public class ControleurApp1
     public int         getNbCuvesMax() { return nbCuvesMax;}
     public FrameApp1   getIhm()        { return ihm; }
 
+     /**
+     * Crée un Tuyau<br>
+     * Fait appel à la méthode creerTuyau de {@link Reseau} et met à jour {@link FrameApp1}.
+     */
     public boolean creerTuyau(int section, char idCuve1, char idCuve2)
     {
         Tuyau tuyau = reseau.creerTuyau(section, idCuve1, idCuve2);
@@ -194,6 +198,10 @@ public class ControleurApp1
         return true;
     }
 
+     /**
+     * Crée une Cuve<br>
+     * Fait appel à la méthode creerCuve de {@link Reseau} et met à jour {@link FrameApp1}.
+     */
     public boolean creerCuve(int capacite)
     {
         Cuve cuve = reseau.creerCuve(capacite);
@@ -202,6 +210,10 @@ public class ControleurApp1
         return true;
     }
 
+    /**
+     * Supprime une Cuve<br>
+     * Fait appel à la méthode supprimerCuve de {@link Reseau}
+     */
     public boolean supprimerCuve()
     {
         if(this.ihm == null) return false;
@@ -214,6 +226,9 @@ public class ControleurApp1
         return true;
     }
 
+    /**
+     * Définit le réseau.
+     */
     public void setReseau(String absolutePath)
     {
         try
@@ -227,8 +242,12 @@ public class ControleurApp1
         }
     }
 
+
     public void setIhm(FrameApp1 ihm) { this.ihm = ihm; }
 
+    /**
+     * Sauvegarde le réseau dans un fichier
+     */
     public void sauvegarderReseau(ReseauFormatType reseauFormatType, String path)
     {
         try
