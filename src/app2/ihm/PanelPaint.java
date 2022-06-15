@@ -51,7 +51,7 @@ public class PanelPaint extends JPanel
         }
 
         this.addMouseListener      (new EllipseTake());
-        this.addMouseMotionListener(new EllispseDrag());
+        this.addMouseMotionListener(new EllipseDrag());
     }
 
 
@@ -147,7 +147,7 @@ public class PanelPaint extends JPanel
     }
 
 
-    private class EllispseDrag extends MouseMotionAdapter
+    private class EllipseDrag extends MouseMotionAdapter
     {
         public void mouseDragged(MouseEvent e)
         {
