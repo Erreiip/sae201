@@ -227,6 +227,21 @@ public class ControleurApp1
     }
 
     /**
+     * Supprime un Tuyau<br>
+     * Fait appel à la méthode supprimerTuyau
+     */
+    public boolean supprimerTuyau()
+    {
+        if(this.ihm == null) return false;
+        int ligne = this.ihm.getTuyauActif();
+
+        if(ligne == -1 || !this.reseau.supprimerTuyau(ligne)) return false;
+
+        this.ihm.majListeTuyaux();
+        return true;
+    }
+
+    /**
      * Définit le réseau.
      */
     public void setReseau(String absolutePath)

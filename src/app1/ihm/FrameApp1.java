@@ -85,7 +85,8 @@ public class FrameApp1 extends JFrame implements ActionListener
 
     public void majListeCuves()  { this.panelCuves.majListe(); }
     public void majListeTuyaux() { this.panelTuyaux.majListe(); }
-    public int getCuveActive()   { return this.panelCuves.getTblGrilleDonnees().getSelectedRow(); }
+    public int getCuveActive()   { return this.panelCuves.getTblGrilleDonnees().getSelectedRow();  }
+    public int getTuyauActif()   { return this.panelTuyaux.getTblGrilleDonnees().getSelectedRow(); }
 
     public void actionPerformed(ActionEvent e)
     {
@@ -104,7 +105,7 @@ public class FrameApp1 extends JFrame implements ActionListener
         JFileChooser jFileChooser = new JFileChooser(".");
         jFileChooser.setDialogTitle("Sauvegarder votre fichier");
 
-        if (jFileChooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION)
+        if (jFileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION)
         {
             String[] types           = Arrays.stream(ReseauFormatType.values()).map(ReseauFormatType::getNom).toArray(String[]::new);
             String   typeSelectionne = (String) JOptionPane.showInputDialog(null, "Sélectionnez le format de sortie :", "Enregistrez", JOptionPane.QUESTION_MESSAGE, null, types, types[0]);

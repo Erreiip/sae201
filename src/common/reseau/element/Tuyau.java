@@ -112,8 +112,6 @@ public class Tuyau implements IReseauElement
         if ( quantite > max )
             quantite = max;
 
-        System.out.println(c + "/" + quantite+ "/" + max + "/" + cuveArrivee);
-
         return Transfert.creer(cuveDepart, cuveArrivee, quantite);
     }
 

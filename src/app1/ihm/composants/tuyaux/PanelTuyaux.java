@@ -29,6 +29,9 @@ public class PanelTuyaux extends PanelTableElement
         frameNouvelElement.setVisible(true);
     }
 
-    public void supprimerElement() {}
+    public void supprimerElement()
+    {
+        this.getCtrl().supprimerTuyau();
+    }
     public void majListe()         { super.majListe(new GrilleTuyauxModel(this.getCtrl())); }
 }

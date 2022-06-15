@@ -61,7 +61,7 @@ public class PanelMenu extends JPanel implements ActionListener
     public void actionPerformed(ActionEvent e)
     {
 
-        JFileChooser fileChooser = new JFileChooser("" + new File("../") + "");
+        JFileChooser fileChooser = new JFileChooser("" + new File(".") + "");
         if (e.getSource() instanceof JMenuItem)
         {
             if (e.getSource() == menuiFichierOuvrir)
