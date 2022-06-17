@@ -18,6 +18,7 @@ javac src\common\Tests.java
 `javac` va aussi compiler les fichiers Java qui sont utilisés par les classes initialement compilées, donc nous 
 n'avons pas à nous soucier de tous les autres fichiers.
 
-- Pour utiliser l'application 1, utilisez `java src\app1\ControleurApp1`
+- Pour utiliser l'application 1 en mode CUI, utilisez `java src\app1\ControleurApp1`
+- Pour utiliser l'application 1 en mode GUI, utilisez `java src\app1\ControleurApp1 gui`
 - Pour utiliser l'application 2, utilisez `java src\app1\ControleurApp2`
 - Pour utiliser les tests unitaires, utilisez `java src\common\Tests`
